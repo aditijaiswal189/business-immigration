@@ -7,7 +7,7 @@ import Header from "@/components/ui/header";
 import Header1 from "@/components/ui/header1";
 import Hero from "@/components/ui/hero";
 import HeroSlider from "@/components/ui/hero-slider";
-import ProcessSection from "@/components/ui/process-section";
+import { BusinessImmigrationJourney } from "@/components/ui/business-immigration-journey";
 import ProcessSectionAnimated from "@/components/ui/process-section-animated";
 import ServicesGrid from "@/components/ui/services-grid";
 
@@ -15,6 +15,8 @@ import ServicesGrid from "@/components/ui/services-grid";
 import StatsSection from "@/components/ui/stats-section";
 import TeamSection from "@/components/ui/team-section";
 import TestimonialSection from "@/components/ui/testimonial-section";
+import ProcessSection from "@/components/ui/process-section";
+import AnnualReportSection from "@/components/ui/annual-report-section";
 
 export default function Home() {
   return (
@@ -28,9 +30,10 @@ export default function Home() {
       <BlogSection />
       <BrandLogos />
       <ProcessSectionAnimated />
-
+      <AnnualReportSection />
       <ProcessSection />
       <StatsSection />
+      <BusinessImmigrationJourney />
       <TeamSection />
       <TestimonialSection />
       <ServicesGrid />

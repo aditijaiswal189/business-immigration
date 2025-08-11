@@ -132,11 +132,34 @@
   .bg-primary-yellow {
     background-color: var(--btn-yellow);
   }
+
   .text-primary-yellow {
     color: var(--btn-yellow);
   }
   .border-primary-yellow {
     border-color: var(--btn-yellow);
+  }
+  .bg-primary-yellow-20 {
+    background-color: var(--light-yellow);
+  }
+
+  .text-primary-yellow-20 {
+    color: var(--light-yellow);
+  }
+
+  .border-primary-yellow-20 {
+    border-color: var(--light-yellow);
+  }
+  .bg-primary-yellow-10 {
+    background-color: var(--lightest-yellow);
+  }
+
+  .text-primary-yellow-10 {
+    color: var(--lightest-yellow);
+  }
+
+  .border-primary-yellow-10 {
+    border-color: var(--lightest-yellow);
   }
   .border-blue {
     border-color: var(--btn-blue);
@@ -275,8 +298,9 @@
     --popover: #ffffff;
     --popover-foreground: #1a1a1a;
 
-    --primary: #f76707;
-    /* --primary: #c62828; red-800 */
+    --primary: #56736c;
+    --primary-light: #f0f4f3;
+
     --primary-foreground: #ffffff;
 
     --secondary: #fce7f3;
@@ -314,8 +338,10 @@
     /* --btn-green: #10b981; */
     --btn-green: #82c91e;
     --btn-blue: #3b82f6;
-    --btn-yellow: #d1a97a;
     --btn-foreground: #ffffff;
+    --btn-yellow: #d1a97a;
+    --light-yellow: #ebdac6;
+    --lightest-yellow: #f8f3ec;
   }
 
   .dark {

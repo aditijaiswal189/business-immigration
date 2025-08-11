@@ -20,7 +20,7 @@ const services = [
     title: "Digital Marketing",
     description:
       "We specialize in serving specific industries, such as healthcare, finance, or manufacturing solutions.",
-    color: "bg-yellow-100 text-yellow-600",
+    color: "bg-primary-yellow text-yellow-600",
   },
   {
     icon: BarChart3,
