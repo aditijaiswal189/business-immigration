@@ -5,7 +5,8 @@ const teamMembers = [
     name: "Sarah Charlotte",
     title: "Chief Advisor",
     image:
-      "https://images.unsplash.com/photo-1494790108755-2616b612b577?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400",
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400",
+
     size: "large",
   },
   {

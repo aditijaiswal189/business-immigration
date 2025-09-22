@@ -7,25 +7,25 @@ import { ChevronLeft, ChevronRight, ArrowDown } from "lucide-react";
 const slides = [
   {
     id: 1,
-    category: "INNOVATIVE FINANCIAL",
-    title: "Financial Expertise You Can Trust & Secure.",
-    buttonText: "LEARN MORE →",
+    category: "BUSINESS IMMIGRATION",
+    title: "Your Gateway to Global Business Success",
+    buttonText: "START YOUR JOURNEY →",
     image:
       "https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop",
   },
   {
     id: 2,
-    category: "SMART FINANCIAL STRATEGIES",
-    title: "Expert Guidance for Your Financial Future",
-    buttonText: "TALK TO EXPERT →",
+    category: "EXPERT VISA SERVICES",
+    title: "Navigate Immigration with Confidence",
+    buttonText: "CONSULT EXPERTS →",
     image:
       "https://images.pexels.com/photos/3184357/pexels-photo-3184357.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop",
   },
   {
     id: 3,
-    category: "VISIONS INTO REALITY",
-    title: "Comprehensive Financial Planning & Consulting",
-    buttonText: "VIEW SERVICES →",
+    category: "GLOBAL OPPORTUNITIES",
+    title: "Unlock International Business Potential",
+    buttonText: "EXPLORE OPTIONS →",
     image:
       "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop",
   },
@@ -69,23 +69,40 @@ const HeroSlider = () => {
   };
 
   useEffect(() => {
-    const interval = setInterval(nextSlide, 5000);
+    const interval = setInterval(() => {
+      if (!isTransitioning) {
+        const next = (currentSlide + 1) % slides.length;
+        setNextSlideIndex(next);
+        setIsTransitioning(true);
+        setTimeout(() => {
+          setCurrentSlide(next);
+          setIsTransitioning(false);
+        }, 1500);
+      }
+    }, 5000);
     return () => clearInterval(interval);
-  }, [isTransitioning]);
+  }, [currentSlide, isTransitioning]);
 
   return (
     <div className="relative h-screen overflow-hidden">
       {/* Background Images */}
       <div className="absolute inset-0">
-        {/* Current Slide */}
-        <div className="absolute inset-0">
-          <img
-            src={slides[currentSlide].image}
-            alt={slides[currentSlide].title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-800/60 to-transparent" />
-        </div>
+        {/* All Slides */}
+        {slides.map((slide, index) => (
+          <div
+            key={slide.id}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentSlide ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <img
+              src={slide.image}
+              alt={slide.title}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-800/60 to-transparent" />
+          </div>
+        ))}
 
         {/* Pixelated Transition Overlay */}
         {isTransitioning && (
@@ -146,7 +163,7 @@ const HeroSlider = () => {
                   scale={1.02}
                   tiltEnable={true}
                 >
-                  <button className="bg-gray-600/80 backdrop-blur-sm hover:bg-gray-600 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                  <button className="bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 text-white px-8 py-4 rounded-full font-semibold transition-all duration-500 transform hover:scale-105 hover:shadow-2xl shadow-lg">
                     {slides[currentSlide].buttonText}
                   </button>
                 </Tilt>
@@ -155,11 +172,11 @@ const HeroSlider = () => {
 
             {/* Right Side - Slide Numbers */}
             <div className="lg:col-span-4 flex lg:justify-end">
-              <div className="text-right">
-                <div className="text-6xl font-bold text-white/20 mb-2">
+              <div className="text-right bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+                <div className="text-6xl font-bold text-white/30 mb-2">
                   {String(currentSlide + 1).padStart(2, "0")}.
                 </div>
-                <div className="text-4xl font-bold text-white/40 mb-8">
+                <div className="text-4xl font-bold text-white/50 mb-8">
                   {String(slides.length).padStart(2, "0")}.
                 </div>
               </div>
@@ -169,25 +186,25 @@ const HeroSlider = () => {
       </div>
 
       {/* Navigation Controls */}
-      <div className="absolute left-8 bottom-32 space-y-4 z-30">
+      <div className="absolute left-8 bottom-32 space-y-4 z-30 bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
         <button
           onClick={prevSlide}
           disabled={isTransitioning}
-          className="block text-white hover:text-gray-300 transition-colors duration-200 text-sm font-medium tracking-widest disabled:opacity-50"
+          className="block text-white/90 hover:text-primary-yellow transition-all duration-300 text-sm font-medium tracking-widest disabled:opacity-50 hover:scale-105"
         >
           PREVIOUS
         </button>
         <button
           onClick={nextSlide}
           disabled={isTransitioning}
-          className="block text-white hover:text-gray-300 transition-colors duration-200 text-sm font-medium tracking-widest disabled:opacity-50"
+          className="block text-white/90 hover:text-primary-yellow transition-all duration-300 text-sm font-medium tracking-widest disabled:opacity-50 hover:scale-105"
         >
           NEXT
         </button>
       </div>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-30">
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-30 bg-white/5 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10">
         {slides.map((_, index) => (
           <button
             key={index}
@@ -195,8 +212,8 @@ const HeroSlider = () => {
             disabled={isTransitioning}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
               index === currentSlide
-                ? "bg-white scale-125"
-                : "bg-white/40 hover:bg-white/60"
+                ? "bg-primary-yellow scale-125 shadow-lg"
+                : "bg-white/40 hover:bg-white/60 hover:scale-110"
             } disabled:opacity-50`}
           />
         ))}
@@ -214,29 +231,29 @@ const HeroSlider = () => {
       <button
         onClick={prevSlide}
         disabled={isTransitioning}
-        className="absolute left-8 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors duration-200 z-30 disabled:opacity-50"
+        className="absolute left-8 top-1/2 transform -translate-y-1/2 text-white/90 hover:text-primary-yellow transition-all duration-300 z-30 disabled:opacity-50 bg-white/5 backdrop-blur-sm rounded-full p-3 border border-white/10 hover:scale-110"
       >
-        <ChevronLeft className="h-8 w-8" />
+        <ChevronLeft className="h-6 w-6" />
       </button>
       <button
         onClick={nextSlide}
         disabled={isTransitioning}
-        className="absolute right-8 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors duration-200 z-30 disabled:opacity-50"
+        className="absolute right-8 top-1/2 transform -translate-y-1/2 text-white/90 hover:text-primary-yellow transition-all duration-300 z-30 disabled:opacity-50 bg-white/5 backdrop-blur-sm rounded-full p-3 border border-white/10 hover:scale-110"
       >
-        <ChevronRight className="h-8 w-8" />
+        <ChevronRight className="h-6 w-6" />
       </button>
 
       {/* Scroll Indicator */}
       <div
-        className="absolute bottom-8 right-8 text-white text-center z-30 cursor-pointer"
+        className="absolute bottom-8 right-8 text-white text-center z-30 cursor-pointer bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:bg-white/10 transition-all duration-300"
         onClick={() => {
           const el = document.getElementById("next-section");
           if (el) el.scrollIntoView({ behavior: "smooth" });
         }}
       >
-        <div className="text-xs tracking-widest mb-2">SCROLL TO</div>
-        <div className="text-xs tracking-widest mb-4">EXPLORE</div>
-        <ArrowDown className="h-5 w-5 mx-auto animate-bounce" />
+        <div className="text-xs tracking-widest mb-2 text-white/90">SCROLL TO</div>
+        <div className="text-xs tracking-widest mb-4 text-white/90">EXPLORE</div>
+        <ArrowDown className="h-5 w-5 mx-auto animate-bounce text-primary-yellow" />
       </div>
     </div>
   );
