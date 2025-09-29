@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
+
+import React, { useState, useEffect, useRef } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -11,14 +12,32 @@ import {
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-// SVG icon strings
-const iconSvgs = {
-  globe: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75H18a.75.75 0 000-1.5h-5.25V6z" clipRule="evenodd" /></svg>`,
-  mapPin: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M12 11.25a.75.75 0 01.75.75v5.04c0 .358-.328.647-.648.647-.32 0-.647-.289-.647-.647v-5.04a.75.75 0 01.75-.75z" /></svg>`,
-  arrowRight: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`,
+/* =========================================================
+   Theme tokens (read from your global.css variables)
+   =======================================================*/
+const tokens = {
+  red: "var(--btn-red)",
+  blue: "var(--btn-blue)",
+  green: "var(--btn-green)",
+  yellow: "var(--btn-yellow)",
+  primary: "var(--primary)",
+  accent: "var(--accent)",
+  card: "var(--card)",
+  border: "var(--border)",
 };
 
-// Canadian provinces data
+/* =========================================================
+   SVG icon strings (keep fill="currentColor")
+   =======================================================*/
+const iconSvgs = {
+  globe: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75H18a.75.75 0 000-1.5h-5.25V6z" clip-rule="evenodd"/></svg>`,
+  mapPin: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 11.25a.75.75 0 01.75.75v5.04c0 .358-.328.647-.648.647-.32 0-.647-.289-.647-.647v-5.04a.75.75 0 01.75-.75z"/></svg>`,
+  arrowRight: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`,
+};
+
+/* =========================================================
+   Data
+   =======================================================*/
 const canadianProvinces = [
   {
     name: "Alberta",
@@ -94,14 +113,76 @@ const canadianProvinces = [
   },
 ];
 
-// Regions data
-const regions = [
+const nationalities = [
+  {
+    name: "Canada",
+    flag: "/flags/canada.png",
+    active: true,
+    coords: [56.1304, -106.3468] as [number, number],
+    zoom: 3,
+    color: tokens.red,
+  },
+  {
+    name: "Europe",
+    flag: "/flags/eu.png",
+    active: false,
+    coords: [54.526, 15.2551] as [number, number],
+    zoom: 3,
+    color: "var(--chart-4)",
+  },
+  {
+    name: "USA",
+    flag: "/flags/usa.png",
+    active: false,
+    coords: [39.8283, -98.5795] as [number, number],
+    zoom: 3,
+    color: tokens.blue,
+  },
+  {
+    name: "New Zealand",
+    flag: "/flags/newzealand.png",
+    active: false,
+    coords: [-40.9006, 174.886] as [number, number],
+    zoom: 4,
+    color: tokens.green,
+  },
+  {
+    name: "Australia",
+    flag: "/flags/australia.png",
+    active: false,
+    coords: [-25.2744, 133.7751] as [number, number],
+    zoom: 3,
+    color: tokens.yellow,
+  },
+  {
+    name: "Caribbean",
+    flag: "/flags/caribbean.png",
+    active: false,
+    coords: [21.4691, -78.6569] as [number, number],
+    zoom: 4,
+    color: tokens.green,
+  },
+];
+
+type Region = {
+  name: "ALL" | "CANADA" | "AMERICAS" | "EMEA" | "APAC" | "CARIBBEAN";
+  displayName: string;
+  coords: [number, number];
+  zoom: number;
+  color: string;
+  iconSvg: string;
+  countries: { name: string; coords: [number, number] }[];
+  provinces?: typeof canadianProvinces;
+  programs: string[];
+};
+
+const regions: Region[] = [
   {
     name: "ALL",
     displayName: "All Regions",
-    coords: [20.0, 0.0] as [number, number],
+    coords: [20.0, 0.0],
     zoom: 2,
-    color: "#56736c",
+    color: tokens.primary,
     iconSvg: iconSvgs.globe,
     countries: [],
     programs: [],
@@ -109,13 +190,11 @@ const regions = [
   {
     name: "CANADA",
     displayName: "Canada Provincial Programs",
-    coords: [56.1304, -106.3468] as [number, number],
+    coords: [56.1304, -106.3468],
     zoom: 3,
-    color: "#e53e3e",
+    color: tokens.red,
     iconSvg: iconSvgs.mapPin,
-    countries: [
-      { name: "Canada", coords: [56.1304, -106.3468] as [number, number] },
-    ],
+    countries: [{ name: "Canada", coords: [56.1304, -106.3468] }],
     provinces: canadianProvinces,
     programs: [
       "Provincial Nominee Program (PNP)",
@@ -127,19 +206,16 @@ const regions = [
   {
     name: "AMERICAS",
     displayName: "Americas",
-    coords: [15.0, -90.0] as [number, number],
+    coords: [15.0, -90.0],
     zoom: 3,
-    color: "#3b82f6",
+    color: tokens.blue,
     iconSvg: iconSvgs.mapPin,
     countries: [
-      {
-        name: "United States",
-        coords: [39.8283, -98.5795] as [number, number],
-      },
-      { name: "Mexico", coords: [23.6345, -102.5528] as [number, number] },
-      { name: "Brazil", coords: [-14.235, -51.9253] as [number, number] },
-      { name: "Panama", coords: [8.538, -80.7821] as [number, number] },
-      { name: "Paraguay", coords: [-23.4425, -58.4438] as [number, number] },
+      { name: "United States", coords: [39.8283, -98.5795] },
+      { name: "Mexico", coords: [23.6345, -102.5528] },
+      { name: "Brazil", coords: [-14.235, -51.9253] },
+      { name: "Panama", coords: [8.538, -80.7821] },
+      { name: "Paraguay", coords: [-23.4425, -58.4438] },
     ],
     programs: [
       "Investor Visa Programs",
@@ -150,46 +226,33 @@ const regions = [
   {
     name: "EMEA",
     displayName: "Europe, Middle East & Africa",
-    coords: [54.526, 15.2551] as [number, number],
+    coords: [54.526, 15.2551],
     zoom: 3,
-    color: "#8b5cf6",
+    color: "var(--chart-4)",
     iconSvg: iconSvgs.mapPin,
     countries: [
-      // Europe
-      { name: "Andorra", coords: [42.5462, 1.6016] as [number, number] },
-      { name: "Austria", coords: [47.5162, 14.5501] as [number, number] },
-      { name: "Cyprus", coords: [35.1264, 33.4299] as [number, number] },
-      { name: "Greece", coords: [39.0742, 21.8243] as [number, number] },
-      { name: "Hungary", coords: [47.1625, 19.5033] as [number, number] },
-      { name: "Italy", coords: [41.8719, 12.5674] as [number, number] },
-      { name: "Latvia", coords: [56.8796, 24.6032] as [number, number] },
-      { name: "Malta", coords: [35.9375, 14.3754] as [number, number] },
-      { name: "Moldova", coords: [47.4116, 28.3699] as [number, number] },
-      {
-        name: "North Macedonia",
-        coords: [41.6086, 21.7453] as [number, number],
-      },
-      { name: "Portugal", coords: [39.3999, -8.2245] as [number, number] },
-      { name: "Spain", coords: [40.4637, -3.7492] as [number, number] },
-      { name: "Serbia", coords: [44.0165, 21.0059] as [number, number] },
-      { name: "Switzerland", coords: [46.8182, 8.2275] as [number, number] },
-      { name: "United Kingdom", coords: [55.3781, -3.436] as [number, number] },
-      // Middle East
-      { name: "Jordan", coords: [30.5852, 36.2384] as [number, number] },
-      { name: "Oman", coords: [21.4735, 55.9754] as [number, number] },
-      { name: "Turkey", coords: [38.9637, 35.2433] as [number, number] },
-      {
-        name: "United Arab Emirates",
-        coords: [23.4241, 53.8478] as [number, number],
-      },
-      // Africa
-      { name: "Egypt", coords: [26.0975, 31.2357] as [number, number] },
-      { name: "Namibia", coords: [-22.9576, 18.4904] as [number, number] },
-      // Caribbean (Cayman Islands)
-      {
-        name: "Cayman Islands",
-        coords: [19.3133, -81.2546] as [number, number],
-      },
+      { name: "Andorra", coords: [42.5462, 1.6016] },
+      { name: "Austria", coords: [47.5162, 14.5501] },
+      { name: "Cyprus", coords: [35.1264, 33.4299] },
+      { name: "Greece", coords: [39.0742, 21.8243] },
+      { name: "Hungary", coords: [47.1625, 19.5033] },
+      { name: "Italy", coords: [41.8719, 12.5674] },
+      { name: "Latvia", coords: [56.8796, 24.6032] },
+      { name: "Malta", coords: [35.9375, 14.3754] },
+      { name: "Moldova", coords: [47.4116, 28.3699] },
+      { name: "North Macedonia", coords: [41.6086, 21.7453] },
+      { name: "Portugal", coords: [39.3999, -8.2245] },
+      { name: "Spain", coords: [40.4637, -3.7492] },
+      { name: "Serbia", coords: [44.0165, 21.0059] },
+      { name: "Switzerland", coords: [46.8182, 8.2275] },
+      { name: "United Kingdom", coords: [55.3781, -3.436] },
+      { name: "Jordan", coords: [30.5852, 36.2384] },
+      { name: "Oman", coords: [21.4735, 55.9754] },
+      { name: "Turkey", coords: [38.9637, 35.2433] },
+      { name: "United Arab Emirates", coords: [23.4241, 53.8478] },
+      { name: "Egypt", coords: [26.0975, 31.2357] },
+      { name: "Namibia", coords: [-22.9576, 18.4904] },
+      { name: "Cayman Islands", coords: [19.3133, -81.2546] },
     ],
     programs: [
       "Skilled Worker Programs",
@@ -201,22 +264,19 @@ const regions = [
   {
     name: "APAC",
     displayName: "Asia Pacific",
-    coords: [-25.2744, 133.7751] as [number, number],
+    coords: [-25.2744, 133.7751],
     zoom: 3,
-    color: "#d1a97a",
+    color: tokens.yellow,
     iconSvg: iconSvgs.mapPin,
     countries: [
-      // North Asia
-      { name: "Singapore", coords: [1.3521, 103.8198] as [number, number] },
-      { name: "Thailand", coords: [15.87, 100.9925] as [number, number] },
-      // South Asia
-      { name: "Cambodia", coords: [12.5657, 104.991] as [number, number] },
-      // Asia Pacific
-      { name: "Australia", coords: [-25.2744, 133.7751] as [number, number] },
-      { name: "Fiji", coords: [-16.578, 179.4144] as [number, number] },
-      { name: "Nauru", coords: [-0.5228, 166.9315] as [number, number] },
-      { name: "New Zealand", coords: [-40.9006, 174.886] as [number, number] },
-      { name: "Vanuatu", coords: [-15.3767, 166.9592] as [number, number] },
+      { name: "Singapore", coords: [1.3521, 103.8198] },
+      { name: "Thailand", coords: [15.87, 100.9925] },
+      { name: "Cambodia", coords: [12.5657, 104.991] },
+      { name: "Australia", coords: [-25.2744, 133.7751] },
+      { name: "Fiji", coords: [-16.578, 179.4144] },
+      { name: "Nauru", coords: [-0.5228, 166.9315] },
+      { name: "New Zealand", coords: [-40.9006, 174.886] },
+      { name: "Vanuatu", coords: [-15.3767, 166.9592] },
     ],
     programs: [
       "Skilled Migration Programs",
@@ -228,24 +288,18 @@ const regions = [
   {
     name: "CARIBBEAN",
     displayName: "Caribbean Islands",
-    coords: [21.4691, -78.6569] as [number, number],
+    coords: [21.4691, -78.6569],
     zoom: 4,
-    color: "#10b981",
+    color: tokens.green,
     iconSvg: iconSvgs.mapPin,
     countries: [
-      { name: "Anguilla", coords: [18.2206, -63.0686] as [number, number] },
-      {
-        name: "Antigua and Barbuda",
-        coords: [17.0608, -61.7964] as [number, number],
-      },
-      { name: "Curacao", coords: [12.1696, -68.99] as [number, number] },
-      { name: "Dominica", coords: [15.414, -61.371] as [number, number] },
-      { name: "Grenada", coords: [12.2628, -61.6043] as [number, number] },
-      { name: "Saint Lucia", coords: [13.9094, -60.9789] as [number, number] },
-      {
-        name: "Saint Kitts and Nevis",
-        coords: [17.3578, -62.783] as [number, number],
-      },
+      { name: "Anguilla", coords: [18.2206, -63.0686] },
+      { name: "Antigua and Barbuda", coords: [17.0608, -61.7964] },
+      { name: "Curacao", coords: [12.1696, -68.99] },
+      { name: "Dominica", coords: [15.414, -61.371] },
+      { name: "Grenada", coords: [12.2628, -61.6043] },
+      { name: "Saint Lucia", coords: [13.9094, -60.9789] },
+      { name: "Saint Kitts and Nevis", coords: [17.3578, -62.783] },
     ],
     programs: [
       "Citizenship by Investment Programs",
@@ -255,7 +309,9 @@ const regions = [
   },
 ];
 
-// Map controller component
+/* =========================================================
+   Helpers / Components
+   =======================================================*/
 const MapController = ({
   position,
   zoom,
@@ -264,47 +320,62 @@ const MapController = ({
   zoom: number;
 }) => {
   const map = useMap();
-
   useEffect(() => {
-    map.flyTo(position, zoom, {
-      duration: 1.5,
-      easeLinearity: 0.25,
-    });
+    map.flyTo(position, zoom, { duration: 1.5, easeLinearity: 0.25 });
   }, [map, position, zoom]);
-
   return null;
 };
 
-// Create custom icon
 const createCustomIcon = (
   svgString: string,
-  color: string,
-  size: number = 24
+  cssVar: string = tokens.primary,
+  size = 24
 ) => {
-  const svgWithColor = svgString.replace(/currentColor/g, color);
-
   return L.divIcon({
-    html: `<div style="color: ${color}; width: ${size}px; height: ${size}px;">${svgWithColor}</div>`,
+    html: `
+      <div style="color:${cssVar};width:${size}px;height:${size}px;display:flex;align-items:center;justify-content:center;">
+        ${svgString}
+      </div>
+    `,
     className: "custom-div-icon",
     iconSize: [size, size],
     iconAnchor: [size / 2, size / 2],
   });
 };
 
-const MapComponent = () => {
-  const [activeRegion, setActiveRegion] = useState("ALL");
+const getPolygonStyle = (regionColor: string) => ({
+  fillColor: regionColor,
+  weight: 2,
+  opacity: 1,
+  color: tokens.card, // outline matches theme card color
+  dashArray: "",
+  fillOpacity: 0.7,
+});
+
+/* =========================================================
+   Main component
+   =======================================================*/
+const MapComponent: React.FC = () => {
+  const [activeRegion, setActiveRegion] = useState<Region["name"]>("ALL");
+  const [activeNationality, setActiveNationality] = useState("Canada");
   const [activeProvince, setActiveProvince] = useState<string | null>(null);
   const [showProvinces, setShowProvinces] = useState(false);
-  const [mapCenter, setMapCenter] = useState([20.0, 0.0] as [number, number]);
-  const [mapZoom, setMapZoom] = useState(2);
+  const [mapCenter, setMapCenter] = useState<[number, number]>([
+    56.1304, -106.3468,
+  ]);
+  const [mapZoom, setMapZoom] = useState(3);
   const [worldGeoJSON, setWorldGeoJSON] = useState<any>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
 
   // Load world GeoJSON data
   useEffect(() => {
     const loadGeoJSON = async () => {
       try {
         const response = await fetch(
-          "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"
+          "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson",
+          {
+            cache: "force-cache",
+          }
         );
         const data = await response.json();
         setWorldGeoJSON(data);
@@ -312,11 +383,34 @@ const MapComponent = () => {
         console.error("Failed to load world GeoJSON:", error);
       }
     };
-
     loadGeoJSON();
   }, []);
 
-  const handleRegionClick = (region: any) => {
+  const handleNationalityClick = (
+    nationality: (typeof nationalities)[number]
+  ) => {
+    setActiveNationality(nationality.name);
+    if (nationality.name === "Canada") {
+      setActiveRegion("CANADA");
+      setShowProvinces(true);
+      setActiveProvince(null);
+    } else {
+      setShowProvinces(false);
+      setActiveProvince(null);
+      const regionMap: Record<string, Region["name"]> = {
+        Europe: "EMEA",
+        USA: "AMERICAS",
+        "New Zealand": "APAC",
+        Australia: "APAC",
+        Caribbean: "CARIBBEAN",
+      };
+      setActiveRegion(regionMap[nationality.name] || "ALL");
+    }
+    setMapCenter(nationality.coords);
+    setMapZoom(nationality.zoom);
+  };
+
+  const handleRegionClick = (region: Region) => {
     if (region.name === "CANADA") {
       setShowProvinces(true);
       setActiveProvince(null);
@@ -329,7 +423,9 @@ const MapComponent = () => {
     setMapZoom(region.zoom);
   };
 
-  const handleProvinceClick = (province: any) => {
+  const handleProvinceClick = (
+    province: (typeof canadianProvinces)[number]
+  ) => {
     setActiveProvince(province.code);
     setMapCenter(province.coords);
     setMapZoom(5);
@@ -344,27 +440,27 @@ const MapComponent = () => {
   const getFilteredCountries = () => {
     if (!worldGeoJSON) return [];
 
-    // Show all countries from all regions when "ALL" is selected
+    // ALL = union of region countries (skip CARIBBEAN geojson; we draw custom)
     if (activeRegion === "ALL") {
       const allCountries: any[] = [];
-
       regions
         .filter((r) => r.name !== "ALL" && r.name !== "CARIBBEAN")
         .forEach((region) => {
           region.countries.forEach((country) => {
-            const feature = worldGeoJSON.features.find(
-              (f: any) => {
-                const countryName = country.name.toLowerCase();
-                const featureName = (f.properties.NAME || f.properties.name || f.properties.ADMIN || '').toLowerCase();
-                
-                // Exact match
-                if (featureName === countryName) return true;
-                
-                // Fallback: partial match
-                return featureName.includes(countryName) || countryName.includes(featureName);
-              }
-            );
-
+            const feature = worldGeoJSON.features.find((f: any) => {
+              const countryName = country.name.toLowerCase();
+              const featureName = (
+                f.properties.NAME ||
+                f.properties.name ||
+                f.properties.ADMIN ||
+                ""
+              ).toLowerCase();
+              if (featureName === countryName) return true;
+              return (
+                featureName.includes(countryName) ||
+                countryName.includes(featureName)
+              );
+            });
             if (feature) {
               allCountries.push({
                 ...feature,
@@ -374,65 +470,50 @@ const MapComponent = () => {
             }
           });
         });
-
       return allCountries;
     }
 
-    // Skip GeoJSON polygons for Caribbean - use custom polygons instead
-    if (activeRegion === "CARIBBEAN") {
-      return [];
-    }
+    if (activeRegion === "CARIBBEAN") return [];
 
     const activeRegionData = regions.find((r) => r.name === activeRegion);
     if (!activeRegionData) return [];
 
-    const filteredCountries: any[] = [];
-
+    const filtered: any[] = [];
     activeRegionData.countries.forEach((country) => {
-      const feature = worldGeoJSON.features.find(
-        (f: any) => {
-          const countryName = country.name.toLowerCase();
-          const featureName = (f.properties.NAME || f.properties.name || f.properties.ADMIN || '').toLowerCase();
-          
-          // Exact match
-          if (featureName === countryName) return true;
-          
-          // Fallback: partial match
-          return featureName.includes(countryName) || countryName.includes(featureName);
-        }
-      );
-
+      const feature = worldGeoJSON.features.find((f: any) => {
+        const countryName = country.name.toLowerCase();
+        const featureName = (
+          f.properties.NAME ||
+          f.properties.name ||
+          f.properties.ADMIN ||
+          ""
+        ).toLowerCase();
+        if (featureName === countryName) return true;
+        return (
+          featureName.includes(countryName) || countryName.includes(featureName)
+        );
+      });
       if (feature) {
-        filteredCountries.push({
+        filtered.push({
           ...feature,
           regionColor: activeRegionData.color,
           regionName: activeRegionData.displayName,
         });
       }
     });
-
-    return filteredCountries;
+    return filtered;
   };
 
-  const getPolygonStyle = (regionColor: string) => ({
-    fillColor: regionColor,
-    weight: 2,
-    opacity: 1,
-    color: "#ffffff",
-    dashArray: "",
-    fillOpacity: 0.7,
-  });
-
   return (
-    <>
+    <section className="w-full bg-background py-8 mt-20 relative z-10">
       <style jsx global>{`
         .country-polygon {
           transition: all 0.3s ease;
           cursor: pointer;
         }
         .country-polygon:hover {
-          filter: brightness(1.1);
-          transform: scale(1.02);
+          filter: brightness(1.04);
+          transform: scale(1.01);
         }
         .custom-div-icon {
           background: none !important;
@@ -440,74 +521,171 @@ const MapComponent = () => {
         }
         .leaflet-popup-content-wrapper {
           border-radius: 8px;
+          background: var(--card);
+          color: var(--foreground);
+          border: 1px solid var(--border);
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
         .leaflet-popup-content {
           margin: 12px 16px;
-          font-family: system-ui, -apple-system, sans-serif;
+          font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter,
+            sans-serif;
         }
         .leaflet-container {
           z-index: 1 !important;
+          background: var(--card);
         }
         .leaflet-control-container {
           z-index: 2 !important;
         }
       `}</style>
 
-      <section className="w-full bg-gradient-to-br from-gray-50 to-blue-50 py-8 mt-20 relative z-10">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[500px]">
-            {/* Left Panel - Map and Tabs */}
-            <div className="lg:col-span-2 h-[500px]">
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden h-full flex flex-col">
-                {/* Region Tabs */}
-                <div className="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                  <div className="flex flex-wrap gap-1">
-                    {regions.map((region) => (
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-foreground mb-4">
+            Discover Immigration Opportunities Worldwide
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Explore immigration programs and opportunities across different
+            countries and regions. Click on any country to learn more.
+          </p>
+        </div>
+
+        <div className="bg-card rounded-2xl shadow-xl overflow-hidden relative border border-border">
+          {/* Edges glow/gradients */}
+          <div
+            className="absolute top-0 left-0  h-24 pointer-events-none z-10 hidden lg:block"
+            style={{
+              background:
+                "linear-gradient(to bottom, var(--card), rgba(255,255,255,0))",
+            }}
+          />
+          <div
+            className="absolute bottom-0 left-0  h-20 pointer-events-none z-10 hidden lg:block"
+            style={{
+              background:
+                "linear-gradient(to top, var(--card), rgba(255,255,255,0))",
+            }}
+          />
+          <div
+            className="absolute top-0 bottom-0 left-0 w-20 pointer-events-none z-10 hidden lg:block"
+            style={{
+              background:
+                "linear-gradient(to right, var(--card), rgba(255,255,255,0))",
+            }}
+          />
+          <div
+            className="absolute top-0 bottom-0 right-0 w-28 pointer-events-none z-10 hidden lg:block"
+            style={{
+              background:
+                "linear-gradient(to left, var(--card), rgba(255,255,255,0))",
+            }}
+          />
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 min-h-[600px]">
+            {/* Left: Map */}
+            <div className="lg:col-span-2 relative">
+              {/* Nationality slider */}
+              <div className="absolute top-4 left-4 right-4 z-20">
+                <div className="bg-card/90 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-border">
+                  <div
+                    className="flex items-center space-x-4 overflow-x-auto pb-2"
+                    ref={sliderRef}
+                  >
+                    {nationalities.map((n) => (
                       <button
-                        key={region.name}
-                        onClick={() => handleRegionClick(region)}
-                        className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all duration-200 ${
-                          activeRegion === region.name
-                            ? "text-white shadow-sm"
-                            : "bg-white text-gray-600 hover:bg-gray-100 hover:text-gray-800"
+                        key={n.name}
+                        onClick={() => handleNationalityClick(n)}
+                        className={`flex items-center space-x-3 px-4 py-2 rounded-lg border transition-all duration-300 whitespace-nowrap ${
+                          activeNationality === n.name
+                            ? "bg-primary border-primary text-primary-foreground shadow-lg"
+                            : "bg-card border-border text-foreground hover:border-border/80 hover:shadow-md"
                         }`}
-                        style={{
-                          backgroundColor:
-                            activeRegion === region.name
-                              ? region.color
-                              : undefined,
-                        }}
                       >
-                        <div className="flex items-center space-x-1">
+                        <div className="relative w-7 h-7 rounded-full overflow-hidden shadow-md bg-card flex-shrink-0 border border-border">
                           <div
-                            className="w-3 h-3"
-                            dangerouslySetInnerHTML={{ __html: region.iconSvg }}
+                            className="absolute inset-0"
+                            style={{
+                              background:
+                                "linear-gradient(to bottom, transparent, rgba(255,255,255,.6))",
+                            }}
                           />
-                          <span>{region.displayName}</span>
+                          <div className="w-6 h-6 rounded-full bg-muted m-0.5 flex items-center justify-center text-xs font-bold">
+                            {n.name.charAt(0)}
+                          </div>
                         </div>
+                        <span
+                          className={`text-sm font-medium uppercase tracking-wide`}
+                        >
+                          {n.name}
+                        </span>
                       </button>
                     ))}
                   </div>
                 </div>
+              </div>
 
-                {/* Map Container */}
-                <div className="flex-1 relative ">
-                  <MapContainer
-                    center={mapCenter}
-                    zoom={mapZoom}
-                    className="w-full h-88"
-                    zoomControl={true}
-                    scrollWheelZoom={true}
+              {/* Zoom controls (optional wiring to map via window.leaflet?) */}
+              <div className="absolute bottom-6 left-6 z-20 flex flex-col space-y-2">
+                <button
+                  className="w-10 h-10 bg-[color:var(--primary-light)] backdrop-blur-sm rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity"
+                  onClick={() => setMapZoom((z) => Math.min(z + 1, 10))}
+                  aria-label="Zoom in"
+                >
+                  <svg
+                    className="w-4 h-4 text-foreground"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
                   >
-                    <TileLayer
-                      url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-                      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 6v12M6 12h12"
                     />
+                  </svg>
+                </button>
+                <button
+                  className="w-10 h-10 bg-[color:var(--primary-light)] backdrop-blur-sm rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity"
+                  onClick={() => setMapZoom((z) => Math.max(z - 1, 1))}
+                  aria-label="Zoom out"
+                >
+                  <svg
+                    className="w-4 h-4 text-foreground"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 12h12"
+                    />
+                  </svg>
+                </button>
+              </div>
 
-                    {/* Render country polygons */}
-                    {worldGeoJSON &&
-                      getFilteredCountries().map((countryFeature, index) => (
+              {/* Map */}
+              <div className="h-[600px] relative">
+                <MapContainer
+                  center={mapCenter}
+                  zoom={mapZoom}
+                  className="w-full h-full"
+                  zoomControl={false}
+                  scrollWheelZoom
+                >
+                  <TileLayer
+                    url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                  />
+
+                  {/* Regions as country polygons */}
+                  {worldGeoJSON &&
+                    getFilteredCountries().map(
+                      (countryFeature: any, index: number) => (
                         <GeoJSON
                           key={`${activeRegion}-${
                             countryFeature.properties.NAME ||
@@ -520,23 +698,22 @@ const MapComponent = () => {
                           }
                           onEachFeature={(feature, layer) => {
                             layer.on({
-                              mouseover: (e) => {
-                                const layer = e.target;
-                                layer.setStyle({
+                              mouseover: (e: any) => {
+                                const ll = e.target;
+                                ll.setStyle({
                                   weight: 3,
-                                  color: "#ffffff",
+                                  color: tokens.card,
                                   dashArray: "",
                                   fillOpacity: 0.9,
                                 });
                               },
-                              mouseout: (e) => {
-                                const layer = e.target;
-                                layer.setStyle(
+                              mouseout: (e: any) => {
+                                const ll = e.target;
+                                ll.setStyle(
                                   getPolygonStyle(countryFeature.regionColor)
                                 );
                               },
-                              click: (e) => {
-                                const layer = e.target;
+                              click: () => {
                                 const countryName =
                                   feature.properties.NAME ||
                                   feature.properties.name ||
@@ -544,224 +721,221 @@ const MapComponent = () => {
                                 layer
                                   .bindPopup(
                                     `<div class="text-center font-medium">
-                                  <div class="font-bold text-lg">${countryName}</div>
-                                  <div class="text-sm mt-1" style="color: ${countryFeature.regionColor}">
-                                    ${countryFeature.regionName}
-                                  </div>
-                                </div>`
+                                    <div class="font-bold text-lg">${countryName}</div>
+                                    <div class="text-sm mt-1" style="color:${countryFeature.regionColor}">${countryFeature.regionName}</div>
+                                  </div>`
                                   )
                                   .openPopup();
                               },
                             });
                           }}
                         />
-                      ))}
+                      )
+                    )}
 
-                    {/* Show Canadian provinces when Canada is selected */}
-                    {activeRegion === "CANADA" &&
-                      showProvinces &&
-                      canadianProvinces.map((province) => (
+                  {/* Canada province markers */}
+                  {activeRegion === "CANADA" &&
+                    showProvinces &&
+                    canadianProvinces.map((province) => (
+                      <Marker
+                        key={`province-${province.code}`}
+                        position={province.coords}
+                        icon={createCustomIcon(
+                          iconSvgs.mapPin,
+                          tokens.red,
+                          activeProvince === province.code ? 20 : 16
+                        )}
+                      >
+                        <Popup>
+                          <div className="text-center">
+                            <div className="font-bold">{province.name}</div>
+                            <div className="text-sm text-muted-foreground">
+                              {province.code}
+                            </div>
+                            <div
+                              className="text-xs mt-1"
+                              style={{ color: tokens.red }}
+                            >
+                              {province.program}
+                            </div>
+                          </div>
+                        </Popup>
+                      </Marker>
+                    ))}
+
+                  {/* Caribbean as custom small polygons */}
+                  {activeRegion === "CARIBBEAN" &&
+                    regions
+                      .find((r) => r.name === "CARIBBEAN")
+                      ?.countries.map((country) => {
+                        const [lat, lng] = country.coords;
+                        const radius = 0.3;
+                        const points = 20;
+                        const coordinates: [number, number][] = [];
+                        for (let i = 0; i < points; i++) {
+                          const angle = (i / points) * 2 * Math.PI;
+                          const latOffset = radius * Math.cos(angle);
+                          const lngOffset =
+                            (radius * Math.sin(angle)) /
+                            Math.cos((lat * Math.PI) / 180);
+                          coordinates.push([lat + latOffset, lng + lngOffset]);
+                        }
+                        coordinates.push(coordinates[0]);
+                        const polygonGeoJSON = {
+                          type: "Feature" as const,
+                          properties: { NAME: country.name },
+                          geometry: {
+                            type: "Polygon" as const,
+                            coordinates: [coordinates],
+                          },
+                        };
+
+                        return (
+                          <GeoJSON
+                            key={`caribbean-polygon-${country.name}`}
+                            data={polygonGeoJSON}
+                            style={() => ({
+                              fillColor: tokens.green,
+                              weight: 2,
+                              opacity: 1,
+                              color: tokens.card,
+                              dashArray: "",
+                              fillOpacity: 0.7,
+                            })}
+                            onEachFeature={(_, layer) => {
+                              layer.on({
+                                mouseover: (e: any) => {
+                                  const ll = e.target;
+                                  ll.setStyle({
+                                    weight: 3,
+                                    color: tokens.card,
+                                    dashArray: "",
+                                    fillOpacity: 0.9,
+                                  });
+                                },
+                                mouseout: (e: any) => {
+                                  const ll = e.target;
+                                  ll.setStyle({
+                                    fillColor: tokens.green,
+                                    weight: 2,
+                                    opacity: 1,
+                                    color: tokens.card,
+                                    dashArray: "",
+                                    fillOpacity: 0.7,
+                                  });
+                                },
+                                click: () => {
+                                  layer
+                                    .bindPopup(
+                                      `<div class="text-center font-medium">
+                                        <div class="font-bold text-lg">${country.name}</div>
+                                        <div class="text-sm mt-1" style="color:${tokens.green}">Caribbean Islands</div>
+                                        <div class="text-xs text-muted-foreground mt-1">Citizenship by Investment Programs</div>
+                                      </div>`
+                                    )
+                                    .openPopup();
+                                },
+                              });
+                            }}
+                          />
+                        );
+                      })}
+
+                  {/* Fallback markers if GeoJSON not loaded */}
+                  {!worldGeoJSON &&
+                    activeRegion !== "ALL" &&
+                    activeRegion !== "CARIBBEAN" &&
+                    regions
+                      .find((r) => r.name === activeRegion)
+                      ?.countries.map((country) => (
                         <Marker
-                          key={`province-${province.code}`}
-                          position={province.coords}
+                          key={`fallback-${activeRegion}-${country.name}`}
+                          position={country.coords}
                           icon={createCustomIcon(
                             iconSvgs.mapPin,
-                            activeProvince === province.code
-                              ? "#dc2626"
-                              : "#e53e3e",
-                            activeProvince === province.code ? 20 : 16
+                            regions.find((r) => r.name === activeRegion)
+                              ?.color || tokens.primary,
+                            16
                           )}
                         >
                           <Popup>
                             <div className="text-center">
-                              <div className="font-bold">{province.name}</div>
-                              <div className="text-sm text-gray-600">
-                                {province.code}
-                              </div>
-                              <div className="text-xs text-blue-600 mt-1">
-                                {province.program}
+                              <div className="font-bold">{country.name}</div>
+                              <div className="text-sm text-muted-foreground">
+                                {
+                                  regions.find((r) => r.name === activeRegion)
+                                    ?.displayName
+                                }
                               </div>
                             </div>
                           </Popup>
                         </Marker>
                       ))}
 
-                    {/* Caribbean Islands polygons - create custom polygons for small islands */}
-                    {activeRegion === "CARIBBEAN" &&
-                      regions
-                        .find((r) => r.name === "CARIBBEAN")
-                        ?.countries.map((country) => {
-                          // Create small circular polygons for Caribbean islands
-                          const [lat, lng] = country.coords;
-                          const radius = 0.3; // Adjust size as needed
-                          const points = 20;
-                          const coordinates = [];
-                          
-                          for (let i = 0; i < points; i++) {
-                            const angle = (i / points) * 2 * Math.PI;
-                            const latOffset = radius * Math.cos(angle);
-                            const lngOffset = radius * Math.sin(angle) / Math.cos(lat * Math.PI / 180);
-                            coordinates.push([lat + latOffset, lng + lngOffset]);
-                          }
-                          coordinates.push(coordinates[0]); // Close the polygon
-                          
-                          const polygonGeoJSON = {
-                            type: "Feature" as const,
-                            properties: { NAME: country.name },
-                            geometry: {
-                              type: "Polygon" as const,
-                              coordinates: [coordinates]
-                            }
-                          };
-                          
-                          return (
-                            <GeoJSON
-                              key={`caribbean-polygon-${country.name}`}
-                              data={polygonGeoJSON}
-                              style={() => ({
-                                fillColor: "#10b981",
-                                weight: 2,
-                                opacity: 1,
-                                color: "#ffffff",
-                                dashArray: "",
-                                fillOpacity: 0.7,
-                              })}
-                              onEachFeature={(feature, layer) => {
-                                layer.on({
-                                  mouseover: (e) => {
-                                    const layer = e.target;
-                                    layer.setStyle({
-                                      weight: 3,
-                                      color: "#ffffff",
-                                      dashArray: "",
-                                      fillOpacity: 0.9,
-                                    });
-                                  },
-                                  mouseout: (e) => {
-                                    const layer = e.target;
-                                    layer.setStyle({
-                                      fillColor: "#10b981",
-                                      weight: 2,
-                                      opacity: 1,
-                                      color: "#ffffff",
-                                      dashArray: "",
-                                      fillOpacity: 0.7,
-                                    });
-                                  },
-                                  click: (e) => {
-                                    const layer = e.target;
-                                    layer
-                                      .bindPopup(
-                                        `<div class="text-center font-medium">
-                                          <div class="font-bold text-lg">${country.name}</div>
-                                          <div class="text-sm mt-1" style="color: #10b981">
-                                            Caribbean Islands
-                                          </div>
-                                          <div class="text-xs text-gray-600 mt-1">
-                                            Citizenship by Investment Programs
-                                          </div>
-                                        </div>`
-                                      )
-                                      .openPopup();
-                                  },
-                                });
-                              }}
-                            />
-                          );
-                        })}
-
-                    {/* Fallback markers if GeoJSON fails to load */}
-                    {!worldGeoJSON &&
-                      activeRegion !== "ALL" &&
-                      activeRegion !== "CARIBBEAN" &&
-                      regions
-                        .find((r) => r.name === activeRegion)
-                        ?.countries.map((country) => (
-                          <Marker
-                            key={`fallback-${activeRegion}-${country.name}`}
-                            position={country.coords}
-                            icon={createCustomIcon(
-                              iconSvgs.mapPin,
-                              regions.find((r) => r.name === activeRegion)
-                                ?.color || "#56736c",
-                              16
-                            )}
-                          >
-                            <Popup>
-                              <div className="text-center">
-                                <div className="font-bold">{country.name}</div>
-                                <div className="text-sm text-gray-600">
-                                  {
-                                    regions.find((r) => r.name === activeRegion)
-                                      ?.displayName
-                                  }
-                                </div>
-                              </div>
-                            </Popup>
-                          </Marker>
-                        ))}
-
-                    <MapController position={mapCenter} zoom={mapZoom} />
-                  </MapContainer>
-                </div>
+                  <MapController position={mapCenter} zoom={mapZoom} />
+                </MapContainer>
               </div>
             </div>
 
-            {/* Right Panel - Country Details */}
-            <div className="lg:col-span-1">
-              <div className="bg-white rounded-xl shadow-lg p-4 h-[500px]">
+            {/* Right: Sidebar */}
+            <div className="lg:col-span-1 bg-muted">
+              <div className="p-6 h-[600px]">
                 <div className="h-full flex flex-col">
-                  <h3 className="text-lg font-bold text-gray-800 mb-3">
-                    {regions.find((r) => r.name === activeRegion)
-                      ?.displayName || "All Programs"}
-                  </h3>
-                  <div className="flex-1 overflow-y-auto pr-2 h-[400px]">
-                    {/* All Regions View */}
+                  <div className="mb-6">
+                    <h3 className="text-xl font-bold text-foreground mb-2">
+                      {activeNationality} Immigration Programs
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      Explore available immigration pathways and opportunities
+                    </p>
+                  </div>
+
+                  <div className="flex-1 overflow-y-auto pr-2">
+                    {/* ALL view */}
                     {activeRegion === "ALL" && (
                       <div className="space-y-4">
                         {regions
                           .filter((r) => r.name !== "ALL")
                           .map((region) => (
-                            <div
+                            <button
                               key={region.name}
-                              className="border rounded-lg p-3"
-                              style={{ borderColor: region.color }}
+                              onClick={() => handleRegionClick(region)}
+                              className="w-full text-left border rounded-lg p-3 bg-card hover:bg-muted transition-colors"
+                              style={{ borderColor: "var(--border)" }}
                             >
                               <div className="flex items-center space-x-2 mb-2">
                                 <div
                                   className="w-4 h-4 rounded-full"
                                   style={{ backgroundColor: region.color }}
                                 />
-                                <h4 className="font-semibold text-sm text-gray-800">
+                                <h4 className="font-semibold text-sm text-foreground">
                                   {region.displayName}
                                 </h4>
                               </div>
-                              <p className="text-xs text-gray-600 mb-2">
+                              <p className="text-xs text-muted-foreground mb-2">
                                 {region.countries.length} countries
                               </p>
                               <div className="flex flex-wrap gap-1">
-                                {region.countries
-                                  .slice(0, 3)
-                                  .map((country, idx) => (
-                                    <span
-                                      key={idx}
-                                      className="text-xs bg-gray-100 px-2 py-1 rounded"
-                                    >
-                                      {country.name}
-                                    </span>
-                                  ))}
+                                {region.countries.slice(0, 3).map((c, idx) => (
+                                  <span
+                                    key={idx}
+                                    className="text-xs bg-muted px-2 py-1 rounded"
+                                  >
+                                    {c.name}
+                                  </span>
+                                ))}
                                 {region.countries.length > 3 && (
-                                  <span className="text-xs text-gray-500">
+                                  <span className="text-xs text-muted-foreground">
                                     +{region.countries.length - 3} more
                                   </span>
                                 )}
                               </div>
-                            </div>
+                            </button>
                           ))}
                       </div>
                     )}
 
-                    {/* Canada Provinces Navigation */}
+                    {/* Canada province navigation */}
                     {activeRegion === "CANADA" && showProvinces && (
                       <div className="mb-6">
                         {activeProvince && (
@@ -784,7 +958,7 @@ const MapComponent = () => {
                           </button>
                         )}
 
-                        <h4 className="font-semibold text-gray-700 text-sm mb-3">
+                        <h4 className="font-semibold text-foreground text-sm mb-3">
                           {activeProvince
                             ? canadianProvinces.find(
                                 (p) => p.code === activeProvince
@@ -798,21 +972,24 @@ const MapComponent = () => {
                               <button
                                 key={index}
                                 onClick={() => handleProvinceClick(province)}
-                                className="w-full bg-red-50 hover:bg-red-100 rounded-md p-2 transition-colors duration-200 text-left"
+                                className="w-full rounded-md p-2 transition-colors duration-200 text-left bg-[color:var(--primary-light)] hover:opacity-90"
                               >
                                 <div className="flex items-center justify-between">
                                   <div className="flex items-center space-x-2">
-                                    <div className="w-5 h-5 rounded-full bg-red-500 flex items-center justify-center">
-                                      <span className="text-white text-xs font-bold">
+                                    <div
+                                      className="w-5 h-5 rounded-full flex items-center justify-center"
+                                      style={{ background: tokens.red }}
+                                    >
+                                      <span className="text-primary-foreground text-xs font-bold">
                                         {province.code}
                                       </span>
                                     </div>
-                                    <span className="font-medium text-gray-800 text-xs">
+                                    <span className="font-medium text-foreground text-xs">
                                       {province.name}
                                     </span>
                                   </div>
                                   <svg
-                                    className="w-3 h-3 text-gray-400"
+                                    className="w-3 h-3 text-muted-foreground"
                                     fill="currentColor"
                                     viewBox="0 0 20 20"
                                   >
@@ -827,27 +1004,45 @@ const MapComponent = () => {
                             ))}
                           </div>
                         ) : (
-                          <div className="bg-red-50 rounded-lg p-4">
+                          <div
+                            className="rounded-lg p-4"
+                            style={{
+                              background:
+                                "color-mix(in oklab, var(--btn-red) 12%, transparent)",
+                            }}
+                          >
                             <div className="flex items-center space-x-3 mb-3">
-                              <div className="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center">
-                                <span className="text-white text-sm font-bold">
+                              <div
+                                className="w-8 h-8 rounded-full flex items-center justify-center"
+                                style={{ background: tokens.red }}
+                              >
+                                <span className="text-primary-foreground text-sm font-bold">
                                   {activeProvince}
                                 </span>
                               </div>
                               <div>
-                                <h5 className="font-semibold text-red-800">
+                                <h5
+                                  className="font-semibold"
+                                  style={{ color: tokens.red }}
+                                >
                                   {
                                     canadianProvinces.find(
                                       (p) => p.code === activeProvince
                                     )?.name
                                   }
                                 </h5>
-                                <p className="text-red-600 text-xs">
+                                <p
+                                  className="text-xs"
+                                  style={{ color: tokens.red }}
+                                >
                                   Provincial Immigration Program
                                 </p>
                               </div>
                             </div>
-                            <p className="text-red-700 text-sm">
+                            <p
+                              className="text-sm"
+                              style={{ color: tokens.red }}
+                            >
                               {
                                 canadianProvinces.find(
                                   (p) => p.code === activeProvince
@@ -859,15 +1054,15 @@ const MapComponent = () => {
                       </div>
                     )}
 
-                    {/* Countries List for other regions */}
+                    {/* Countries list for other regions */}
                     {activeRegion !== "CANADA" && activeRegion !== "ALL" && (
                       <div className="space-y-2">
                         {regions
                           .find((r) => r.name === activeRegion)
-                          ?.countries?.map((country, index) => (
+                          ?.countries?.map((country, i) => (
                             <div
-                              key={index}
-                              className="bg-gray-50 rounded-md p-2 hover:bg-gray-100 transition-colors duration-200"
+                              key={i}
+                              className="bg-muted rounded-md p-2 hover:opacity-90 transition"
                             >
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-2">
@@ -879,9 +1074,9 @@ const MapComponent = () => {
                                       )?.color,
                                     }}
                                   >
-                                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                                    <div className="w-2 h-2 bg-card rounded-full" />
                                   </div>
-                                  <span className="font-medium text-gray-800 text-xs">
+                                  <span className="font-medium text-foreground text-xs">
                                     {country.name}
                                   </span>
                                 </div>
@@ -892,15 +1087,15 @@ const MapComponent = () => {
                             </div>
                           )) || (
                           <div className="text-center py-8">
-                            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
+                            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">
                               <div
-                                className="w-8 h-8 text-gray-400"
+                                className="w-8 h-8 text-muted-foreground"
                                 dangerouslySetInnerHTML={{
                                   __html: iconSvgs.globe,
                                 }}
                               />
                             </div>
-                            <p className="text-gray-500 text-sm">
+                            <p className="text-muted-foreground text-sm">
                               Select a region to view countries
                             </p>
                           </div>
@@ -909,8 +1104,8 @@ const MapComponent = () => {
                     )}
 
                     {/* Programs */}
-                    <div className="space-y-3">
-                      <h4 className="font-semibold text-gray-700 text-sm">
+                    <div className="space-y-3 mt-4">
+                      <h4 className="font-semibold text-foreground text-sm">
                         Available Programs:
                       </h4>
                       {regions
@@ -919,12 +1114,15 @@ const MapComponent = () => {
                         .map((program, index) => (
                           <div
                             key={index}
-                            className="bg-blue-50 rounded-lg p-3"
+                            className="rounded-lg p-3 border border-border bg-card"
                           >
-                            <h5 className="font-medium text-blue-800 text-sm mb-1">
+                            <h5
+                              className="font-medium text-sm mb-1"
+                              style={{ color: tokens.accent }}
+                            >
                               {program}
                             </h5>
-                            <p className="text-blue-600 text-xs">
+                            <p className="text-xs text-muted-foreground">
                               Immigration program available
                             </p>
                           </div>
@@ -932,19 +1130,27 @@ const MapComponent = () => {
                     </div>
                   </div>
 
-                  {/* Explore Programs Button */}
-                  <div className="mt-6 pt-4 border-t border-gray-200">
-                    <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold text-sm hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                      Explore Programs
+                  {/* CTA */}
+                  <div className="mt-6 pt-4 border-t border-border">
+                    <button className="w-full bg-primary text-primary-foreground py-4 px-6 rounded-xl font-semibold text-sm hover:opacity-90 transition shadow-lg">
+                      <div className="flex items-center justify-center space-x-2">
+                        <span>Explore {activeNationality} Programs</span>
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: iconSvgs.arrowRight,
+                          }}
+                        />
+                      </div>
                     </button>
                   </div>
                 </div>
               </div>
             </div>
+            {/* /Right */}
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 

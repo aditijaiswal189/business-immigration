@@ -17,7 +17,7 @@ import TeamSection from "@/components/ui/team-section";
 import TestimonialSection from "@/components/ui/testimonial-section";
 import ProcessSection from "@/components/ui/process-section";
 import AnnualReportSection from "@/components/ui/annual-report-section";
-import MapComponent from "@/components/ui/map-component";
+import MapClient from "@/components/ui/map-client";
 import { ImmigrationServicesTimeline } from "@/components/ui/immigration-services-timeline";
 import { ImmigrationTimeline } from "@/components/ui/immigration-timeline";
 
@@ -30,18 +30,18 @@ export default function Home() {
 
       {/* <Hero /> */}
       <AboutSection />
+      <StatsSection />
       {/* <BlogSection /> */}
-      <MapComponent />
+      <MapClient />
       <ImmigrationServicesTimeline />
       {/* <BrandLogos /> */}
       <ProcessSectionAnimated />
-      <AnnualReportSection />
-      <ProcessSection />
-      <StatsSection />
-      <BusinessImmigrationJourney />
-      <TeamSection />
+      {/* <AnnualReportSection /> */}
+      {/* <ProcessSection /> */}
+      {/* <BusinessImmigrationJourney /> */}
+      {/* <TeamSection /> */}
       <TestimonialSection />
-      <ServicesGrid />
+      {/* <ServicesGrid /> */}
       <ContactSection />
       <Footer />
     </div>

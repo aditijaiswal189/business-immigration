@@ -5,7 +5,7 @@ import * as React from "react";
 export function ImageWithFallback(
   props: React.ImgHTMLAttributes<HTMLImageElement> & { fallback?: string }
 ) {
-  const { fallback = "/placeholder.png", ...rest } = props;
+  const { fallback = "/placeholder.svg", ...rest } = props;
   const [src, setSrc] = React.useState(rest.src);
   return (
     <img
