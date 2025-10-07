@@ -68,8 +68,9 @@ export default function ContactSection() {
               Get free business consultation Today
             </h2>
             <p className="text-gray-600 mb-12">
-              At GTR Business Immigration, we are a renowned global consulting
-              firm committed to helping businesses overcome challenges.
+              At GTR Worldwide Business Immigration, we are a renowned global
+              consulting firm committed to helping businesses overcome
+              challenges.
             </p>
 
             <div className="space-y-6">

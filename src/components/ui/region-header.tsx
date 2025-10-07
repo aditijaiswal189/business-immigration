@@ -61,54 +61,140 @@ const ABOUT: Section = {
   ],
 };
 
-const NORTH_AMERICA: Section = {
-  label: "NORTH AMERICA",
+const AMERICAS: Section = {
+  label: "AMERICA'S",
   items: [
     {
-      title: "Canada – Express Entry",
-      href: "/canada/express-entry",
-      desc: "FSW, CEC, FST—check eligibility and CRS paths.",
+      title: "Brazil",
+      href: "/americas/brazil",
+      desc: "Residency and work permits.",
     },
-    {
-      title: "Canada – PNP by Province",
-      href: "/canada/pnp",
-      desc: "Ontario, BC, Alberta, Saskatchewan and more.",
-    },
-    {
-      title: "USA – Work Visas",
-      href: "/usa/work",
-      desc: "H-1B, TN, L-1—find the right route.",
-    },
-    {
-      title: "USA – Investor / EB-5",
-      href: "/usa/eb5",
-      desc: "Capital-led pathways.",
-    },
-  ],
-};
-
-const LATAM: Section = {
-  label: "LATIN AMERICA",
-  items: [
     {
       title: "Mexico",
-      href: "/latam/mexico",
+      href: "/americas/mexico",
       desc: "Temporary & permanent resident options.",
     },
     {
       title: "Panama",
-      href: "/latam/panama",
+      href: "/americas/panama",
       desc: "Friendly Nations & investment routes.",
     },
     {
-      title: "Brazil",
-      href: "/latam/brazil",
+      title: "Paraguay",
+      href: "/americas/paraguay",
+      desc: "Residency via investment.",
+    },
+    {
+      title: "USA - EB5",
+      href: "/americas/usa",
+      desc: "Capital-led pathways.",
+    },
+  ],
+};
+const CANADA: Section = {
+  label: "CANADA",
+  items: [
+    {
+      title: "Alberta",
+      href: "/canada/alberta",
       desc: "Residency and work permits.",
     },
     {
-      title: "Paraguay",
-      href: "/latam/paraguay",
-      desc: "Residency via investment.",
+      title: "British Columbia",
+      href: "/canada/br-columbia",
+      desc: "Residency and work permits.",
+    },
+    {
+      title: "Manitoba",
+      href: "/canada/manitoba",
+      desc: "Residency and work permits.",
+    },
+    {
+      title: "New Brunswick",
+      href: "/canada/new-brunswick",
+      desc: "Residency and work permits.",
+    },
+    {
+      title: "Newfoundland and Labrador",
+      href: "/canada/newfoundland-and-labrador",
+      desc: "Residency and work permits.",
+    },
+    {
+      title: "Nova Scotia",
+      href: "/canada/nova-scotia",
+      desc: "Residency and work permits.",
+    },
+    {
+      title: "Ontario",
+      href: "/canada/ontario",
+      desc: "Residency and work permits.",
+    },
+    {
+      title: "Quebec",
+      href: "/canada/quebec",
+      desc: "Residency and work permits.",
+    },
+    {
+      title: "Saskatchewan",
+      href: "/canada/saskatchewan",
+      desc: "Residency and work permits.",
+    },
+    {
+      title: "Prince Edward Island",
+      href: "/canada/prince-edward-island",
+      desc: "Residency and work permits.",
+    },
+    {
+      title: "Yukon",
+      href: "/canada/yukon",
+      desc: "Residency and work permits.",
+    },
+
+    {
+      title: "Northwest Territories",
+      href: "/canada/northwest-territories",
+      desc: "Residency and work permits.",
+    },
+  ],
+};
+
+const CARIBBEAN: Section = {
+  label: "CARIBBEAN ISLANDS",
+  items: [
+    {
+      title: "Antigua & Barbuda",
+      href: "/caribbean/antigua-barbuda",
+      desc: "Temporary & permanent resident options.",
+    },
+    {
+      title: "Anguilla",
+      href: "/caribbean/anguilla",
+      desc: "Temporary & permanent resident options.",
+    },
+    {
+      title: "Curacao",
+      href: "/caribbean/curacao",
+      desc: "Temporary & permanent resident options.",
+    },
+    {
+      title: "Dominica",
+      href: "/caribbean/dominica",
+      desc: "Temporary & permanent resident options.",
+    },
+    {
+      title: "Grenada",
+      href: "/caribbean/grenada",
+      desc: "Temporary & permanent resident options.",
+    },
+    {
+      title: "Saint Lucia",
+      href: "/caribbean/saint-lucia",
+      desc: "Temporary & permanent resident options.",
+    },
+    {
+      title: "St.Kitts & Nevis",
+      href: "/caribbean/st-kitts-nevis",
+      desc: "Temporary & permanent resident options.",
     },
   ],
 };
@@ -116,6 +202,106 @@ const LATAM: Section = {
 const EMEA: Section = {
   label: "EMEA",
   items: [
+    {
+      title: "Andorra",
+      href: "/emea/andorra",
+      desc: "D-visas, work, study and residency.",
+    },
+    {
+      title: "Austria",
+      href: "/emea/austria",
+      desc: "D-visas, work, study and residency.",
+    },
+    {
+      title: "Cyprus",
+      href: "/emea/cyprus",
+      desc: "D-visas, work, study and residency.",
+    },
+    {
+      title: "Cayman Islands",
+      href: "/emea/cayman-islands",
+      desc: "D-visas, work, study and residency.",
+    },
+    {
+      title: "Greece",
+      href: "/emea/greece",
+      desc: "D-visas, work, study and residency.",
+    },
+    {
+      title: "Hungary",
+      href: "/emea/hungary",
+      desc: "D-visas, work, study and residency.",
+    },
+    {
+      title: "Italy",
+      href: "/emea/italy",
+      desc: "D-visas, work, study and residency.",
+    },
+    {
+      title: "Latvia",
+      href: "/emea/latvia",
+      desc: "D-visas, work, study and residency.",
+    },
+    {
+      title: "Moldova",
+      href: "/emea/moldova",
+      desc: "D-visas, work, study and residency.",
+    },
+    {
+      title: "North Macedonia",
+      href: "/emea/north-macedonia",
+      desc: "D-visas, work, study and residency.",
+    },
+    {
+      title: "Portugal",
+      href: "/emea/portugal",
+      desc: "D-visas, work, study and residency.",
+    },
+    {
+      title: "Spain",
+      href: "/emea/spain",
+      desc: "D-visas, work, study and residency.",
+    },
+    {
+      title: "Serbia",
+      href: "/emea/serbia",
+      desc: "D-visas, work, study and residency.",
+    },
+    {
+      title: "Switzerland",
+      href: "/emea/switzerland",
+      desc: "D-visas, work, study and residency.",
+    },
+    {
+      title: "UK",
+      href: "/emea/uk",
+      desc: "D-visas, work, study and residency.",
+    },
+    {
+      title: "Jordan",
+      href: "/emea/jordan",
+      desc: "D-visas, work, study and residency.",
+    },
+    {
+      title: "Oman",
+      href: "/emea/oman",
+      desc: "D-visas, work, study and residency.",
+    },
+    {
+      title: "Turkey",
+      href: "/emea/turkey",
+      desc: "D-visas, work, study and residency.",
+    },
+    {
+      title: "Egypt",
+      href: "/emea/egypt",
+      desc: "D-visas, work, study and residency.",
+    },
+    {
+      title: "Namibia",
+      href: "/emea/namibia",
+      desc: "D-visas, work, study and residency.",
+    },
     {
       title: "Portugal",
       href: "/emea/portugal",
@@ -156,6 +342,26 @@ const APAC: Section = {
     {
       title: "Thailand",
       href: "/apac/thailand",
+      desc: "LTR, SMART, work permits.",
+    },
+    {
+      title: "Cambodia",
+      href: "/apac/cambodia",
+      desc: "LTR, SMART, work permits.",
+    },
+    {
+      title: "Fiji",
+      href: "/apac/fiji",
+      desc: "LTR, SMART, work permits.",
+    },
+    {
+      title: "Nauru",
+      href: "/apac/nauru",
+      desc: "LTR, SMART, work permits.",
+    },
+    {
+      title: "Vanuatu",
+      href: "/apac/vanuatu",
       desc: "LTR, SMART, work permits.",
     },
   ],
@@ -200,9 +406,9 @@ export function RegionHeader({
       >
         <div
           className={cn(
-            "mx-auto mt-2 max-w-7xl px-6 transition-all duration-300 lg:px-12",
+            "mx-auto mt-2 max-w-8xl px-6 transition-all duration-300 lg:px-12",
             isScrolled &&
-              "bg-background/50 max-w-5xl rounded-2xl border backdrop-blur-lg lg:px-5"
+              "bg-background/50 max-w-7xl rounded-2xl border backdrop-blur-lg lg:px-5"
           )}
         >
           <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
@@ -213,7 +419,9 @@ export function RegionHeader({
                 aria-label="home"
                 className="flex items-center space-x-2"
               >
-                <span className="font-bold">GTR Business Immigration</span>
+                <span className="font-bold">
+                  GTR Worldwide Business Immigration
+                </span>
               </Link>
 
               <button
@@ -264,14 +472,14 @@ export function RegionHeader({
                     </NavigationMenuContent>
                   </NavigationMenuItem>
 
-                  {/* North America */}
+                  {/* Americas */}
                   <NavigationMenuItem>
                     <NavigationMenuTrigger>
-                      {NORTH_AMERICA.label}
+                      {AMERICAS.label}
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <ul className="grid w-[600px] gap-2 md:grid-cols-2">
-                        {NORTH_AMERICA.items.map((it) => (
+                        {AMERICAS.items.map((it) => (
                           <ListItem
                             key={it.title}
                             href={it.href}
@@ -284,12 +492,34 @@ export function RegionHeader({
                     </NavigationMenuContent>
                   </NavigationMenuItem>
 
-                  {/* LATAM */}
+                  {/* Caribbean */}
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger>{LATAM.label}</NavigationMenuTrigger>
+                    <NavigationMenuTrigger>
+                      {CARIBBEAN.label}
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[600px] gap-2 md:grid-cols-2">
+                        {CARIBBEAN.items.map((it) => (
+                          <ListItem
+                            key={it.title}
+                            href={it.href}
+                            title={it.title}
+                          >
+                            {it.desc ?? ""}
+                          </ListItem>
+                        ))}
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+
+                  {/* canada */}
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger>
+                      {CANADA.label}
+                    </NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <ul className="grid w-[520px] gap-2 md:grid-cols-2">
-                        {LATAM.items.map((it) => (
+                        {CANADA.items.map((it) => (
                           <ListItem
                             key={it.title}
                             href={it.href}
@@ -306,7 +536,7 @@ export function RegionHeader({
                   <NavigationMenuItem>
                     <NavigationMenuTrigger>{EMEA.label}</NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <ul className="grid w-[520px] gap-2 md:grid-cols-2">
+                      <ul className="grid w-[520px] gap-2 md:grid-cols-3">
                         {EMEA.items.map((it) => (
                           <ListItem
                             key={it.title}
@@ -346,23 +576,27 @@ export function RegionHeader({
               {/* Mobile menu list (simple) */}
               <div className="lg:hidden">
                 <ul className="space-y-6 text-base">
-                  {[ABOUT, NORTH_AMERICA, LATAM, EMEA, APAC].map((section) => (
-                    <li key={section.label}>
-                      <div className="mb-1 font-semibold">{section.label}</div>
-                      <ul className="ml-3 space-y-2">
-                        {section.items.slice(0, 3).map((it) => (
-                          <li key={it.title}>
-                            <Link
-                              href={it.href}
-                              className="text-muted-foreground hover:text-accent-foreground block"
-                            >
-                              {it.title}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </li>
-                  ))}
+                  {[ABOUT, AMERICAS, CANADA, CARIBBEAN, EMEA, APAC].map(
+                    (section) => (
+                      <li key={section.label}>
+                        <div className="mb-1 font-semibold">
+                          {section.label}
+                        </div>
+                        <ul className="ml-3 space-y-2">
+                          {section.items.slice(0, 3).map((it) => (
+                            <li key={it.title}>
+                              <Link
+                                href={it.href}
+                                className="text-muted-foreground hover:text-accent-foreground block"
+                              >
+                                {it.title}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </li>
+                    )
+                  )}
                   {SIMPLE_LINKS.map((it) => (
                     <li key={it.label}>
                       <Link

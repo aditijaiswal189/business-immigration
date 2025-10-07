@@ -190,14 +190,14 @@ const HeroSlider = () => {
         <button
           onClick={prevSlide}
           disabled={isTransitioning}
-          className="block text-white/90 hover:text-primary-yellow transition-all duration-300 text-sm font-medium tracking-widest disabled:opacity-50 hover:scale-105"
+          className="block text-white/90 hover:text-primary transition-all duration-300 text-sm font-medium tracking-widest disabled:opacity-50 hover:scale-105"
         >
           PREVIOUS
         </button>
         <button
           onClick={nextSlide}
           disabled={isTransitioning}
-          className="block text-white/90 hover:text-primary-yellow transition-all duration-300 text-sm font-medium tracking-widest disabled:opacity-50 hover:scale-105"
+          className="block text-white/90 hover:text-primary transition-all duration-300 text-sm font-medium tracking-widest disabled:opacity-50 hover:scale-105"
         >
           NEXT
         </button>
@@ -212,7 +212,7 @@ const HeroSlider = () => {
             disabled={isTransitioning}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
               index === currentSlide
-                ? "bg-primary-yellow scale-125 shadow-lg"
+                ? "bg-primary scale-125 shadow-lg"
                 : "bg-white/40 hover:bg-white/60 hover:scale-110"
             } disabled:opacity-50`}
           />
@@ -231,14 +231,14 @@ const HeroSlider = () => {
       <button
         onClick={prevSlide}
         disabled={isTransitioning}
-        className="absolute left-8 top-1/2 transform -translate-y-1/2 text-white/90 hover:text-primary-yellow transition-all duration-300 z-30 disabled:opacity-50 bg-white/5 backdrop-blur-sm rounded-full p-3 border border-white/10 hover:scale-110"
+        className="absolute left-8 top-1/2 transform -translate-y-1/2 text-white/90 hover:text-primary transition-all duration-300 z-30 disabled:opacity-50 bg-white/5 backdrop-blur-sm rounded-full p-3 border border-white/10 hover:scale-110"
       >
         <ChevronLeft className="h-6 w-6" />
       </button>
       <button
         onClick={nextSlide}
         disabled={isTransitioning}
-        className="absolute right-8 top-1/2 transform -translate-y-1/2 text-white/90 hover:text-primary-yellow transition-all duration-300 z-30 disabled:opacity-50 bg-white/5 backdrop-blur-sm rounded-full p-3 border border-white/10 hover:scale-110"
+        className="absolute right-8 top-1/2 transform -translate-y-1/2 text-white/90 hover:text-primary transition-all duration-300 z-30 disabled:opacity-50 bg-white/5 backdrop-blur-sm rounded-full p-3 border border-white/10 hover:scale-110"
       >
         <ChevronRight className="h-6 w-6" />
       </button>
@@ -251,9 +251,13 @@ const HeroSlider = () => {
           if (el) el.scrollIntoView({ behavior: "smooth" });
         }}
       >
-        <div className="text-xs tracking-widest mb-2 text-white/90">SCROLL TO</div>
-        <div className="text-xs tracking-widest mb-4 text-white/90">EXPLORE</div>
-        <ArrowDown className="h-5 w-5 mx-auto animate-bounce text-primary-yellow" />
+        <div className="text-xs tracking-widest mb-2 text-white/90">
+          SCROLL TO
+        </div>
+        <div className="text-xs tracking-widest mb-4 text-white/90">
+          EXPLORE
+        </div>
+        <ArrowDown className="h-5 w-5 mx-auto animate-bounce text-primary" />
       </div>
     </div>
   );

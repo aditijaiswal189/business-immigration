@@ -81,10 +81,10 @@ export default function StatsSection() {
                   that drive business transformation.
                 </p>
                 <p className="text-gray-300 mb-8">
-                  At GTR Business Immigration, we are a renowned global
-                  consulting firm committed to collaborating with business and
-                  societal leaders in overcoming their most critical challenges
-                  and seizing their greatest opportunities.
+                  At GTR Worldwide Business Immigration, we are a renowned
+                  global consulting firm committed to collaborating with
+                  business and societal leaders in overcoming their most
+                  critical challenges and seizing their greatest opportunities.
                 </p>
                 <Button className="bg-primary-yellow text-white px-8 py-4 rounded-md hover:bg-yellow-600 transition-colors font-semibold">
                   Get Started +

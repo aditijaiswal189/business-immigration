@@ -44,7 +44,7 @@ export default function Footer() {
             <div className="flex items-center space-x-2 mb-6">
               <Box className="text-primary-yellow text-2xl" />
               <span className="text-2xl font-bold text-card-foreground">
-                GTR Business Immigration
+                GTR Worldwide Business Immigration
               </span>
             </div>
             <p className="text-muted-foreground mb-6 max-w-sm">
@@ -58,7 +58,9 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-lg font-bold text-card-foreground mb-6">Services</h4>
+            <h4 className="text-lg font-bold text-card-foreground mb-6">
+              Services
+            </h4>
             <ul className="space-y-3">
               {services.map((service) => (
                 <li key={service.name}>
@@ -75,7 +77,9 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-lg font-bold text-card-foreground mb-6">Pages</h4>
+            <h4 className="text-lg font-bold text-card-foreground mb-6">
+              Pages
+            </h4>
             <ul className="space-y-3">
               {pages.map((page) => (
                 <li key={page.name}>
@@ -92,7 +96,9 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-lg font-bold text-card-foreground mb-6">Newsletter</h4>
+            <h4 className="text-lg font-bold text-card-foreground mb-6">
+              Newsletter
+            </h4>
             <p className="text-muted-foreground mb-4">Enter your email</p>
             <div className="flex">
               <Input
@@ -136,7 +142,7 @@ export default function Footer() {
 
         <div className="border-t border-border mt-12 pt-8 flex flex-col lg:flex-row items-center justify-between">
           <p className="text-muted-foreground text-sm">
-            © Copyright GTR Business Immigration All rights reserved
+            © Copyright GTR Worldwide Business Immigration All rights reserved
           </p>
           <div className="flex items-center space-x-6 mt-4 lg:mt-0">
             <a

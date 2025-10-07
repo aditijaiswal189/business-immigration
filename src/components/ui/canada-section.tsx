@@ -1,13 +1,42 @@
 "use client";
 
 import * as React from "react";
-import * as L from "leaflet";
-// import RegionMapPanel, { Region } from "@/components/RegionMapPanel";
+import dynamic from "next/dynamic";
 
 // ↓ JSON imports
 import canadaOutline from "@/data/canada-outline.geo.json";
 import canadaProvinces from "@/data/canada-provinces.geo.json";
-import RegionMapPanel, { Region } from "./region-map-panel";
+
+// Dynamic import to prevent SSR issues
+const RegionMapPanel = dynamic(() => import("./region-map-panel"), {
+  ssr: false,
+  loading: () => (
+    <section className="flex space-x-[6.69rem] pt-[4rem] section-container xsm:flex-col-reverse xsm:space-x-0 my-16">
+      <div className="w-[41.5rem] xsm:mt-[2.56rem] xsm:w-full">
+        <span className="mb-[0.38rem] text-[1rem] font-semibold uppercase leading-[1.5] opacity-70 xsm:text-[0.75rem] xsm:font-medium">
+          WHY CHOOSE CANADA?
+        </span>
+        <h2 className="mb-[1.5rem] font-optima text-[3rem] font-semibold leading-[1.2] tracking-[-0.06rem] xsm:text-[1.5rem] xsm:tracking-[-0.045rem]">
+          Canada is a top choice for newcomers
+        </h2>
+        <p className="text-[1rem] leading-[1.55] xsm:text-[0.875rem]">
+          Canada is renowned for a strong economy, quality of life, and welcoming communities.
+        </p>
+      </div>
+      <div className="relative h-[36.25rem] w-[27.86819rem] xsm:h-[22.125rem] xsm:w-full flex items-center justify-center bg-gray-50">
+        <div className="text-sm text-gray-500">Loading interactive map...</div>
+      </div>
+    </section>
+  ),
+});
+
+type Region = {
+  id: string;
+  name: string;
+  labelPosition: [number, number];
+  geojson?: any;
+  style?: any;
+};
 
 // A tiny helper to safely pull a readable name from various datasets
 function getFeatureName(props: any) {
@@ -26,15 +55,28 @@ function getFeatureName(props: any) {
 }
 
 export default function CanadaSection() {
-  // Build Region[] once on the client
-  // Build exactly 13 regions (group all parts by name)
+  // Dynamically load Leaflet to avoid SSR issues and compute regions once available
+  const [leaflet, setLeaflet] = React.useState<any>(null);
+  React.useEffect(() => {
+    let mounted = true;
+    import("leaflet").then((mod) => {
+      if (mounted) setLeaflet(mod);
+    });
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  // Build Region[] once Leaflet is available on the client
   const regions = React.useMemo<Region[]>(() => {
+    if (!leaflet) return [];
+    const L = leaflet as typeof import("leaflet");
     const fc = canadaProvinces as unknown as GeoJSON.FeatureCollection;
 
     // group by name
     const groups = new Map<
       string,
-      { features: GeoJSON.Feature[]; bounds: L.LatLngBounds }
+      { features: GeoJSON.Feature[]; bounds: import("leaflet").LatLngBounds }
     >();
 
     for (const f of fc.features) {
@@ -72,7 +114,7 @@ export default function CanadaSection() {
         style: { fillOpacity: 1 },
       } satisfies Region;
     });
-  }, []);
+  }, [leaflet]);
 
   return (
     <RegionMapPanel

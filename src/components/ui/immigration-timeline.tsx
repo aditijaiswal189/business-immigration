@@ -8,7 +8,7 @@ export function ImmigrationTimeline() {
       content: (
         <div>
           <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-            GTR Business Immigration is proud to be a trusted partner,
+            GTR Worldwide Business Immigration is proud to be a trusted partner,
             accompanying Vietnamese customers on their journey of real estate
             investment and immigration to Europe. With extensive experience and
             a wide network of connections, we provide comprehensive solutions,
@@ -16,8 +16,8 @@ export function ImmigrationTimeline() {
             investment opportunities, helping you build a solid future.
           </p>
           <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-            Let GTR Business Immigration help you realize your dream of
-            investing in Europe, with peace of mind and maximum efficiency.
+            Let GTR Worldwide Business Immigration help you realize your dream
+            of investing in Europe, with peace of mind and maximum efficiency.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <img
@@ -57,17 +57,17 @@ export function ImmigrationTimeline() {
       content: (
         <div>
           <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-            GTR Business Immigration is proud to introduce prestigious EB-5
-            investment projects, helping Vietnamese customers expand their
+            GTR Worldwide Business Immigration is proud to introduce prestigious
+            EB-5 investment projects, helping Vietnamese customers expand their
             opportunities for settlement and financial development in the US.
             With a deep understanding of the market and immigration regulations,
             we provide safe and effective investment solutions, ensuring a path
             to achieving a US green card for investors and their families.
           </p>
           <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-            By participating in GTR Business Immigration's EB-5 projects, you
-            not only invest in your financial future, but also open the door to
-            a new, promising life in the US.
+            By participating in GTR Worldwide Business Immigration's EB-5
+            projects, you not only invest in your financial future, but also
+            open the door to a new, promising life in the US.
           </p>
           <div className="mb-8">
             <div className="flex items-center gap-2 text-xs text-neutral-700 md:text-sm dark:text-neutral-300">
@@ -129,20 +129,20 @@ export function ImmigrationTimeline() {
       content: (
         <div>
           <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-            GTR Business Immigration is proud to provide Canadian immigration
-            consulting services, helping you and your family realize your dream
-            of building a new life in one of the most livable countries in the
-            world. With a team of experienced experts and in-depth understanding
-            of immigration programs such as Start-up Visa, Provincial
-            Entrepreneur or skilled workers, we accompany you from the stage of
-            evaluating your application, preparing documents, to consulting on
-            appropriate immigration strategies.
+            GTR Worldwide Business Immigration is proud to provide Canadian
+            immigration consulting services, helping you and your family realize
+            your dream of building a new life in one of the most livable
+            countries in the world. With a team of experienced experts and
+            in-depth understanding of immigration programs such as Start-up
+            Visa, Provincial Entrepreneur or skilled workers, we accompany you
+            from the stage of evaluating your application, preparing documents,
+            to consulting on appropriate immigration strategies.
           </p>
           <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-            Let GTR Business Immigration be your trusted companion on your
-            journey to conquer the opportunity to settle in Canada - a place
-            that opens up a stable future, quality education and an ideal living
-            environment for the whole family.
+            Let GTR Worldwide Business Immigration be your trusted companion on
+            your journey to conquer the opportunity to settle in Canada - a
+            place that opens up a stable future, quality education and an ideal
+            living environment for the whole family.
           </p>
           <div className="mb-8">
             <div className="flex items-center gap-2 text-xs text-neutral-700 md:text-sm dark:text-neutral-300">
@@ -207,9 +207,10 @@ export function ImmigrationTimeline() {
             Our Immigration Services
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            GTR Business Immigration offers comprehensive immigration solutions
-            across multiple countries, helping you and your family build a
-            brighter future through strategic investment and expert guidance.
+            GTR Worldwide Business Immigration offers comprehensive immigration
+            solutions across multiple countries, helping you and your family
+            build a brighter future through strategic investment and expert
+            guidance.
           </p>
         </div>
         <Timeline data={data} />

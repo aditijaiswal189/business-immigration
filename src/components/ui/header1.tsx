@@ -11,7 +11,9 @@ export default function Header1() {
       <nav className="container mx-auto px-6 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <Box className="text-primary-yellow text-2xl" />
-          <span className="text-2xl font-bold">GTR Business Immigration</span>
+          <span className="text-2xl font-bold">
+            GTR Worldwide Business Immigration
+          </span>
         </div>
 
         <div className="hidden lg:flex items-center space-x-8">

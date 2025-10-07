@@ -10,13 +10,13 @@ export function ImmigrationServicesTimeline() {
       content: (
         <div>
           <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-            GTR Business Immigration is proud to be a trusted partner,
+            GTR Worldwide Business Immigration is proud to be a trusted partner,
             accompanying clients on their journey of real estate investment and
             immigration to Europe…
           </p>
           <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-            Let GTR Business Immigration help you realize your dream of
-            investing in Europe…
+            Let GTR Worldwide Business Immigration help you realize your dream
+            of investing in Europe…
           </p>
 
           <div className="grid grid-cols-2 gap-4">
@@ -57,11 +57,12 @@ export function ImmigrationServicesTimeline() {
       content: (
         <div>
           <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-            GTR Business Immigration is proud to introduce prestigious EB-5
-            investment projects…
+            GTR Worldwide Business Immigration is proud to introduce prestigious
+            EB-5 investment projects…
           </p>
           <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-            By participating in GTR Business Immigration's EB-5 projects…
+            By participating in GTR Worldwide Business Immigration's EB-5
+            projects…
           </p>
 
           <div className="mb-8 space-y-2 text-xs md:text-sm text-neutral-700 dark:text-neutral-300">
@@ -122,11 +123,11 @@ export function ImmigrationServicesTimeline() {
       content: (
         <div>
           <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-            GTR Business Immigration is proud to provide Canadian immigration
-            consulting services…
+            GTR Worldwide Business Immigration is proud to provide Canadian
+            immigration consulting services…
           </p>
           <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-            Let GTR Business Immigration be your trusted companion…
+            Let GTR Worldwide Business Immigration be your trusted companion…
           </p>
 
           <div className="mb-8 space-y-2 text-xs md:text-sm text-neutral-700 dark:text-neutral-300">
@@ -183,9 +184,10 @@ export function ImmigrationServicesTimeline() {
             Our Immigration Services
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            GTR Business Immigration provides comprehensive immigration
-            solutions across multiple countries, helping you and your family
-            achieve your dreams of international residency and citizenship.
+            GTR Worldwide Business Immigration provides comprehensive
+            immigration solutions across multiple countries, helping you and
+            your family achieve your dreams of international residency and
+            citizenship.
           </p>
         </div>
         <Timeline data={data} />

@@ -27,10 +27,10 @@ export default function AboutSection() {
               <span className="text-primary-yellow">Vision a Reality</span>
             </h2>
             <p className="text-muted-foreground mb-8 leading-relaxed">
-              At GTR Business Immigration, we are a renowned global consulting
-              firm committed to collaborating with business and societal leaders
-              in overcoming their most critical challenges and seizing their
-              greatest opportunities.
+              At GTR Worldwide Business Immigration, we are a renowned global
+              consulting firm committed to collaborating with business and
+              societal leaders in overcoming their most critical challenges and
+              seizing their greatest opportunities.
             </p>
 
             {/* Feature box */}
@@ -54,9 +54,7 @@ export default function AboutSection() {
             {/* Stats */}
             <div className="flex items-center space-x-8 mb-8">
               <div className="text-center">
-                <div className="text-4xl font-bold text-primary mb-2">
-                  630K
-                </div>
+                <div className="text-4xl font-bold text-primary mb-2">630K</div>
                 <p className="text-muted-foreground text-sm">
                   Projects completed in last 5 years
                 </p>

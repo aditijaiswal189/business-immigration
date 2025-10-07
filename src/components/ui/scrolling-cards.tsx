@@ -12,6 +12,7 @@ import {
   MapPin,
 } from "lucide-react";
 
+
 // tiny local cn to avoid external dep
 function cn(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
@@ -350,29 +351,7 @@ export function ScrollingCards() {
           </div>
 
           {/* Stats */}
-          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { number: "15K+", label: "Successful Applications" },
-              { number: "98%", label: "Success Rate" },
-              { number: "50+", label: "Countries Served" },
-              { number: "24/7", label: "Expert Support" },
-            ].map((stat, index) => (
-              <div key={index} className="text-center group">
-                <div
-                  className="text-4xl font-bold mb-2 text-transparent bg-clip-text"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(90deg, var(--primary), var(--accent))",
-                  }}
-                >
-                  {stat.number}
-                </div>
-                <div className="font-medium text-muted-foreground">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
+         
         </div>
 
         {/* Hide scrollbar (WebKit) */}
