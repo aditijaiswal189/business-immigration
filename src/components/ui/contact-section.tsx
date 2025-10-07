@@ -42,11 +42,8 @@ export default function ContactSection() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
-      toast({
-        title: "Missing fields",
-        description: "Please fill in all required fields.",
-        variant: "destructive",
-      });
+      // TODO: Add toast notification when toast hook is available
+      console.log("Please fill in all required fields.");
       return;
     }
     // contactMutation.mutate(formData);
@@ -57,17 +54,17 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gray-50">
+    <section id="contact" className="py-20 bg-background">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           <div>
-            <p className="text-gray-600 text-sm uppercase tracking-wider mb-4">
+            <p className="text-[var(--muted-foreground)] text-sm uppercase tracking-wider mb-4">
               CONTACT
             </p>
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-8 leading-tight">
+            <h2 className="text-4xl lg:text-5xl font-bold text-[var(--foreground)] mb-8 leading-tight">
               Get free business consultation Today
             </h2>
-            <p className="text-gray-600 mb-12">
+            <p className="text-[var(--muted-foreground)] mb-12">
               At GTR Worldwide Business Immigration, we are a renowned global
               consulting firm committed to helping businesses overcome
               challenges.
@@ -75,31 +72,31 @@ export default function ContactSection() {
 
             <div className="space-y-6">
               <div className="flex items-center space-x-4">
-                <MapPin className="text-primary-yellow text-xl" />
-                <span className="text-gray-800">
+                <MapPin className="text-[var(--accent)] text-xl" />
+                <span className="text-[var(--foreground)]">
                   Old Westbury 256, New York 11201, United States
                 </span>
               </div>
 
               <div className="flex items-center space-x-4">
-                <Mail className="text-primary-yellow text-xl" />
-                <span className="text-gray-800">
+                <Mail className="text-[var(--accent)] text-xl" />
+                <span className="text-[var(--foreground)]">
                   gtrbusinessimmigration@example.com
                 </span>
               </div>
 
               <div className="flex items-center space-x-4">
-                <Phone className="text-primary-yellow text-xl" />
-                <span className="text-gray-800">1-888-452-1505</span>
+                <Phone className="text-[var(--accent)] text-xl" />
+                <span className="text-[var(--foreground)]">1-888-452-1505</span>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl p-8 shadow-lg">
+          <div className="bg-[var(--card)]/80 backdrop-blur-sm border border-[var(--accent)]/20 rounded-2xl p-8 shadow-lg">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-800 mb-2">
+                  <label className="block text-sm font-medium text-[var(--card-foreground)] mb-2">
                     Name
                   </label>
                   <Input
@@ -111,7 +108,7 @@ export default function ContactSection() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-800 mb-2">
+                  <label className="block text-sm font-medium text-[var(--card-foreground)] mb-2">
                     Email
                   </label>
                   <Input
@@ -125,7 +122,7 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-800 mb-2">
+                <label className="block text-sm font-medium text-[var(--card-foreground)] mb-2">
                   Message
                 </label>
                 <Textarea
@@ -140,7 +137,7 @@ export default function ContactSection() {
               <Button
                 type="submit"
                 // disabled={contactMutation.isPending}
-                className="bg-primary-yellow text-white px-8 py-4 rounded-lg hover:bg-yellow-600 transition-colors font-semibold w-full lg:w-auto"
+                className="bg-[linear-gradient(90deg,var(--primary),var(--accent))] hover:bg-[linear-gradient(90deg,var(--accent),var(--primary))] text-white px-8 py-4 rounded-lg transition-all duration-300 font-semibold w-full lg:w-auto shadow-lg hover:shadow-xl transform hover:scale-105"
               >
                 {/* {contactMutation.isPending ? "Sending..." : "Send"}{" "} */}
                 <ArrowRight className="ml-2 w-4 h-4" />

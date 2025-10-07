@@ -111,7 +111,7 @@ export function ImmigrationServicesTimeline() {
           </div>
 
           <div className="mt-6">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg text-sm font-medium transition-colors duration-200">
+            <button className="bg-[linear-gradient(90deg,var(--primary),var(--accent))] hover:bg-[linear-gradient(90deg,var(--accent),var(--primary))] text-white px-6 py-2 rounded-lg text-sm font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
               Learn More
             </button>
           </div>
@@ -177,13 +177,13 @@ export function ImmigrationServicesTimeline() {
   ];
 
   return (
-    <div className="relative w-full overflow-clip bg-white py-16">
+    <div className="relative w-full overflow-clip bg-background py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-4">
             Our Immigration Services
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg text-[var(--muted-foreground)] max-w-3xl mx-auto">
             GTR Worldwide Business Immigration provides comprehensive
             immigration solutions across multiple countries, helping you and
             your family achieve your dreams of international residency and

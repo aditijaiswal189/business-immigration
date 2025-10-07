@@ -1,4 +1,4 @@
-            <span className="bg-primary-yellow/90 backdrop-blur-sm px-3 py-1 rounded-lg text-primary shadow-lg">
+            <span className="bg-[var(--accent)]/90 backdrop-blur-sm px-3 py-1 rounded-lg text-[var(--primary)] shadow-lg">
               GTR
             </span>{" "}
             BUSINESS IMMIGRATION
@@ -8,8 +8,8 @@
           <nav className="hidden lg:flex items-center space-x-8">
             {menuItems.map((item) => (
               <div key={item.name} className="relative group">
-                <button className={`flex items-center hover:text-primary-yellow transition-all duration-300 text-sm font-medium tracking-wide hover:scale-105 ${
-                  isDarkBackground ? 'text-white/90' : 'text-primary/90'
+                <button className={`flex items-center hover:text-[var(--primary)]-yellow transition-all duration-300 text-sm font-medium tracking-wide hover:scale-105 ${
+                  isDarkBackground ? 'text-white/90' : 'text-[var(--primary)]/90'
                 }`}>
                   {item.name}
                   {item.hasDropdown && (
@@ -22,20 +22,20 @@
 
           {/* Right Side Actions (Desktop) */}
           <div className="hidden lg:flex items-center space-x-6">
-            <button className={`hover:text-primary-yellow transition-all duration-300 p-2 rounded-full hover:bg-white/10 ${
-              isDarkBackground ? 'text-white/90' : 'text-primary/90'
+            <button className={`hover:text-[var(--primary)]-yellow transition-all duration-300 p-2 rounded-full hover:bg-white/10 ${
+              isDarkBackground ? 'text-white/90' : 'text-[var(--primary)]/90'
             }`}>
               <Search className="h-5 w-5" />
             </button>
-            <button className="bg-primary-yellow/90 backdrop-blur-sm hover:bg-primary-yellow text-primary px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 shadow-lg border border-white/20">
+            <button className="bg-[var(--accent)]/90 backdrop-blur-sm hover:bg-[var(--accent)] text-[var(--primary)] px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 shadow-lg border border-white/20">
               BOOK AN APPOINTMENT →
             </button>
           </div>
 
           {/* Mobile Menu Toggle Button */}
           <button
-            className={`lg:hidden hover:text-primary-yellow transition-all duration-300 p-2 rounded-full hover:bg-white/10 ${
-              isDarkBackground ? 'text-white/90' : 'text-primary/90'
+            className={`lg:hidden hover:text-[var(--primary)]-yellow transition-all duration-300 p-2 rounded-full hover:bg-white/10 ${
+              isDarkBackground ? 'text-white/90' : 'text-[var(--primary)]/90'
             }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
@@ -54,10 +54,10 @@
               {menuItems.map((item) => (
                 <button
                   key={item.name}
-                  className="block w-full text-left text-primary/90 hover:text-primary-yellow transition-all duration-300 text-sm font-medium tracking-wide py-3 px-2 rounded-lg hover:bg-white/10"
+                  className="block w-full text-left text-[var(--primary)]/90 hover:text-[var(--primary)]-yellow transition-all duration-300 text-sm font-medium tracking-wide py-3 px-2 rounded-lg hover:bg-white/10"
                 >
                   {item.name}
-                      <span className="bg-primary/90 backdrop-blur-sm px-3 py-1 rounded-lg text-primary shadow-lg">
+                      <span className="bg-[var(--primary)]/90 backdrop-blur-sm px-3 py-1 rounded-lg text-[var(--primary)] shadow-lg">
               GTR
             </span>{" "}
             BUSINESS IMMIGRATION
@@ -67,8 +67,8 @@
           <nav className="hidden lg:flex items-center space-x-8">
             {menuItems.map((item) => (
               <div key={item.name} className="relative group">
-                <button className={`flex items-center hover:text-primary transition-all duration-300 text-sm font-medium tracking-wide hover:scale-105 ${
-                  isDarkBackground ? 'text-white/90' : 'text-primary/90'
+                <button className={`flex items-center hover:text-[var(--primary)] transition-all duration-300 text-sm font-medium tracking-wide hover:scale-105 ${
+                  isDarkBackground ? 'text-white/90' : 'text-[var(--primary)]/90'
                 }`}>
                   {item.name}
                   {item.hasDropdown && (
@@ -81,20 +81,20 @@
 
           {/* Right Side Actions (Desktop) */}
           <div className="hidden lg:flex items-center space-x-6">
-            <button className={`hover:text-primary transition-all duration-300 p-2 rounded-full hover:bg-white/10 ${
-              isDarkBackground ? 'text-white/90' : 'text-primary/90'
+            <button className={`hover:text-[var(--primary)] transition-all duration-300 p-2 rounded-full hover:bg-white/10 ${
+              isDarkBackground ? 'text-white/90' : 'text-[var(--primary)]/90'
             }`}>
               <Search className="h-5 w-5" />
             </button>
-            <button className="bg-primary/90 backdrop-blur-sm hover:bg-primary text-primary px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 shadow-lg border border-white/20">
+            <button className="bg-[var(--primary)]/90 backdrop-blur-sm hover:bg-primary text-[var(--primary)] px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 shadow-lg border border-white/20">
               BOOK AN APPOINTMENT →
             </button>
           </div>
 
           {/* Mobile Menu Toggle Button */}
           <button
-            className={`lg:hidden hover:text-primary transition-all duration-300 p-2 rounded-full hover:bg-white/10 ${
-              isDarkBackground ? 'text-white/90' : 'text-primary/90'
+            className={`lg:hidden hover:text-[var(--primary)] transition-all duration-300 p-2 rounded-full hover:bg-white/10 ${
+              isDarkBackground ? 'text-white/90' : 'text-[var(--primary)]/90'
             }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
@@ -113,9 +113,9 @@
               {menuItems.map((item) => (
                 <button
                   key={item.name}
-                  className="block w-full text-left text-primary/90 hover:text-primary transition-all duration-300 text-sm font-medium tracking-wide py-3 px-2 rounded-lg hover:bg-white/10"
+                  className="block w-full text-left text-[var(--primary)]/90 hover:text-[var(--primary)] transition-all duration-300 text-sm font-medium tracking-wide py-3 px-2 rounded-lg hover:bg-white/10"
                 >
                   {item.name}
                 </button>
               ))}
-              <button className="w-full bg-primary/90 backdrop-blur-sm hover:bg-primary text-primary px-6 py-3 rounded-full font-medium transition-all duration-300 mt-4 shadow-lg border border-white/20">
+              <button className="w-full bg-[var(--primary)]/90 backdrop-blur-sm hover:bg-primary text-[var(--primary)] px-6 py-3 rounded-full font-medium transition-all duration-300 mt-4 shadow-lg border border-white/20">

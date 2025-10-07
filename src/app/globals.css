@@ -284,116 +284,6 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 }
-@layer base {
-  :root {
-    --radius: 0.5rem;
-    --section-padding-x: 2rem;
-    --section-padding-y: 4rem;
-    --topbar-height: 3rem;
-    /* Light Theme */
-    --background: #ffffff;
-    --foreground: #1a1a1a;
-    --card: #ffffff;
-    --card-foreground: #1a1a1a;
-    --popover: #ffffff;
-    --popover-foreground: #1a1a1a;
-
-    --primary: #56736c;
-    --primary-light: #f0f4f3;
-
-    --primary-foreground: #ffffff;
-
-    --secondary: #fce7f3;
-    --secondary-foreground: #831843;
-
-    --muted: #f4f4f5;
-    --muted-foreground: #121314;
-
-    --accent: #f3f4f6;
-    --accent-foreground: #1f2937;
-
-    --destructive: #ef4444;
-    --destructive-foreground: #ffffff;
-
-    --border: #e5e7eb;
-    --input: #e5e7eb;
-    --ring: #c62828;
-
-    --chart-1: #f97316;
-    --chart-2: #0d9488;
-    --chart-3: #334155;
-    --chart-4: #fbbf24;
-    --chart-5: #fb923c;
-
-    --sidebar-background: #fafafa;
-    --sidebar-foreground: #1f2937;
-    --sidebar-primary: #c62828;
-    --sidebar-primary-foreground: #ffffff;
-    --sidebar-accent: #f3f4f6;
-    --sidebar-accent-foreground: #1f2937;
-    --sidebar-border: #e5e7eb;
-    --sidebar-ring: #c62828;
-
-    --btn-red: #e53e3e;
-    /* --btn-green: #10b981; */
-    --btn-green: #82c91e;
-    --btn-blue: #3b82f6;
-    --btn-foreground: #ffffff;
-    --btn-yellow: #e0a45c;
-    --light-yellow: ##e0a45c;
-    --lightest-yellow: #f8f3ec;
-  }
-
-  .dark {
-    /* Dark Theme */
-    --background: #0f0f0f;
-    --foreground: #f4f4f5;
-    --card: #1f1f1f;
-    --card-foreground: #f4f4f5;
-    --popover: #1f1f1f;
-    --popover-foreground: #f4f4f5;
-
-    --primary: #f43f5e; /* red-500/400 */
-    --primary-foreground: #1f1f1f;
-
-    --secondary: #3f3f46;
-    --secondary-foreground: #f4f4f5;
-
-    --muted: #3f3f46;
-    --muted-foreground: #a1a1aa;
-
-    --accent: #3f3f46;
-    --accent-foreground: #f4f4f5;
-
-    --destructive: #b91c1c;
-    --destructive-foreground: #ffffff;
-
-    --border: #27272a;
-    --input: #27272a;
-    --ring: #f43f5e;
-
-    --chart-1: #3b82f6;
-    --chart-2: #10b981;
-    --chart-3: #f59e0b;
-    --chart-4: #8b5cf6;
-    --chart-5: #ec4899;
-
-    --sidebar-background: #1f1f1f;
-    --sidebar-foreground: #f4f4f5;
-    --sidebar-primary: #f43f5e;
-    --sidebar-primary-foreground: #1f1f1f;
-    --sidebar-accent: #27272a;
-    --sidebar-accent-foreground: #f4f4f5;
-    --sidebar-border: #27272a;
-    --sidebar-ring: #f43f5e;
-
-    --btn-red: #f43f5e;
-    --btn-green: #10b981;
-    --btn-blue: #3b82f6;
-    --btn-yellow: #facc15;
-    --btn-foreground: #000000;
-  }
-}
 @layer utilities {
   .pixelated-grid {
     display: grid;
@@ -430,34 +320,56 @@
 @tailwind utilities;
 
 :root {
-  --background: hsl(0, 0%, 100%);
-  --foreground: hsl(210, 6%, 21%);
-  --muted: hsl(210, 40%, 98%);
-  --muted-foreground: hsl(215, 13%, 65%);
-  --popover: hsl(0, 0%, 100%);
-  --popover-foreground: hsl(210, 6%, 21%);
-  --card: hsl(0, 0%, 100%);
-  --card-foreground: hsl(210, 6%, 21%);
-  --border: hsl(214, 32%, 91%);
-  --input: hsl(214, 32%, 91%);
-  --primary: hsl(210, 6%, 21%);
-  --primary-foreground: hsl(0, 0%, 98%);
-  --secondary: hsl(210, 40%, 98%);
-  --secondary-foreground: hsl(215, 13%, 65%);
-  --accent: hsl(37, 88%, 54%);
-  --accent-foreground: hsl(0, 0%, 98%);
-  --destructive: hsl(0, 84%, 60%);
-  --destructive-foreground: hsl(60, 9%, 98%);
-  --ring: hsl(210, 6%, 21%);
+  --background: #fff;
+  --foreground: #111;
+  --muted: #f7f7f7;
+  --muted-foreground: #888;
+  --popover: #fff;
+  --popover-foreground: #111;
+  --card: #fff;
+  --card-foreground: #111;
+  --border: #dedede;
+  --input: #dedede;
+  --primary: #111; /* Black */
+  --primary-foreground: #e0a45c; /* Yellow for contrast */
+  --accent: #e0a45c; /* Yellow */
+  --accent-foreground: #111;
+  --gold: #D4AF37; /* Golden */
+  --destructive: #e53e3e;
+  --destructive-foreground: #fff;
+  --ring: #e0a45c;
   --radius: 0.5rem;
-
-  /* Custom colors for the Uniqo theme */
-  --uniqo-primary: hsl(210, 6%, 21%);
-  --uniqo-secondary: hsl(215, 13%, 65%);
-  --uniqo-accent: hsl(37, 88%, 54%);
-  --uniqo-light-gray: hsl(210, 40%, 98%);
-  --uniqo-dark: hsl(220, 13%, 18%);
+  --btn-yellow: #e0a45c;
+  --btn-gold: #D4AF37;
+  --btn-foreground: #111;
+  --light-yellow: #f8e3b0;
+  --lightest-yellow: #f8f3ec;
 }
+
+.dark {
+  --background: #111;
+  --foreground: #e0a45c;
+  --card: #222;
+  --card-foreground: #e0a45c;
+  --popover: #222;
+  --popover-foreground: #e0a45c;
+  --border: #333;
+  --input: #333;
+  --primary: #e0a45c; /* Yellow as primary in dark */
+  --primary-foreground: #111;
+  --accent: #e0a45c; /* Yellow as accent in dark */
+  --accent-foreground: #111;
+  --gold: #D4AF37;
+  --destructive: #e53e3e;
+  --destructive-foreground: #fff;
+  --ring: #e0a45c;
+  --btn-yellow: #e0a45c;
+  --btn-gold: #D4AF37;
+  --btn-foreground: #111;
+  --light-yellow: #f8e3b0;
+  --lightest-yellow: #f8f3ec;
+}
+
 
 .dark {
   --background: hsl(222, 84%, 4%);

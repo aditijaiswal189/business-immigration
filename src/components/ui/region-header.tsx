@@ -30,10 +30,10 @@ function ListItem({
       <NavigationMenuLink asChild>
         <Link
           href={href}
-          className="block rounded-md p-3 no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
+          className="block rounded-md p-3 no-underline outline-none transition-colors hover:bg-[var(--accent)] hover:text-[var(--accent-foreground)]"
         >
           <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="text-muted-foreground mt-1 line-clamp-2 text-sm leading-snug">
+          <p className="text-[var(--muted-foreground)] mt-1 line-clamp-2 text-sm leading-snug">
             {children}
           </p>
         </Link>
@@ -408,7 +408,7 @@ export function RegionHeader({
           className={cn(
             "mx-auto mt-2 max-w-8xl px-6 transition-all duration-300 lg:px-12",
             isScrolled &&
-              "bg-background/50 max-w-7xl rounded-2xl border backdrop-blur-lg lg:px-5"
+              "bg-[var(--background)]/50 max-w-7xl rounded-2xl border backdrop-blur-lg lg:px-5"
           )}
         >
           <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
@@ -452,7 +452,7 @@ export function RegionHeader({
                               <div className="mt-4 mb-2 text-lg font-medium">
                                 About GTR
                               </div>
-                              <p className="text-muted-foreground text-sm leading-tight">
+                              <p className="text-[var(--muted-foreground)] text-sm leading-tight">
                                 Transparent process, expert guidance, strong
                                 outcomes.
                               </p>
@@ -572,7 +572,7 @@ export function RegionHeader({
             </div>
 
             {/* Right cluster (mobile sheet + desktop CTAs) */}
-            <div className="bg-background in-data-[state=active]:block lg:in-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none">
+            <div className=" in-data-[state=active]:block lg:in-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none">
               {/* Mobile menu list (simple) */}
               <div className="lg:hidden">
                 <ul className="space-y-6 text-base">
@@ -587,7 +587,7 @@ export function RegionHeader({
                             <li key={it.title}>
                               <Link
                                 href={it.href}
-                                className="text-muted-foreground hover:text-accent-foreground block"
+                                className="text-[var(--muted-foreground)] hover:text-accent-foreground block"
                               >
                                 {it.title}
                               </Link>
@@ -601,7 +601,7 @@ export function RegionHeader({
                     <li key={it.label}>
                       <Link
                         href={it.href}
-                        className="text-muted-foreground hover:text-accent-foreground block"
+                        className="text-[var(--muted-foreground)] hover:text-accent-foreground block"
                       >
                         {it.label}
                       </Link>
@@ -614,7 +614,7 @@ export function RegionHeader({
               <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
                 <Button
                   asChild
-                  variant="outline"
+                  variant="outline2"
                   size="sm"
                   className={cn(isScrolled && "lg:hidden")}
                 >

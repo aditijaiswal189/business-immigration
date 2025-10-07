@@ -48,10 +48,10 @@ export default function TestimonialSection() {
   const current = testimonials[currentTestimonial];
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-background">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <p className="text-gray-600 text-sm uppercase tracking-wider mb-4">
+          <p className="text-[var(--muted-foreground)] text-sm uppercase tracking-wider mb-4">
             OUR CLIENT SAY
           </p>
         </div>
@@ -65,14 +65,14 @@ export default function TestimonialSection() {
             />
           </div>
 
-          <blockquote className="text-3xl lg:text-4xl font-bold text-gray-800 mb-8 leading-relaxed">
+          <blockquote className="text-3xl lg:text-4xl font-bold text-[var(--foreground)] mb-8 leading-relaxed">
             "{current.quote}"
           </blockquote>
 
           <div className="flex justify-center mb-8">
             <div className="flex space-x-1">
               {[1, 2, 3, 4, 5].map((star) => (
-                <span key={star} className="text-primary-yellow text-xl">
+                <span key={star} className="text-[var(--accent)] text-xl">
                   ★
                 </span>
               ))}
@@ -80,22 +80,22 @@ export default function TestimonialSection() {
           </div>
 
           <div className="mb-8">
-            <p className="text-lg font-semibold text-gray-800">
+            <p className="text-lg font-semibold text-[var(--foreground)]">
               {current.author}
             </p>
-            <p className="text-gray-600">{current.title}</p>
+            <p className="text-[var(--muted-foreground)]">{current.title}</p>
           </div>
 
           <div className="flex justify-center space-x-4">
             <button
               onClick={prevTestimonial}
-              className="w-12 h-12 rounded-full border-2 border-gray-300 flex items-center justify-center hover:bg-primary-yellow hover:border-primary-yellow hover:text-white transition-colors"
+              className="w-12 h-12 rounded-full border-2 border-[#F5C178]/30 flex items-center justify-center hover:bg-gradient-to-r hover:from-[#95502F] hover:to-[#F5C178] hover:border-[#F5C178] hover:text-white transition-all duration-300"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={nextTestimonial}
-              className="w-12 h-12 rounded-full border-2 border-gray-300 flex items-center justify-center hover:bg-primary-yellow hover:border-primary-yellow hover:text-white transition-colors"
+              className="w-12 h-12 rounded-full border-2 border-[#F5C178]/30 flex items-center justify-center hover:bg-gradient-to-r hover:from-[#95502F] hover:to-[#F5C178] hover:border-[#F5C178] hover:text-white transition-all duration-300"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
@@ -107,8 +107,8 @@ export default function TestimonialSection() {
                 key={index}
                 className={`w-2 h-2 rounded-full transition-colors ${
                   index === currentTestimonial
-                    ? "bg-primary-yellow"
-                    : "bg-gray-300"
+                    ? "bg-[linear-gradient(90deg,var(--primary),var(--accent))]"
+                    : "bg-[var(--muted)]/50"
                 }`}
                 onClick={() => setCurrentTestimonial(index)}
               />

@@ -26,7 +26,7 @@ import RegionHeader from "@/components/ui/region-header";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background text-foreground">
       <RegionHeader />
       <HeroSlider />
 

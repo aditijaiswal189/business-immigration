@@ -54,14 +54,14 @@ function ProcessSectionAnimated() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div className=" bg-gray-50">
+    <div className="bg-background">
       <section className="py-20 px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <div className="text-xs text-gray-400 tracking-[0.3em] uppercase mb-4 font-light">
+            <div className="text-xs text-[var(--muted-foreground)] tracking-[0.3em] uppercase mb-4 font-light">
               PROCESS
             </div>
-            <h2 className="text-5xl font-light text-gray-800 leading-tight">
+            <h2 className="text-5xl font-light text-[var(--foreground)] leading-tight">
               How does it Work?
             </h2>
           </div>
@@ -87,7 +87,7 @@ function ProcessSectionAnimated() {
                   onMouseLeave={() => setHoveredIndex(null)}
                 >
                   <div
-                    className="w-90 h-90 rounded-full border border-gray-200 bg-white/80 backdrop-blur-sm flex flex-col items-center justify-center p-8 transition-all duration-500 hover:scale-105 hover:shadow-xl cursor-pointer hover:bg-cover hover:bg-center"
+                    className="w-90 h-90 rounded-full border border-[var(--accent)]/20 bg-[linear-gradient(135deg,var(--card)/90,var(--accent)/80)] backdrop-blur-sm flex flex-col items-center justify-center p-8 transition-all duration-500 hover:scale-105 hover:shadow-xl cursor-pointer hover:bg-cover hover:bg-center"
                     style={{
                       backgroundImage: "var(--hover-bg, none)",
                     }}
@@ -102,15 +102,15 @@ function ProcessSectionAnimated() {
                     }}
                   >
                     <div className="mb-6">
-                      <Icon className="w-12 h-12 text-primary-yellow stroke-1 group-hover:text-primary-yellow transition-colors duration-500" />
+                      <Icon className="w-12 h-12 text-[var(--accent)] stroke-1 group-hover:text-[var(--accent)] transition-colors duration-500" />
                     </div>
-                    <h3 className="text-2xl font-light text-gray-800 mb-4 group-hover:text-white transition-colors duration-500">
-                      <span className="text-primary-yellow font-normal group-hover:text-primary-yellow">
+                    <h3 className="text-2xl font-light text-[var(--foreground)] mb-4 group-hover:text-white transition-colors duration-500">
+                      <span className="text-[var(--accent)] font-normal group-hover:text-[var(--accent)]">
                         {step.number}
                       </span>{" "}
                       {step.title}
                     </h3>
-                    <p className="text-gray-600 text-center text-sm leading-relaxed group-hover:text-white/90 transition-colors duration-500">
+                    <p className="text-[var(--muted-foreground)] text-center text-sm leading-relaxed group-hover:text-white/90 transition-colors duration-500">
                       {step.description}
                     </p>
                   </div>

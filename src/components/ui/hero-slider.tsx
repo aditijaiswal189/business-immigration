@@ -163,7 +163,7 @@ const HeroSlider = () => {
                   scale={1.02}
                   tiltEnable={true}
                 >
-                  <button className="bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 text-white px-8 py-4 rounded-full font-semibold transition-all duration-500 transform hover:scale-105 hover:shadow-2xl shadow-lg">
+                  <button className="bg-[linear-gradient(90deg,var(--primary),var(--accent))] hover:bg-[linear-gradient(90deg,var(--accent),var(--primary))] backdrop-blur-md border border-[var(--accent)]/30 text-white px-8 py-4 rounded-full font-semibold transition-all duration-500 transform hover:scale-105 hover:shadow-2xl shadow-lg">
                     {slides[currentSlide].buttonText}
                   </button>
                 </Tilt>
@@ -190,14 +190,14 @@ const HeroSlider = () => {
         <button
           onClick={prevSlide}
           disabled={isTransitioning}
-          className="block text-white/90 hover:text-primary transition-all duration-300 text-sm font-medium tracking-widest disabled:opacity-50 hover:scale-105"
+          className="block text-white/90 hover:text-[var(--accent)] transition-all duration-300 text-sm font-medium tracking-widest disabled:opacity-50 hover:scale-105"
         >
           PREVIOUS
         </button>
         <button
           onClick={nextSlide}
           disabled={isTransitioning}
-          className="block text-white/90 hover:text-primary transition-all duration-300 text-sm font-medium tracking-widest disabled:opacity-50 hover:scale-105"
+          className="block text-white/90 hover:text-[var(--accent)] transition-all duration-300 text-sm font-medium tracking-widest disabled:opacity-50 hover:scale-105"
         >
           NEXT
         </button>
@@ -212,7 +212,7 @@ const HeroSlider = () => {
             disabled={isTransitioning}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
               index === currentSlide
-                ? "bg-primary scale-125 shadow-lg"
+                ? "bg-[linear-gradient(90deg,var(--primary),var(--accent))] scale-125 shadow-lg"
                 : "bg-white/40 hover:bg-white/60 hover:scale-110"
             } disabled:opacity-50`}
           />
@@ -231,14 +231,14 @@ const HeroSlider = () => {
       <button
         onClick={prevSlide}
         disabled={isTransitioning}
-        className="absolute left-8 top-1/2 transform -translate-y-1/2 text-white/90 hover:text-primary transition-all duration-300 z-30 disabled:opacity-50 bg-white/5 backdrop-blur-sm rounded-full p-3 border border-white/10 hover:scale-110"
+        className="absolute left-8 top-1/2 transform -translate-y-1/2 text-white/90 hover:text-[var(--accent)] transition-all duration-300 z-30 disabled:opacity-50 bg-white/5 backdrop-blur-sm rounded-full p-3 border border-white/10 hover:scale-110"
       >
         <ChevronLeft className="h-6 w-6" />
       </button>
       <button
         onClick={nextSlide}
         disabled={isTransitioning}
-        className="absolute right-8 top-1/2 transform -translate-y-1/2 text-white/90 hover:text-primary transition-all duration-300 z-30 disabled:opacity-50 bg-white/5 backdrop-blur-sm rounded-full p-3 border border-white/10 hover:scale-110"
+        className="absolute right-8 top-1/2 transform -translate-y-1/2 text-white/90 hover:text-[var(--accent)] transition-all duration-300 z-30 disabled:opacity-50 bg-white/5 backdrop-blur-sm rounded-full p-3 border border-white/10 hover:scale-110"
       >
         <ChevronRight className="h-6 w-6" />
       </button>
@@ -257,7 +257,7 @@ const HeroSlider = () => {
         <div className="text-xs tracking-widest mb-4 text-white/90">
           EXPLORE
         </div>
-        <ArrowDown className="h-5 w-5 mx-auto animate-bounce text-primary" />
+        <ArrowDown className="h-5 w-5 mx-auto animate-bounce text-[var(--accent)]" />
       </div>
     </div>
   );

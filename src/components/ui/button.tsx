@@ -14,6 +14,8 @@ const buttonVariants = cva(
           "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
           "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+        outline2:
+          "border  shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
         secondary:
           "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
         ghost:
@@ -22,7 +24,9 @@ const buttonVariants = cva(
 
         // 🚀 New gradient variant (uses your CSS variables)
         gradient:
-          "rounded-xl font-semibold text-[var(--primary-foreground)] bg-[linear-gradient(90deg,var(--primary),var(--accent))] shadow-md hover:shadow-lg will-change-transform hover:scale-105 active:scale-100",
+          "rounded-xl font-semibold text-white bg-[linear-gradient(90deg,var(--primary),var(--accent))] shadow-md hover:shadow-lg will-change-transform hover:scale-105 active:scale-100",
+        gold:
+          "rounded-xl font-semibold text-[var(--primary-foreground)] bg-[var(--gold)] shadow-md hover:shadow-lg will-change-transform hover:scale-105 active:scale-100",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

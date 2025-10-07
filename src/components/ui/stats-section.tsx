@@ -66,27 +66,27 @@ export default function StatsSection() {
             "url('https://images.unsplash.com/photo-1542626991-cbc4e32524cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')",
         }}
       >
-        <div className="bg-gray-800 bg-opacity-90">
+        <div className="bg-gradient-to-br from-[var(--primary)]/95 via-[var(--primary)]/90 to-[var(--accent)]/80">
           <div className="container mx-auto px-6 py-20">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="text-white">
-                <p className="text-primary-yellow text-sm uppercase tracking-wider mb-4">
+                <p className="text-[var(--accent)] text-sm uppercase tracking-wider mb-4">
                   WORK
                 </p>
                 <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
                   Have a view of our amazing Workflow
                 </h2>
-                <p className="text-gray-300 mb-8 italic">
+                <p className="text-white/80 mb-8 italic">
                   Our team of seasoned experts delivers innovative solutions
                   that drive business transformation.
                 </p>
-                <p className="text-gray-300 mb-8">
+                <p className="text-white/70 mb-8">
                   At GTR Worldwide Business Immigration, we are a renowned
                   global consulting firm committed to collaborating with
                   business and societal leaders in overcoming their most
                   critical challenges and seizing their greatest opportunities.
                 </p>
-                <Button className="bg-primary-yellow text-white px-8 py-4 rounded-md hover:bg-yellow-600 transition-colors font-semibold">
+                <Button className="bg-[linear-gradient(90deg,var(--primary),var(--accent))] hover:bg-[linear-gradient(90deg,var(--accent),var(--primary))] text-white px-8 py-4 rounded-md transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105">
                   Get Started +
                 </Button>
               </div>
@@ -96,13 +96,13 @@ export default function StatsSection() {
                   <div key={skill.name} className="text-white">
                     <div className="flex items-center justify-between mb-2">
                       <span>{skill.name}</span>
-                      <span className="text-primary-yellow font-bold">
+                      <span className="text-[var(--accent)] font-bold">
                         {skill.percentage}%
                       </span>
                     </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div className="w-full bg-white/20 rounded-full h-2">
                       <div
-                        className={`bg-primary-yellow h-2 rounded-full progress-bar ${
+                        className={`bg-[linear-gradient(90deg,var(--primary),var(--accent))] h-2 rounded-full progress-bar ${
                           skillsVisible ? `w-[${skill.percentage}%]` : "w-0"
                         }`}
                         style={{
@@ -123,13 +123,13 @@ export default function StatsSection() {
                   className="glass-effect rounded-lg p-6 text-center"
                 >
                   <div className="flex items-center justify-center mb-4">
-                    <stat.icon className="text-primary-yellow text-3xl" />
+                    <stat.icon className="text-[var(--accent)] text-3xl" />
                   </div>
                   <div className="stat-counter text-white">
                     {counters[index]}
                     {stat.suffix}
                   </div>
-                  <p className="text-gray-300">{stat.label}</p>
+                  <p className="text-white/70">{stat.label}</p>
                 </div>
               ))}
             </div>
