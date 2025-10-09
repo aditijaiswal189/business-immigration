@@ -3,6 +3,7 @@
 import Tilt from "react-parallax-tilt";
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, ArrowDown } from "lucide-react";
+import { Button } from "./button";
 
 const slides = [
   {
@@ -157,16 +158,26 @@ const HeroSlider = () => {
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8">
                   {slides[currentSlide].title}
                 </h1>
-                <Tilt
+                {/* <Tilt
                   glareEnable={true}
                   glareMaxOpacity={0.4}
                   scale={1.02}
                   tiltEnable={true}
-                >
-                  <button className="bg-[linear-gradient(90deg,var(--primary),var(--accent))] hover:bg-[linear-gradient(90deg,var(--accent),var(--primary))] backdrop-blur-md border border-[var(--accent)]/30 text-white px-8 py-4 rounded-full font-semibold transition-all duration-500 transform hover:scale-105 hover:shadow-2xl shadow-lg">
+                > */}
+                <Button variant="goldWhite" className="rounded-xl px-10 py-4">
+                  {/* inner surface under text */}
+                  <div
+                    className="absolute inset-[2px] rounded-[inherit] z-10
+                  bg-[linear-gradient(135deg,#fff,#f9f9f9,#f0f0f0)]
+                  shadow-[inset_0_2px_5px_rgba(255,255,255,0.8),inset_0_-1px_2px_rgba(0,0,0,0.15),0_1px_0_rgba(255,255,255,0.7)]
+                  pointer-events-none"
+                  />
+                  {/* text above everything */}
+                  <span className="relative z-30 font-bold text-black">
                     {slides[currentSlide].buttonText}
-                  </button>
-                </Tilt>
+                  </span>
+                </Button>
+                {/* </Tilt> */}
               </div>
             </div>
 

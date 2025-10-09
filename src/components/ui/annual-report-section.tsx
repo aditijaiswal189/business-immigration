@@ -68,7 +68,7 @@ export default function AnnualReportSection() {
               consultancy, we partner with uncover insights, craft compelling
             </p>
 
-            <Button className="bg-primary text-white hover:bg-foreground/90 w-fit">
+            <Button variant="blackGold">
               View More →
             </Button>
           </div>

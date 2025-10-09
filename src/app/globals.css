@@ -334,13 +334,16 @@
   --primary-foreground: #e0a45c; /* Yellow for contrast */
   --accent: #e0a45c; /* Yellow */
   --accent-foreground: #111;
-  --gold: #D4AF37; /* Golden */
+  --gold: #d4af37; /* Golden */
   --destructive: #e53e3e;
   --destructive-foreground: #fff;
   --ring: #e0a45c;
+  --btn-black: #111;
+  --btn-white: #fff;
+  --btn-gold-border: #d4af37;
   --radius: 0.5rem;
   --btn-yellow: #e0a45c;
-  --btn-gold: #D4AF37;
+  --btn-gold: #d4af37;
   --btn-foreground: #111;
   --light-yellow: #f8e3b0;
   --lightest-yellow: #f8f3ec;
@@ -359,17 +362,16 @@
   --primary-foreground: #111;
   --accent: #e0a45c; /* Yellow as accent in dark */
   --accent-foreground: #111;
-  --gold: #D4AF37;
+  --gold: #d4af37;
   --destructive: #e53e3e;
   --destructive-foreground: #fff;
   --ring: #e0a45c;
   --btn-yellow: #e0a45c;
-  --btn-gold: #D4AF37;
+  --btn-gold: #d4af37;
   --btn-foreground: #111;
   --light-yellow: #f8e3b0;
   --lightest-yellow: #f8f3ec;
 }
-
 
 .dark {
   --background: hsl(222, 84%, 4%);

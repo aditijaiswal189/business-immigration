@@ -1,4 +1,5 @@
 import { Briefcase } from "lucide-react";
+import { Button } from "./button";
 
 export default function AboutSection() {
   return (
@@ -67,89 +68,21 @@ export default function AboutSection() {
 
             {/* CTA Buttons */}
             <div className="flex gap-4 flex-wrap">
-              <button className="bg-[linear-gradient(90deg,var(--primary),var(--accent))] hover:bg-[linear-gradient(90deg,var(--accent),var(--primary))] text-white px-8 py-3 rounded-md transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105">
-                About Us +
-              </button>
+              {/* <button className="bg-[linear-gradient(90deg,var(--primary),var(--accent))] hover:bg-[linear-gradient(90deg,var(--accent),var(--primary))] text-white px-8 py-3 rounded-md transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105">
+               
+              </button> */}
 
-              {/* Black Background with Premium Gradient Gold Border */}
-              <button className="relative font-semibold transition-all duration-300 group overflow-hidden hover:scale-105" 
-                      style={{
-                        padding: '0px',
-                        background: 'conic-gradient(from 0deg, #8B4513, #CD853F, #FFD700, #FFFACD, #FFD700, #DAA520, #B8860B, #654321, #8B4513)',
-                        borderRadius: '16px',
-                        boxShadow: '0 8px 25px rgba(0,0,0,0.4), 0 0 40px rgba(255,215,0,0.3), inset 0 2px 4px rgba(255,248,220,0.8), inset 0 -2px 4px rgba(101,67,33,0.9)'
-                      }}>
-                
-                {/* Outer golden gradient ring */}
-                <div className="absolute inset-[2px] rounded-xl" style={{
-                  background: 'radial-gradient(ellipse at top, #FFD700, #DAA520, #B8860B)',
-                  boxShadow: 'inset 0 1px 2px rgba(255,255,255,0.6), inset 0 -1px 2px rgba(139,69,19,0.4)'
-                }}></div>
-                
-                {/* Inner premium gradient ring */}
-                <div className="absolute inset-[4px] rounded-xl" style={{
-                  background: 'linear-gradient(45deg, #B8860B 0%, #DAA520 25%, #FFD700 50%, #FFFACD 75%, #FFD700 100%)',
-                  boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.5), inset 0 -1px 1px rgba(184,134,11,0.5)'
-                }}></div>
-                
-                {/* Black interior with padding */}
-                <div className="px-8 py-3 rounded-xl relative m-[6px]" style={{
-                  background: 'linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%)',
-                  boxShadow: 'inset 0 3px 6px rgba(0,0,0,0.9), inset 0 -1px 3px rgba(255,255,255,0.1), 0 1px 0 rgba(255,255,255,0.1)'
-                }}>
+              <Button variant="goldBlack">
+                <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+                <span className="relative z-10 text-white font-bold">
+                  About Us +
+                </span>
+              </Button>
 
-                  {/* 3D White Text Effect */}
-                  <span className="relative text-white font-bold transition-all duration-300 group-hover:text-gray-200"
-                        style={{
-                          textShadow: '0 1px 0 rgba(255,255,255,0.3), 0 -1px 0 rgba(0,0,0,1), 0 0 10px rgba(255,215,0,0.4)'
-                        }}>
-                    Premium +
-                  </span>
-
-                  {/* Golden shine sweep */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FFD700]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] duration-800"></div>
-                </div>
-              </button>
-
-              {/* White Background with Premium Gradient Gold Border */}
-              <button className="relative font-semibold transition-all duration-300 group overflow-hidden hover:scale-105" 
-                      style={{
-                        padding: '0px',
-                        background: 'conic-gradient(from 0deg, #8B4513, #CD853F, #FFD700, #FFFACD, #FFD700, #DAA520, #B8860B, #654321, #8B4513)',
-                        borderRadius: '16px',
-                        boxShadow: '0 8px 25px rgba(0,0,0,0.4), 0 0 40px rgba(255,215,0,0.3), inset 0 2px 4px rgba(255,248,220,0.8), inset 0 -2px 4px rgba(101,67,33,0.9)'
-                      }}>
-                
-                {/* Outer golden gradient ring */}
-                <div className="absolute inset-[2px] rounded-xl" style={{
-                  background: 'radial-gradient(ellipse at top, #FFD700, #DAA520, #B8860B)',
-                  boxShadow: 'inset 0 1px 2px rgba(255,255,255,0.6), inset 0 -1px 2px rgba(139,69,19,0.4)'
-                }}></div>
-                
-                {/* Inner premium gradient ring */}
-                <div className="absolute inset-[4px] rounded-xl" style={{
-                  background: 'linear-gradient(45deg, #B8860B 0%, #DAA520 25%, #FFD700 50%, #FFFACD 75%, #FFD700 100%)',
-                  boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.5), inset 0 -1px 1px rgba(184,134,11,0.5)'
-                }}></div>
-                
-                {/* White interior with padding */}
-                <div className="px-8 py-3 rounded-xl relative m-[6px]" style={{
-                  background: 'linear-gradient(135deg, #ffffff 0%, #f8f8f8 50%, #f0f0f0 100%)',
-                  boxShadow: 'inset 0 3px 6px rgba(255,255,255,0.9), inset 0 -1px 3px rgba(0,0,0,0.1), 0 1px 0 rgba(255,255,255,0.8)'
-                }}>
-
-                  {/* 3D Black Text Effect */}
-                  <span className="relative text-black font-bold transition-all duration-300 group-hover:text-gray-800"
-                        style={{
-                          textShadow: '0 1px 0 rgba(255,255,255,1), 0 2px 4px rgba(0,0,0,0.2), 0 0 8px rgba(255,215,0,0.3)'
-                        }}>
-                    Contact +
-                  </span>
-
-                  {/* Golden shine sweep */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FFD700]/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] duration-800"></div>
-                </div>
-              </button>
+              {/* <Button variant="goldWhite">
+                <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#fff,#f9f9f9,#f0f0f0)] shadow-[inset_0_2px_5px_rgba(255,255,255,0.8),inset_0_-1px_2px_rgba(0,0,0,0.15),0_1px_0_rgba(255,255,255,0.7)]" />
+                <span className="relative z-10 font-bold">Contact +</span>
+              </Button> */}
             </div>
           </div>
         </div>

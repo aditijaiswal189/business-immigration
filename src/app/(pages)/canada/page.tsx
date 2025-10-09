@@ -2,7 +2,7 @@ import BenefitsSlider from "@/components/ui/benefits-slider";
 import { ScrollingCards } from "@/components/ui/scrolling-cards";
 import React from "react";
 import RegionHeroColor from "@/components/ui/region-hero-color";
-import { ProgramsBento } from "@/components/ui/programs-bento";
+import { EnhancedProgramsBento } from "@/components/ui/enhanced-programs-bento";
 import Stats from "@/components/ui/stats";
 import { canadaBenefits, canadaPrograms, canadaStats } from "@/data/canada";
 
@@ -23,7 +23,7 @@ const CanadaPage: React.FC = () => {
         region="Canada"
         defaultActive="politics"
       />
-      <ProgramsBento 
+      <EnhancedProgramsBento 
         title="Canada"
         items={canadaPrograms}
         searchPlaceholder="Search Canadian programs"

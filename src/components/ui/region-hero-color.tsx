@@ -87,11 +87,11 @@ export function RegionHeroColor({
               preset="slide"
               className="mt-6 flex justify-center gap-3 pointer-events-auto"
             >
-              <Button variant="gradient" asChild>
+              <Button variant="blackGold" asChild>
                 <a href={primaryCta.href}>{primaryCta.label}</a>
               </Button>
 
-              <Button variant="outline" asChild className="group">
+              <Button variant="whiteGold" asChild className="group">
                 <a href={secondaryCta.href}>
                   {secondaryCta.label}
                   <ExternalLink className="ml-2 h-4 transition-transform group-hover:translate-x-0.5" />

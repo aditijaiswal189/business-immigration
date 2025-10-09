@@ -86,8 +86,18 @@ export default function StatsSection() {
                   business and societal leaders in overcoming their most
                   critical challenges and seizing their greatest opportunities.
                 </p>
-                <Button className="bg-[linear-gradient(90deg,var(--primary),var(--accent))] hover:bg-[linear-gradient(90deg,var(--accent),var(--primary))] text-white px-8 py-4 rounded-md transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105">
-                  Get Started +
+                <Button variant="goldWhite" className="rounded-xl px-10 py-4">
+                  {/* inner surface under text */}
+                  <div
+                    className="absolute inset-[2px] rounded-[inherit] z-10
+                  bg-[linear-gradient(135deg,#fff,#f9f9f9,#f0f0f0)]
+                  shadow-[inset_0_2px_5px_rgba(255,255,255,0.8),inset_0_-1px_2px_rgba(0,0,0,0.15),0_1px_0_rgba(255,255,255,0.7)]
+                  pointer-events-none"
+                  />
+                  {/* text above everything */}
+                  <span className="relative z-30 font-bold text-black">
+                    Get Started
+                  </span>
                 </Button>
               </div>
 

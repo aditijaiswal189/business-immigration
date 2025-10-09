@@ -25,8 +25,20 @@ const buttonVariants = cva(
         // 🚀 New gradient variant (uses your CSS variables)
         gradient:
           "rounded-xl font-semibold text-white bg-[linear-gradient(90deg,var(--primary),var(--accent))] shadow-md hover:shadow-lg will-change-transform hover:scale-105 active:scale-100",
-        gold:
-          "rounded-xl font-semibold text-[var(--primary-foreground)] bg-[var(--gold)] shadow-md hover:shadow-lg will-change-transform hover:scale-105 active:scale-100",
+        gold: "rounded-xl font-semibold text-[var(--primary-foreground)] bg-[var(--gold)] shadow-md hover:shadow-lg will-change-transform hover:scale-105 active:scale-100",
+        blackGold:
+          "bg-[var(--btn-black)] border-2 border-[var(--btn-gold-border)] text-[var(--btn-gold-border)] hover:bg-[var(--btn-gold-border)] hover:text-[var(--btn-black)]",
+        whiteGold:
+          "bg-[var(--btn-white)] border-2 border-[var(--btn-gold-border)] text-[var(--btn-black)] hover:text-[var(--btn-gold-border)]",
+        goldBlack:
+          "relative group inline-flex items-center justify-center font-semibold transition-all duration-300 overflow-hidden hover:scale-[1.03]" +
+          " before:absolute before:inset-0 before:rounded-[inherit] before:p-[1.5px] before:bg-[conic-gradient(from_0deg,#8B4513,#CD853F,#FFD700,#FFFACD,#FFD700,#DAA520,#B8860B,#654321,#8B4513)] before:shadow-[0_4px_15px_rgba(0,0,0,0.4),0_0_25px_rgba(255,215,0,0.3)] before:content-['']" +
+          " after:absolute after:inset-0 after:rounded-[inherit] after:bg-gradient-to-r after:from-transparent after:via-[#FFD700]/20 after:to-transparent after:opacity-0 group-hover:after:opacity-100 after:transition-all after:duration-700 after:-skew-x-12 after:-translate-x-full group-hover:after:translate-x-full",
+
+        goldWhite:
+          "relative isolate group inline-flex items-center justify-center font-semibold transition-all duration-300 overflow-hidden hover:scale-[1.03]" +
+          " before:absolute before:inset-0 before:rounded-[inherit] before:p-[2px] before:bg-[conic-gradient(from_0deg,#8B4513,#CD853F,#FFD700,#FFFACD,#FFD700,#DAA520,#B8860B,#654321,#8B4513)] before:shadow-[0_4px_15px_rgba(0,0,0,0.4),0_0_25px_rgba(255,215,0,0.3)] before:content-[''] before:z-0" +
+          " after:absolute after:inset-0 after:rounded-[inherit] after:bg-gradient-to-r after:from-transparent after:via-[#FFD700]/25 after:to-transparent after:opacity-0 group-hover:after:opacity-100 after:transition-all after:duration-700 after:-skew-x-12 after:-translate-x-full group-hover:after:translate-x-full after:z-20",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

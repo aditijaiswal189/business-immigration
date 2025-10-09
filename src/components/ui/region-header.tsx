@@ -419,7 +419,7 @@ export function RegionHeader({
                 aria-label="home"
                 className="flex items-center space-x-2"
               >
-                <span className="font-bold">
+                <span className="font-bold text-sm">
                   GTR Worldwide Business Immigration
                 </span>
               </Link>
@@ -612,31 +612,55 @@ export function RegionHeader({
 
               {/* CTAs */}
               <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
+                {/* Big White (hide on desktop when scrolled) */}
                 <Button
                   asChild
-                  variant="outline2"
-                  size="sm"
-                  className={cn(isScrolled && "lg:hidden")}
+                  variant="goldWhite"
+                  className={cn(
+                    "rounded-xl px-10 py-4",
+                    isScrolled ? "lg:hidden" : "lg:inline-flex"
+                  )}
                 >
-                  <Link href={ctaLogin.href}>{ctaLogin.label}</Link>
-                </Button>
-                <Button
-                  asChild
-                  size="sm"
-                  variant="gradient"
-                  className={cn(isScrolled && "lg:hidden")}
-                >
-                  <Link href={ctaSignup.href}>{ctaSignup.label}</Link>
+                  <Link href={ctaLogin.href}>
+                    <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#fff,#f9f9f9,#f0f0f0)] shadow-[inset_0_2px_5px_rgba(255,255,255,0.8),inset_0_-1px_2px_rgba(0,0,0,0.15),0_1px_0_rgba(255,255,255,0.7)]" />
+                    <span className="relative z-10 font-bold">
+                      {ctaLogin.label}
+                    </span>
+                  </Link>
                 </Button>
 
-                {/* Shows only when scrolled (desktop) */}
+                {/* Big Black (hide on desktop when scrolled) */}
                 <Button
                   asChild
-                  variant="gradient"
-                  size="sm"
-                  className={cn(isScrolled ? "lg:inline-flex" : "hidden")}
+                  variant="goldBlack"
+                  className={cn(
+                    "rounded-xl px-10 py-4",
+                    isScrolled ? "lg:hidden" : "lg:inline-flex"
+                  )}
                 >
-                  <Link href={ctaPrimary.href}>{ctaPrimary.label}</Link>
+                  <Link href={ctaSignup.href}>
+                    <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+                    <span className="relative z-10 text-white font-bold">
+                      {ctaSignup.label}
+                    </span>
+                  </Link>
+                </Button>
+
+                {/* Compact CTA (show on desktop only when scrolled) */}
+                <Button
+                  asChild
+                  variant="goldBlack"
+                  className={cn(
+                    isScrolled ? "lg:inline-flex" : "hidden",
+                    "rounded-xl px-4 py-2"
+                  )}
+                >
+                  <Link href={ctaPrimary.href}>
+                    <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+                    <span className="relative z-10 text-white font-bold">
+                      {ctaPrimary.label}
+                    </span>
+                  </Link>
                 </Button>
               </div>
             </div>

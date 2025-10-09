@@ -87,7 +87,7 @@ function ProcessSectionAnimated() {
                   onMouseLeave={() => setHoveredIndex(null)}
                 >
                   <div
-                    className="w-90 h-90 rounded-full border border-[var(--accent)]/20 bg-[linear-gradient(135deg,var(--card)/90,var(--accent)/80)] backdrop-blur-sm flex flex-col items-center justify-center p-8 transition-all duration-500 hover:scale-105 hover:shadow-xl cursor-pointer hover:bg-cover hover:bg-center"
+                    className="w-90 h-90 rounded-full border border-[var(--accent)]/20 bg-gradient-to-br from-[var(--primary)]/95 via-[var(--primary)]/90 to-[var(--accent)]/80 backdrop-blur-sm flex flex-col items-center justify-center p-8 transition-all duration-500 hover:scale-105 hover:shadow-xl cursor-pointer hover:bg-cover hover:bg-center"
                     style={{
                       backgroundImage: "var(--hover-bg, none)",
                     }}

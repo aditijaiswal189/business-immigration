@@ -1,6 +1,8 @@
 import React from "react";
 import { Timeline } from "@/components/ui/timeline";
 import { ImageWithFallback } from "./image-with-fallback";
+import { Button } from "./button";
+import { Star } from "lucide-react";
 // import { ImageWithFallback } from "@/components/ImageWithFallback";
 
 export function ImmigrationServicesTimeline() {
@@ -49,6 +51,15 @@ export function ImmigrationServicesTimeline() {
               className="h-20 w-full rounded-lg object-cover shadow-[...] md:h-44 lg:h-60"
             />
           </div>
+          <Button
+            variant="goldBlack"
+            className="rounded-xl px-8 py-4 mt-8 text-center"
+          >
+            <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+            <span className="relative z-10 text-white font-bold">
+              Learn More
+            </span>
+          </Button>
         </div>
       ),
     },
@@ -64,21 +75,38 @@ export function ImmigrationServicesTimeline() {
             By participating in GTR Worldwide Business Immigration's EB-5
             projects…
           </p>
-
           <div className="mb-8 space-y-2 text-xs md:text-sm text-neutral-700 dark:text-neutral-300">
-            <div>
-              ✅ Minimum $800,000 investment in targeted employment areas
+            <div className="flex items-center gap-2 text-[var(--btn-gold-border)]">
+              <Star size={18} className="text-[var(--btn-gold-border)]" />
+              <span className="text-neutral-700 dark:text-neutral-300">
+                Minimum $800,000 investment in targeted employment areas
+              </span>
             </div>
-            <div>✅ Path to permanent residency for investor and family</div>
-            <div>
-              ✅ Job creation requirements fulfilled through our projects
+            <div className="flex items-center gap-2 text-[var(--btn-gold-border)]">
+              <Star size={18} className="text-[var(--btn-gold-border)]" />
+              <span className="text-neutral-700 dark:text-neutral-300">
+                Path to permanent residency for investor and family
+              </span>
             </div>
-            <div>✅ Comprehensive due diligence and project vetting</div>
-            <div>
-              ✅ Full legal and immigration support throughout the process
+            <div className="flex items-center gap-2 text-[var(--btn-gold-border)]">
+              <Star size={18} className="text-[var(--btn-gold-border)]" />
+              <span className="text-neutral-700 dark:text-neutral-300">
+                Job creation requirements fulfilled through our projects
+              </span>
+            </div>
+            <div className="flex items-center gap-2 text-[var(--btn-gold-border)]">
+              <Star size={18} className="text-[var(--btn-gold-border)]" />
+              <span className="text-neutral-700 dark:text-neutral-300">
+                Comprehensive due diligence and project vetting
+              </span>
+            </div>
+            <div className="flex items-center gap-2 text-[var(--btn-gold-border)]">
+              <Star size={18} className="text-[var(--btn-gold-border)]" />
+              <span className="text-neutral-700 dark:text-neutral-300">
+                Full legal and immigration support throughout the process
+              </span>
             </div>
           </div>
-
           <div className="grid grid-cols-2 gap-4">
             <ImageWithFallback
               src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?auto=format&fit=crop&w=1200&q=80"
@@ -109,12 +137,16 @@ export function ImmigrationServicesTimeline() {
               className="h-20 w-full rounded-lg object-cover shadow-[...] md:h-44 lg:h-60"
             />
           </div>
-
-          <div className="mt-6">
-            <button className="bg-[linear-gradient(90deg,var(--primary),var(--accent))] hover:bg-[linear-gradient(90deg,var(--accent),var(--primary))] text-white px-6 py-2 rounded-lg text-sm font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+          {/* <Button variant="goldBlack" className="mt-8"> */}
+          <Button
+            variant="goldBlack"
+            className="rounded-xl px-8 py-4 mt-8 text-center"
+          >
+            <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+            <span className="relative z-10 text-white font-bold">
               Learn More
-            </button>
-          </div>
+            </span>
+          </Button>
         </div>
       ),
     },
@@ -131,14 +163,42 @@ export function ImmigrationServicesTimeline() {
           </p>
 
           <div className="mb-8 space-y-2 text-xs md:text-sm text-neutral-700 dark:text-neutral-300">
-            <div>✅ Start-up Visa Program for entrepreneurs</div>
-            <div>✅ Provincial Nominee Programs (PNP) across all provinces</div>
-            <div>✅ Express Entry system for skilled workers</div>
-            <div>✅ Family sponsorship and reunification programs</div>
-            <div>
-              ✅ Comprehensive application preparation and document support
+            <div className="flex items-center gap-2 text-[var(--btn-gold-border)]">
+              <Star size={18} className="text-[var(--btn-gold-border)]" />
+              <span className="text-neutral-700 dark:text-neutral-300">
+                Start-up Visa Program for entrepreneurs
+              </span>
             </div>
-            <div>✅ Post-landing settlement services and guidance</div>
+            <div className="flex items-center gap-2 text-[var(--btn-gold-border)]">
+              <Star size={18} className="text-[var(--btn-gold-border)]" />
+              <span className="text-neutral-700 dark:text-neutral-300">
+                Provincial Nominee Programs (PNP) across all provinces
+              </span>
+            </div>
+            <div className="flex items-center gap-2 text-[var(--btn-gold-border)]">
+              <Star size={18} className="text-[var(--btn-gold-border)]" />
+              <span className="text-neutral-700 dark:text-neutral-300">
+                Express Entry system for skilled workers
+              </span>
+            </div>
+            <div className="flex items-center gap-2 text-[var(--btn-gold-border)]">
+              <Star size={18} className="text-[var(--btn-gold-border)]" />
+              <span className="text-neutral-700 dark:text-neutral-300">
+                Family sponsorship and reunification programs
+              </span>
+            </div>
+            <div className="flex items-center gap-2 text-[var(--btn-gold-border)]">
+              <Star size={18} className="text-[var(--btn-gold-border)]" />
+              <span className="text-neutral-700 dark:text-neutral-300">
+                Comprehensive application preparation and document support
+              </span>
+            </div>
+            <div className="flex items-center gap-2 text-[var(--btn-gold-border)]">
+              <Star size={18} className="text-[var(--btn-gold-border)]" />
+              <span className="text-neutral-700 dark:text-neutral-300">
+                Post-landing settlement services and guidance
+              </span>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
@@ -171,6 +231,15 @@ export function ImmigrationServicesTimeline() {
               className="h-20 w-full rounded-lg object-cover shadow-[...] md:h-44 lg:h-60"
             />
           </div>
+          <Button
+            variant="goldBlack"
+            className="rounded-xl px-8 py-4 mt-8 text-center"
+          >
+            <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+            <span className="relative z-10 text-white font-bold">
+              Learn More
+            </span>
+          </Button>
         </div>
       ),
     },

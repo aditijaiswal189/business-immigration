@@ -11,6 +11,7 @@ import {
 } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { Button } from "./button";
 
 /* =========================================================
    Theme tokens (read from your global.css variables)
@@ -1132,16 +1133,19 @@ const MapComponent: React.FC = () => {
 
                   {/* CTA */}
                   <div className="mt-6 pt-4 border-t border-border">
-                    <button className="w-full bg-primary text-primary-foreground py-4 px-6 rounded-xl font-semibold text-sm hover:opacity-90 transition shadow-lg">
-                      <div className="flex items-center justify-center space-x-2">
-                        <span>Explore {activeNationality} Programs</span>
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: iconSvgs.arrowRight,
-                          }}
-                        />
-                      </div>
-                    </button>
+                    {/* <button className="w-full bg-primary text-primary-foreground py-4 px-6 rounded-xl font-semibold text-sm hover:opacity-90 transition shadow-lg">
+                      <div className="flex items-center justify-center space-x-2"> */}
+                    <Button
+                      variant="goldBlack"
+                      className="w-full bg-primary text-primary-foreground py-6 px-8 rounded-xl font-semibold text-sm hover:opacity-90 transition shadow-lg"
+                    >
+                      <div className="absolute inset-[3px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+                      <span className="relative z-10 text-white font-bold">
+                        Explore {activeNationality} Programs
+                      </span>
+                    </Button>
+                    {/* </div>
+                    </button> */}
                   </div>
                 </div>
               </div>

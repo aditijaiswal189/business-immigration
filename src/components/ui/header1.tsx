@@ -10,10 +10,20 @@ export default function Header1() {
     <header className="bg-gray-800 text-white fixed w-full top-0 z-50">
       <nav className="container mx-auto px-6 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <Box className="text-primary-yellow text-2xl" />
-          <span className="text-2xl font-bold">
-            GTR Worldwide Business Immigration
-          </span>
+          {/* <Box className="text-primary-yellow text-2xl" /> */}
+          <Button variant="goldWhite" className="rounded-xl px-10 py-4">
+            {/* inner surface under text */}
+            <div
+              className="absolute inset-[2px] rounded-[inherit] z-10
+                  bg-[linear-gradient(135deg,#fff,#f9f9f9,#f0f0f0)]
+                  shadow-[inset_0_2px_5px_rgba(255,255,255,0.8),inset_0_-1px_2px_rgba(0,0,0,0.15),0_1px_0_rgba(255,255,255,0.7)]
+                  pointer-events-none"
+            />
+            {/* text above everything */}
+            <span className="relative z-30 font-bold text-black">
+              GTR WORLDWIDE Business Immigration
+            </span>
+          </Button>
         </div>
 
         <div className="hidden lg:flex items-center space-x-8">

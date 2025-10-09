@@ -137,7 +137,7 @@ export default function ContactSection() {
               <Button
                 type="submit"
                 // disabled={contactMutation.isPending}
-                className="bg-[linear-gradient(90deg,var(--primary),var(--accent))] hover:bg-[linear-gradient(90deg,var(--accent),var(--primary))] text-white px-8 py-4 rounded-lg transition-all duration-300 font-semibold w-full lg:w-auto shadow-lg hover:shadow-xl transform hover:scale-105"
+                variant="blackGold" className="px-8 py-4 rounded-lg font-semibold w-full lg:w-auto"
               >
                 {/* {contactMutation.isPending ? "Sending..." : "Send"}{" "} */}
                 <ArrowRight className="ml-2 w-4 h-4" />
