@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@iconify/react": "^6.0.2",
     "@radix-ui/react-slot": "^1.2.3",
     "@turf/centroid": "^7.2.0",
     "@types/leaflet": "^1.9.20",

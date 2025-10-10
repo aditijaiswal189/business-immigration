@@ -1,151 +1,47 @@
-"use client";
-import { useEffect, useRef, useState } from "react";
-import { Building, Briefcase, Lightbulb, Users } from "lucide-react";
-import { Button } from "@/components/ui/button";
+// Server or shared file (OK to be server): stats-section.tsx
+// import StatsShowcase from "./stats-showcase";
 
-const statsData = [
-  { icon: Building, count: 1962, label: "Companies analyzed", suffix: "+" },
-  { icon: Briefcase, count: 2566, label: "Projects released", suffix: "" },
-  { icon: Lightbulb, count: 1856, label: "Strategies planned", suffix: "+" },
-  { icon: Users, count: 1862, label: "Satisfied clients", suffix: "" },
+import StatsShowcase from "./reusable/stats-showcase";
+
+const stats = [
+  {
+    icon: "lucide:building-2",
+    count: 1962,
+    label: "Companies analyzed",
+    suffix: "+",
+  },
+  {
+    icon: "mdi:briefcase",
+    count: 2566,
+    label: "Projects released",
+    suffix: "",
+  },
+  {
+    icon: "mdi:lightbulb-on",
+    count: 1856,
+    label: "Strategies planned",
+    suffix: "+",
+  },
+  {
+    icon: "mdi:account-group",
+    count: 1862,
+    label: "Satisfied clients",
+    suffix: "",
+  },
 ];
 
-const skillsData = [
-  { name: "Business Analysis", percentage: 68 },
-  { name: "Financial Reporting", percentage: 85 },
-  { name: "Investment Analysis", percentage: 56 },
-];
-
-export default function StatsSection() {
-  const [counters, setCounters] = useState(statsData.map(() => 0));
-  const [skillsVisible, setSkillsVisible] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          // Animate counters
-          statsData.forEach((stat, index) => {
-            let current = 0;
-            const increment = stat.count / 100;
-            const timer = setInterval(() => {
-              current += increment;
-              if (current >= stat.count) {
-                current = stat.count;
-                clearInterval(timer);
-              }
-              setCounters((prev) => {
-                const newCounters = [...prev];
-                newCounters[index] = Math.floor(current);
-                return newCounters;
-              });
-            }, 20);
-          });
-
-          // Show skills bars
-          setTimeout(() => setSkillsVisible(true), 500);
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
+export default function StatSection() {
   return (
-    <section ref={sectionRef} className="py-20">
-      <div
-        className="bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1542626991-cbc4e32524cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')",
-        }}
-      >
-        <div className="bg-gradient-to-br from-[var(--primary)]/95 via-[var(--primary)]/90 to-[var(--accent)]/80">
-          <div className="container mx-auto px-6 py-20">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="text-white">
-                <p className="text-[var(--accent)] text-sm uppercase tracking-wider mb-4">
-                  WORK
-                </p>
-                <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-                  Have a view of our amazing Workflow
-                </h2>
-                <p className="text-white/80 mb-8 italic">
-                  Our team of seasoned experts delivers innovative solutions
-                  that drive business transformation.
-                </p>
-                <p className="text-white/70 mb-8">
-                  At GTR Worldwide Business Immigration, we are a renowned
-                  global consulting firm committed to collaborating with
-                  business and societal leaders in overcoming their most
-                  critical challenges and seizing their greatest opportunities.
-                </p>
-                <Button variant="goldWhite" className="rounded-xl px-10 py-4">
-                  {/* inner surface under text */}
-                  <div
-                    className="absolute inset-[2px] rounded-[inherit] z-10
-                  bg-[linear-gradient(135deg,#fff,#f9f9f9,#f0f0f0)]
-                  shadow-[inset_0_2px_5px_rgba(255,255,255,0.8),inset_0_-1px_2px_rgba(0,0,0,0.15),0_1px_0_rgba(255,255,255,0.7)]
-                  pointer-events-none"
-                  />
-                  {/* text above everything */}
-                  <span className="relative z-30 font-bold text-black">
-                    Get Started
-                  </span>
-                </Button>
-              </div>
-
-              <div className="space-y-6">
-                {skillsData.map((skill, index) => (
-                  <div key={skill.name} className="text-white">
-                    <div className="flex items-center justify-between mb-2">
-                      <span>{skill.name}</span>
-                      <span className="text-[var(--accent)] font-bold">
-                        {skill.percentage}%
-                      </span>
-                    </div>
-                    <div className="w-full bg-white/20 rounded-full h-2">
-                      <div
-                        className={`bg-[linear-gradient(90deg,var(--primary),var(--accent))] h-2 rounded-full progress-bar ${
-                          skillsVisible ? `w-[${skill.percentage}%]` : "w-0"
-                        }`}
-                        style={{
-                          width: skillsVisible ? `${skill.percentage}%` : "0%",
-                          transition: "width 1.5s ease-out",
-                        }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
-              {statsData.map((stat, index) => (
-                <div
-                  key={stat.label}
-                  className="glass-effect rounded-lg p-6 text-center"
-                >
-                  <div className="flex items-center justify-center mb-4">
-                    <stat.icon className="text-[var(--accent)] text-3xl" />
-                  </div>
-                  <div className="stat-counter text-white">
-                    {counters[index]}
-                    {stat.suffix}
-                  </div>
-                  <p className="text-white/70">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <StatsShowcase
+      backgroundImage="https://images.unsplash.com/photo-1542626991-cbc4e32524cc?auto=format&fit=crop&w=1920&h=1080"
+      overline="WORK"
+      title="Have a view of our amazing Workflow"
+      stats={stats}
+      skills={[
+        { name: "Business Analysis", percentage: 68 },
+        { name: "Financial Reporting", percentage: 85 },
+        { name: "Investment Analysis", percentage: 56 },
+      ]}
+    />
   );
 }

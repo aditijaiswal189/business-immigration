@@ -3,19 +3,19 @@
 import * as React from "react";
 import Link from "next/link";
 import { Menu, X, CircleHelp, Circle, CircleCheck } from "lucide-react";
-import { Button } from "@/components/ui/button";
+
 import { cn } from "@/lib/utils";
 
 // shadcn NavigationMenu
 import {
   NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+
+import { CTAButton } from "./reusable/cta-button";
+import { NavMenuSection } from "./reusable/nav-menu-section";
+import { NavTriggerGold } from "./reusable/nav-trigger-gold";
 
 /* ----------------------------- helpers ----------------------------- */
 
@@ -402,7 +402,7 @@ export function RegionHeader({
     <header>
       <nav
         data-state={menuState && "active"}
-        className="fixed z-20 w-full px-2"
+        className="fixed z-[100] w-full px-2"
       >
         <div
           className={cn(
@@ -438,135 +438,54 @@ export function RegionHeader({
             <div className="absolute inset-0 m-auto hidden size-fit lg:block">
               <NavigationMenu viewport={false}>
                 <NavigationMenuList>
-                  {/* About */}
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger>{ABOUT.label}</NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <ul className="grid gap-2 md:w-[380px] lg:w-[520px] lg:grid-cols-[.75fr_1fr]">
-                        <li className="row-span-3">
-                          <NavigationMenuLink asChild>
-                            <Link
-                              href="/about"
-                              className="from-muted/50 to-muted flex h-full w-full select-none flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-none focus:shadow-md"
-                            >
-                              <div className="mt-4 mb-2 text-lg font-medium">
-                                About GTR
-                              </div>
-                              <p className="text-[var(--muted-foreground)] text-sm leading-tight">
-                                Transparent process, expert guidance, strong
-                                outcomes.
-                              </p>
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                        {ABOUT.items.map((it) => (
-                          <ListItem
-                            key={it.title}
-                            href={it.href}
-                            title={it.title}
-                          >
-                            {it.desc ?? ""}
-                          </ListItem>
-                        ))}
-                      </ul>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-
-                  {/* Americas */}
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger>
-                      {AMERICAS.label}
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <ul className="grid w-[600px] gap-2 md:grid-cols-2">
-                        {AMERICAS.items.map((it) => (
-                          <ListItem
-                            key={it.title}
-                            href={it.href}
-                            title={it.title}
-                          >
-                            {it.desc ?? ""}
-                          </ListItem>
-                        ))}
-                      </ul>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-
-                  {/* Caribbean */}
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger>
-                      {CARIBBEAN.label}
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <ul className="grid w-[600px] gap-2 md:grid-cols-2">
-                        {CARIBBEAN.items.map((it) => (
-                          <ListItem
-                            key={it.title}
-                            href={it.href}
-                            title={it.title}
-                          >
-                            {it.desc ?? ""}
-                          </ListItem>
-                        ))}
-                      </ul>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-
-                  {/* canada */}
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger>
-                      {CANADA.label}
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <ul className="grid w-[520px] gap-2 md:grid-cols-2">
-                        {CANADA.items.map((it) => (
-                          <ListItem
-                            key={it.title}
-                            href={it.href}
-                            title={it.title}
-                          >
-                            {it.desc ?? ""}
-                          </ListItem>
-                        ))}
-                      </ul>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-
-                  {/* EMEA */}
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger>{EMEA.label}</NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <ul className="grid w-[520px] gap-2 md:grid-cols-3">
-                        {EMEA.items.map((it) => (
-                          <ListItem
-                            key={it.title}
-                            href={it.href}
-                            title={it.title}
-                          >
-                            {it.desc ?? ""}
-                          </ListItem>
-                        ))}
-                      </ul>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-
-                  {/* APAC */}
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger>{APAC.label}</NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <ul className="grid w-[520px] gap-2 md:grid-cols-2">
-                        {APAC.items.map((it) => (
-                          <ListItem
-                            key={it.title}
-                            href={it.href}
-                            title={it.title}
-                          >
-                            {it.desc ?? ""}
-                          </ListItem>
-                        ))}
-                      </ul>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
+                  <NavMenuSection
+                    section={ABOUT}
+                    cols={2}
+                    width={520}
+                    TriggerComp={NavTriggerGold}
+                    triggerSize="xs"
+                    triggerTone="black"
+                  />
+                  <NavMenuSection
+                    section={AMERICAS}
+                    cols={2}
+                    width={600}
+                    TriggerComp={NavTriggerGold}
+                    triggerSize="xs"
+                    triggerTone="black"
+                  />
+                  <NavMenuSection
+                    section={CARIBBEAN}
+                    cols={2}
+                    width={600}
+                    TriggerComp={NavTriggerGold}
+                    triggerSize="xs"
+                    triggerTone="black"
+                  />
+                  <NavMenuSection
+                    section={CANADA}
+                    cols={2}
+                    width={520}
+                    TriggerComp={NavTriggerGold}
+                    triggerSize="xs"
+                    triggerTone="black"
+                  />
+                  <NavMenuSection
+                    section={EMEA}
+                    cols={3}
+                    width={520}
+                    TriggerComp={NavTriggerGold}
+                    triggerSize="xs"
+                    triggerTone="black"
+                  />
+                  <NavMenuSection
+                    section={APAC}
+                    cols={2}
+                    width={520}
+                    TriggerComp={NavTriggerGold}
+                    triggerSize="xs"
+                    triggerTone="black"
+                  />
                 </NavigationMenuList>
               </NavigationMenu>
             </div>
@@ -612,56 +531,30 @@ export function RegionHeader({
 
               {/* CTAs */}
               <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-                {/* Big White (hide on desktop when scrolled) */}
-                <Button
-                  asChild
-                  variant="goldWhite"
-                  className={cn(
-                    "rounded-xl px-10 py-4",
-                    isScrolled ? "lg:hidden" : "lg:inline-flex"
-                  )}
-                >
-                  <Link href={ctaLogin.href}>
-                    <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#fff,#f9f9f9,#f0f0f0)] shadow-[inset_0_2px_5px_rgba(255,255,255,0.8),inset_0_-1px_2px_rgba(0,0,0,0.15),0_1px_0_rgba(255,255,255,0.7)]" />
-                    <span className="relative z-10 font-bold">
-                      {ctaLogin.label}
-                    </span>
-                  </Link>
-                </Button>
-
-                {/* Big Black (hide on desktop when scrolled) */}
-                <Button
-                  asChild
-                  variant="goldBlack"
-                  className={cn(
-                    "rounded-xl px-10 py-4",
-                    isScrolled ? "lg:hidden" : "lg:inline-flex"
-                  )}
-                >
-                  <Link href={ctaSignup.href}>
-                    <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
-                    <span className="relative z-10 text-white font-bold">
-                      {ctaSignup.label}
-                    </span>
-                  </Link>
-                </Button>
-
-                {/* Compact CTA (show on desktop only when scrolled) */}
-                <Button
-                  asChild
-                  variant="goldBlack"
-                  className={cn(
-                    isScrolled ? "lg:inline-flex" : "hidden",
-                    "rounded-xl px-4 py-2"
-                  )}
-                >
-                  <Link href={ctaPrimary.href}>
-                    <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
-                    <span className="relative z-10 text-white font-bold">
-                      {ctaPrimary.label}
-                    </span>
-                  </Link>
-                </Button>
+                <CTAButton
+                  href={ctaLogin.href}
+                  label={ctaLogin.label}
+                  tone="white"
+                  size="lg"
+                  hideWhenScrolled
+                  isScrolled={isScrolled}
+                />
+                <CTAButton
+                  href={ctaSignup.href}
+                  label={ctaSignup.label}
+                  tone="black"
+                  size="lg"
+                  hideWhenScrolled
+                  isScrolled={isScrolled}
+                />
+                <CTAButton
+                  href={ctaPrimary.href}
+                  label={ctaPrimary.label}
+                  tone="black"
+                  size="sm"
+                  showWhenScrolled
+                  isScrolled={isScrolled}
+                />
               </div>
             </div>
           </div>

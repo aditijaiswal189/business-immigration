@@ -1,12 +1,10 @@
+/* Tailwind v4 entry */
 @import "tailwindcss";
 
-/*
-  ---break---
-*/
-
-@custom-variant dark (&:is(.dark *));
-@variant dark (&:is(.dark *));
-
+/* ------------------------------
+   Tailwind v4 theme bridge
+   (maps Tailwind color tokens to your CSS vars)
+------------------------------ */
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -27,36 +25,343 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar-background);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
 }
 
-/*
-  ---break---
-*/
+/* ------------------------------
+   Design Tokens (light)
+------------------------------ */
+:root {
+  /* Base palette */
+  --background: #ffffff;
+  --foreground: #111111;
+
+  --muted: #f7f7f7;
+  --muted-foreground: #888888;
+
+  --popover: #ffffff;
+  --popover-foreground: #111111;
+
+  --card: #ffffff;
+  --card-foreground: #111111;
+
+  --border: #dedede;
+  --input: #dedede;
+
+  --primary: #111111;
+  --primary-foreground: #e0a45c;
+
+  --secondary: #f3f4f6;
+  --secondary-foreground: #111111;
+
+  --accent: #e0a45c; /* gold accent */
+  --accent-foreground: #111111;
+
+  --destructive: #e53e3e;
+  --destructive-foreground: #ffffff;
+
+  --ring: #e0a45c;
+
+  /* Buttons / Brand helpers */
+  --btn-black: #111111;
+  --btn-white: #ffffff;
+  --btn-gold-border: #d4af37;
+  --btn-yellow: #e0a45c;
+  --btn-gold: #d4af37;
+  --btn-foreground: #111111;
+
+  --light-yellow: #f8e3b0;
+  --lightest-yellow: #f8f3ec;
+
+  /* Gold system */
+  --gold-border: conic-gradient(
+    from 0deg,
+    #8b4513,
+    #cd853f,
+    #ffd700,
+    #fffacd,
+    #ffd700,
+    #daa520,
+    #b8860b,
+    #654321,
+    #8b4513
+  );
+  --rim-shadow: 0 4px 15px #00000059, 0 0 20px #ffd70040;
+
+  --surface-black: linear-gradient(135deg, #000000, #111111, #000000);
+  --surface-white: linear-gradient(135deg, #ffffff, #f9f9f9, #f0f0f0);
+
+  /* Sheen (≈20% gold) */
+  --sheen-gold: linear-gradient(90deg, transparent, #ffd70033, transparent);
+
+  /* Hex-alpha shadows (no rgba) */
+  --shadow-strong: inset 0 3px 6px #000000e6, inset 0 -1px 3px #ffffff14,
+    0 1px 0 #ffffff14;
+  --shadow-soft: inset 0 2px 5px #ffffffcc, inset 0 -1px 2px #00000026,
+    0 1px 0 #ffffffb3;
+
+  /* Dots/Glass helpers */
+  --border-accent-20: #9ca3af33; /* 20% neutral */
+  --dots-shell-bg: #ffffff0d; /* 5% white */
+  --dots-shell-border: #ffffff1a; /* 10% white */
+  --dot-idle: #ffffffcc; /* 80% white */
+  --dot-idle-dark: #ffffff40; /* 25% white */
+  --dot-active-shadow: inset 0 1px 2px #ffffff40;
+
+  /* Radius */
+  --radius: 0.5rem;
+}
+
+/* ------------------------------
+   Design Tokens (dark)
+------------------------------ */
+.dark {
+  --background: #111111;
+  --foreground: #e0a45c;
+
+  --card: #222222;
+  --card-foreground: #e0a45c;
+
+  --popover: #222222;
+  --popover-foreground: #e0a45c;
+
+  --border: #333333;
+  --input: #333333;
+
+  --primary: #e0a45c;
+  --primary-foreground: #111111;
+
+  --secondary: #1f2937;
+  --secondary-foreground: #e5e7eb;
+
+  --accent: #e0a45c;
+  --accent-foreground: #111111;
+
+  --destructive: #b91c1c;
+  --destructive-foreground: #ffffff;
+
+  --ring: #e0a45c;
+
+  --btn-yellow: #e0a45c;
+  --btn-gold: #d4af37;
+  --btn-foreground: #111111;
+
+  --light-yellow: #f8e3b0;
+  --lightest-yellow: #f8f3ec;
+}
+
+/* ------------------------------
+   Base
+------------------------------ */
+*,
+::before,
+::after {
+  border-color: var(--border);
+}
+body {
+  font-family: var(
+    --font-inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Inter,
+    sans-serif
+  );
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Make fixed glass headers clickable over hero backdrops */
+.fixed.bg-card {
+  pointer-events: none;
+}
+.fixed.bg-card * {
+  pointer-events: auto;
+}
+
+/* ------------------------------
+   GOLD UI UTILITIES (reusable)
+------------------------------ */
+
+/* Inner surface shortcuts (use inside gold buttons/triggers) */
+.inset-2px {
+  inset: 2px;
+}
+.gold-inner--black {
+  background: var(--surface-black);
+  box-shadow: var(--shadow-strong);
+}
+.gold-inner--white {
+  background: var(--surface-white);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Gold rim trigger (use on NavigationMenuTrigger, etc.) */
+.nav-trigger-gold {
+  position: relative;
+}
+.nav-trigger-gold::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px; /* rim thickness */
+  background: var(--gold-border);
+  box-shadow: var(--rim-shadow);
+}
+
+/* Sheen sweep layer (place as a child of .nav-trigger-gold) */
+.nav-sheen-gold {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: 10;
+  background: var(--sheen-gold);
+  opacity: 0;
+  transform: skewX(-12deg) translateX(-100%);
+  transition: opacity 0.7s, transform 0.7s;
+}
+.nav-trigger-gold:hover .nav-sheen-gold {
+  opacity: 1;
+  transform: skewX(-12deg) translateX(100%);
+}
+
+/* Optional glass card (no rgba) */
+.glass-card {
+  background: color-mix(in srgb, var(--card) 30%, transparent);
+  backdrop-filter: blur(8px);
+  border-color: var(--border-accent-20);
+}
+.glass-chip {
+  background: color-mix(in srgb, var(--card) 95%, transparent);
+  border: 1px solid var(--dots-shell-border); /* you defined this variable */
+  backdrop-filter: blur(8px);
+}
+
+/* ------------------------------
+   DOT INDICATORS (slider)
+------------------------------ */
+.dots-shell {
+  background: var(--dots-shell-bg);
+  border: 1px solid var(--dots-shell-border);
+  backdrop-filter: blur(8px);
+  border-radius: 9999px;
+}
+.dot {
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 9999px;
+}
+.dot-fill {
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: var(--dot-idle);
+}
+.dark .dot-fill {
+  background: var(--dot-idle-dark);
+}
+.dot-fill--active {
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  box-shadow: var(--dot-active-shadow);
+}
+/* hide shimmer overlays for tiny dot buttons that use gold variants */
+.no-sheen::after {
+  display: none !important;
+  opacity: 0 !important;
+}
+
+/* ------------------------------
+   HERO / SLIDER HELPERS
+------------------------------ */
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Pixelated transition grid */
+.pixelated-grid-container {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+.pixelated-grid {
+  display: grid;
+  grid-template-columns: repeat(40, 1fr);
+  grid-template-rows: repeat(30, 1fr);
+  width: 100%;
+  height: 100%;
+}
+.pixel-square {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  animation: pixel-reveal 0.7s ease forwards;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+@keyframes pixel-reveal {
+  0% {
+    transform: scale(1);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Nice gradient text helper */
+.text-gradient {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Minor motion helpers */
+.animated-icon {
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.hover-lift:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+}
+
+/* ------------------------------
+   OPTIONAL: Form/embed helpers
+------------------------------ */
 .zoho-iframe-container {
   max-width: 620px;
   margin: 0 auto;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px #0000001a; /* 10% black */
   border-radius: 0.5rem;
   overflow: hidden;
 }
-
-/* Container */
 #crmWebToEntityForm {
   max-width: 600px !important;
   margin: 2rem auto !important;
@@ -65,550 +370,5 @@
   border: 1px solid #e0e0e0 !important;
   border-radius: 6px !important;
   font-family: Arial, sans-serif !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
-}
-
-@layer components {
-  .primary-red {
-    background-color: var(--btn-red);
-    color: var(--btn-foreground);
-  }
-
-  .primary-green {
-    background-color: var(--btn-green);
-    color: var(--btn-foreground);
-  }
-
-  .primary-blue {
-    background-color: var(--btn-blue);
-    color: var(--btn-foreground);
-  }
-
-  .primary-yellow {
-    background-color: var(--btn-yellow);
-    color: var(--btn-foreground);
-  }
-}
-.fixed.bg-card {
-  pointer-events: none;
-}
-.fixed.bg-card * {
-  pointer-events: auto;
-}
-@layer utilities {
-  .bg-primary-green {
-    background-color: var(--btn-green);
-  }
-  .bg-primary-red {
-    background-color: var(--btn-red);
-  }
-  .text-primary-red {
-    color: var(--btn-red);
-  }
-  .border-primary-red {
-    border-color: var(--btn-red);
-  }
-
-  .bg-primary-blue {
-    background-color: var(--btn-blue);
-  }
-  .text-primary-blue {
-    color: var(--btn-blue);
-  }
-  .border-primary-blue {
-    border-color: var(--btn-blue);
-  }
-
-  .bg-primary-green {
-    background-color: var(--btn-green);
-  }
-  .text-primary-green {
-    color: var(--btn-green);
-  }
-  .border-primary-green {
-    border-color: var(--btn-green);
-  }
-
-  .bg-primary-yellow {
-    background-color: var(--btn-yellow);
-  }
-
-  .text-primary-yellow {
-    color: var(--btn-yellow);
-  }
-  .border-primary-yellow {
-    border-color: var(--btn-yellow);
-  }
-  .bg-primary-yellow-20 {
-    background-color: var(--light-yellow);
-  }
-
-  .text-primary-yellow-20 {
-    color: var(--light-yellow);
-  }
-
-  .border-primary-yellow-20 {
-    border-color: var(--light-yellow);
-  }
-  .bg-primary-yellow-10 {
-    background-color: var(--lightest-yellow);
-  }
-
-  .text-primary-yellow-10 {
-    color: var(--lightest-yellow);
-  }
-
-  .border-primary-yellow-10 {
-    border-color: var(--lightest-yellow);
-  }
-  .border-blue {
-    border-color: var(--btn-blue);
-  }
-
-  .border-red {
-    border-color: var(--btn-red);
-  }
-
-  .border-green {
-    border-color: var(--btn-green);
-  }
-
-  .border-yellow {
-    border-color: var(--btn-yellow);
-  }
-
-  /* Optional background versions */
-  .bg-blue {
-    background-color: var(--btn-blue);
-  }
-  .bg-red {
-    background-color: var(--btn-red);
-  }
-  .bg-green {
-    background-color: var(--btn-green);
-  }
-  .bg-yellow {
-    background-color: var(--btn-yellow);
-  }
-
-  .bg-background {
-    background-color: var(--background);
-  }
-
-  .text-foreground {
-    color: var(--foreground);
-  }
-
-  .text-primary {
-    color: var(--primary);
-  }
-
-  .bg-primary {
-    background-color: var(--primary);
-  }
-
-  .text-muted-foreground {
-    color: var(--muted-foreground);
-  }
-
-  .bg-card {
-    background-color: var(--card);
-  }
-
-  .text-card-foreground {
-    color: var(--card-foreground);
-  }
-
-  .border-border {
-    border-color: var(--border);
-  }
-
-  /* Add more as needed */
-}
-
-/*
-  ---break---
-*/
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-
-  body {
-    font-family: var(--font-inter), sans-serif;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-/*
-  ---break---
-*/
-
-@theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar-background);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-}
-@layer utilities {
-  .pixelated-grid {
-    display: grid;
-    grid-template-columns: repeat(40, 1fr);
-    grid-template-rows: repeat(30, 1fr);
-    width: 100%;
-    height: 100%;
-  }
-
-  .pixel-square {
-    width: 100%;
-    height: 100%;
-    animation: pixelFlip 1.2s ease-in-out forwards;
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-  }
-
-  @keyframes pixelFlip {
-    from {
-      transform: rotateY(0deg);
-      opacity: 1;
-    }
-    to {
-      transform: rotateY(180deg);
-      opacity: 1;
-    }
-  }
-}
-
-/* ///////////////////////////////////////////////////////////////////////////// */
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --background: #fff;
-  --foreground: #111;
-  --muted: #f7f7f7;
-  --muted-foreground: #888;
-  --popover: #fff;
-  --popover-foreground: #111;
-  --card: #fff;
-  --card-foreground: #111;
-  --border: #dedede;
-  --input: #dedede;
-  --primary: #111; /* Black */
-  --primary-foreground: #e0a45c; /* Yellow for contrast */
-  --accent: #e0a45c; /* Yellow */
-  --accent-foreground: #111;
-  --gold: #d4af37; /* Golden */
-  --destructive: #e53e3e;
-  --destructive-foreground: #fff;
-  --ring: #e0a45c;
-  --btn-black: #111;
-  --btn-white: #fff;
-  --btn-gold-border: #d4af37;
-  --radius: 0.5rem;
-  --btn-yellow: #e0a45c;
-  --btn-gold: #d4af37;
-  --btn-foreground: #111;
-  --light-yellow: #f8e3b0;
-  --lightest-yellow: #f8f3ec;
-}
-
-.dark {
-  --background: #111;
-  --foreground: #e0a45c;
-  --card: #222;
-  --card-foreground: #e0a45c;
-  --popover: #222;
-  --popover-foreground: #e0a45c;
-  --border: #333;
-  --input: #333;
-  --primary: #e0a45c; /* Yellow as primary in dark */
-  --primary-foreground: #111;
-  --accent: #e0a45c; /* Yellow as accent in dark */
-  --accent-foreground: #111;
-  --gold: #d4af37;
-  --destructive: #e53e3e;
-  --destructive-foreground: #fff;
-  --ring: #e0a45c;
-  --btn-yellow: #e0a45c;
-  --btn-gold: #d4af37;
-  --btn-foreground: #111;
-  --light-yellow: #f8e3b0;
-  --lightest-yellow: #f8f3ec;
-}
-
-.dark {
-  --background: hsl(222, 84%, 4%);
-  --foreground: hsl(210, 40%, 98%);
-  --muted: hsl(217, 32%, 17%);
-  --muted-foreground: hsl(215, 20%, 65%);
-  --popover: hsl(222, 84%, 4%);
-  --popover-foreground: hsl(210, 40%, 98%);
-  --card: hsl(222, 84%, 4%);
-  --card-foreground: hsl(210, 40%, 98%);
-  --border: hsl(217, 32%, 17%);
-  --input: hsl(217, 32%, 17%);
-  --primary: hsl(210, 40%, 98%);
-  --primary-foreground: hsl(222, 84%, 4%);
-  --secondary: hsl(217, 32%, 17%);
-  --secondary-foreground: hsl(210, 40%, 98%);
-  --accent: hsl(37, 88%, 54%);
-  --accent-foreground: hsl(222, 84%, 4%);
-  --destructive: hsl(0, 62%, 30%);
-  --destructive-foreground: hsl(210, 40%, 98%);
-  --ring: hsl(217, 32%, 17%);
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply font-sans antialiased bg-background text-foreground;
-    font-family: "Inter", sans-serif;
-  }
-}
-
-@layer utilities {
-  .hero-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 2;
-  }
-
-  .process-card {
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-  }
-
-  .process-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  }
-
-  .animated-icon {
-    animation: float 3s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-
-  .stat-counter {
-    font-size: 3rem;
-    font-weight: bold;
-  }
-
-  .team-card:hover img {
-    transform: scale(1.05);
-  }
-
-  .team-card img {
-    transition: transform 0.3s ease;
-  }
-
-  .hero-slider {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-  }
-
-  .slide.active {
-    opacity: 1;
-  }
-
-  .cube-container {
-    position: absolute;
-    top: 50%;
-    right: 10%;
-    transform: translateY(-50%);
-    width: 300px;
-    height: 300px;
-  }
-
-  @media (max-width: 768px) {
-    .cube-container {
-      right: 5%;
-      width: 200px;
-      height: 200px;
-    }
-  }
-
-  .glass-effect {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .progress-bar {
-    transition: width 1.5s ease-out;
-  }
-
-  .fade-in-up {
-    animation: fadeInUp 0.8s ease-out forwards;
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .hover-lift:hover {
-    transform: translateY(-5px);
-    transition: transform 0.3s ease;
-  }
-
-  .pulse-animation {
-    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  @keyframes pulse {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.5;
-    }
-  }
-
-  .slide-in-left {
-    animation: slideInLeft 0.8s ease-out forwards;
-  }
-
-  @keyframes slideInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  .slide-in-right {
-    animation: slideInRight 0.8s ease-out forwards;
-  }
-
-  @keyframes slideInRight {
-    from {
-      opacity: 0;
-      transform: translateX(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  .scale-on-hover:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-  }
-
-  .glow-effect {
-    box-shadow: 0 0 20px rgba(255, 193, 7, 0.3);
-  }
-
-  .text-gradient {
-    background: linear-gradient(135deg, #fbbf24, #f59e0b);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-}
-
-/* hero grid css */
-.mainGrid {
-  display: grid;
-  width: 100%;
-  height: 100%;
-  gap: 10px;
-}
-
-.subgrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.cell {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  transition: background 220ms ease, transform 220ms ease, opacity 220ms ease;
-  will-change: background, transform, opacity;
-  opacity: 0.95;
-}
-.cell:hover {
-  transform: translateY(-1px);
-  opacity: 1;
+  box-shadow: 0 2px 8px #0000000d !important; /* 5% black */
 }
