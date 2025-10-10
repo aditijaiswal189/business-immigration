@@ -9,7 +9,10 @@ import {
   ArrowRight,
   MapPin,
   Users,
+  ChevronLeft,
 } from "lucide-react";
+import { Button } from "./button";
+import Link from "next/link";
 
 /** tiny cn helper */
 const cn = (...c: Array<string | false | null | undefined>) =>
@@ -47,36 +50,72 @@ export type EnhancedProgramsBentoProps = {
 /* -------------------- Group programs by province -------------------- */
 const groupProgramsByProvince = (programs: ProgramCard[]): ProvinceGroup[] => {
   const provinceMap = new Map<string, ProgramCard[]>();
-  
-  programs.forEach(program => {
+
+  programs.forEach((program) => {
     let province = "Federal";
-    
-    if (program.href.includes("/alberta/") || program.title.includes("Alberta")) {
+
+    if (
+      program.href.includes("/alberta/") ||
+      program.title.includes("Alberta")
+    ) {
       province = "Alberta";
-    } else if (program.href.includes("/br-columbia/") || program.title.includes("BC")) {
+    } else if (
+      program.href.includes("/br-columbia/") ||
+      program.title.includes("BC")
+    ) {
       province = "British Columbia";
-    } else if (program.href.includes("/manitoba/") || program.title.includes("Manitoba")) {
+    } else if (
+      program.href.includes("/manitoba/") ||
+      program.title.includes("Manitoba")
+    ) {
       province = "Manitoba";
-    } else if (program.href.includes("/ontario") || program.title.includes("Ontario")) {
+    } else if (
+      program.href.includes("/ontario") ||
+      program.title.includes("Ontario")
+    ) {
       province = "Ontario";
-    } else if (program.href.includes("/quebec/") || program.title.includes("Quebec")) {
+    } else if (
+      program.href.includes("/quebec/") ||
+      program.title.includes("Quebec")
+    ) {
       province = "Quebec";
-    } else if (program.href.includes("/saskatchewan/") || program.title.includes("Saskatchewan")) {
+    } else if (
+      program.href.includes("/saskatchewan/") ||
+      program.title.includes("Saskatchewan")
+    ) {
       province = "Saskatchewan";
-    } else if (program.href.includes("/nova-scotia/") || program.title.includes("Nova Scotia")) {
+    } else if (
+      program.href.includes("/nova-scotia/") ||
+      program.title.includes("Nova Scotia")
+    ) {
       province = "Nova Scotia";
-    } else if (program.href.includes("/newfoundland-labrador/") || program.title.includes("NL")) {
+    } else if (
+      program.href.includes("/newfoundland-labrador/") ||
+      program.title.includes("NL")
+    ) {
       province = "Newfoundland & Labrador";
-    } else if (program.href.includes("/prince-edward-island") || program.title.includes("PEI")) {
+    } else if (
+      program.href.includes("/prince-edward-island") ||
+      program.title.includes("PEI")
+    ) {
       province = "Prince Edward Island";
-    } else if (program.href.includes("/new-brunswick") || program.title.includes("New Brunswick")) {
+    } else if (
+      program.href.includes("/new-brunswick") ||
+      program.title.includes("New Brunswick")
+    ) {
       province = "New Brunswick";
-    } else if (program.href.includes("/northwest-territories") || program.title.includes("Northwest Territories")) {
+    } else if (
+      program.href.includes("/northwest-territories") ||
+      program.title.includes("Northwest Territories")
+    ) {
       province = "Northwest Territories";
-    } else if (program.href.includes("/yukon") || program.title.includes("Yukon")) {
+    } else if (
+      program.href.includes("/yukon") ||
+      program.title.includes("Yukon")
+    ) {
       province = "Yukon";
     }
-    
+
     if (!provinceMap.has(province)) {
       provinceMap.set(province, []);
     }
@@ -84,38 +123,40 @@ const groupProgramsByProvince = (programs: ProgramCard[]): ProvinceGroup[] => {
   });
 
   const provinceColors = {
-    "Federal": "linear-gradient(135deg, #3b82f6, #1d4ed8)",
-    "Alberta": "linear-gradient(135deg, #ef4444, #dc2626)",
+    Federal: "linear-gradient(135deg, #3b82f6, #1d4ed8)",
+    Alberta: "linear-gradient(135deg, #ef4444, #dc2626)",
     "British Columbia": "linear-gradient(135deg, #22c55e, #16a34a)",
-    "Manitoba": "linear-gradient(135deg, #a855f7, #9333ea)",
-    "Ontario": "linear-gradient(135deg, #f59e0b, #d97706)",
-    "Quebec": "linear-gradient(135deg, #14b8a6, #0d9488)",
-    "Saskatchewan": "linear-gradient(135deg, #ec4899, #db2777)",
+    Manitoba: "linear-gradient(135deg, #a855f7, #9333ea)",
+    Ontario: "linear-gradient(135deg, #f59e0b, #d97706)",
+    Quebec: "linear-gradient(135deg, #14b8a6, #0d9488)",
+    Saskatchewan: "linear-gradient(135deg, #ec4899, #db2777)",
     "Nova Scotia": "linear-gradient(135deg, #8b5cf6, #7c3aed)",
     "Newfoundland & Labrador": "linear-gradient(135deg, #6b7280, #4b5563)",
     "Prince Edward Island": "linear-gradient(135deg, #f97316, #ea580c)",
     "New Brunswick": "linear-gradient(135deg, #84cc16, #65a30d)",
     "Northwest Territories": "linear-gradient(135deg, #06b6d4, #0891b2)",
-    "Yukon": "linear-gradient(135deg, #f59e0b, #d97706)",
+    Yukon: "linear-gradient(135deg, #f59e0b, #d97706)",
   };
 
   return Array.from(provinceMap.entries()).map(([name, programs]) => ({
-    id: name.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and'),
+    id: name.toLowerCase().replace(/\s+/g, "-").replace(/&/g, "and"),
     name,
     programs,
-    color: provinceColors[name as keyof typeof provinceColors] || "linear-gradient(135deg, #6b7280, #4b5563)",
+    color:
+      provinceColors[name as keyof typeof provinceColors] ||
+      "linear-gradient(135deg, #6b7280, #4b5563)",
     isStack: programs.length > 1, // Use stacking for provinces with multiple programs
   }));
 };
 
 /* -------------------- Regular Program Card -------------------- */
-function ProgramBentoCard({ 
-  item, 
+function ProgramBentoCard({
+  item,
   budgetLabel = "Typical budget / funds",
   timelineLabel = "Pathway / timeline",
   contactLabel = "Contact advisor",
-  viewDetailsLabel = "View details"
-}: { 
+  viewDetailsLabel = "View details",
+}: {
   item: ProgramCard;
   budgetLabel?: string;
   timelineLabel?: string;
@@ -159,9 +200,7 @@ function ProgramBentoCard({
       {/* Metrics row */}
       <div className="hidden items-center justify-between px-6 py-5 sm:flex">
         <div>
-          <p className="text-[0.95rem] text-neutral-500">
-            {budgetLabel}
-          </p>
+          <p className="text-[0.95rem] text-neutral-500">{budgetLabel}</p>
           <p
             className="text-[1.125rem] font-semibold leading-[1.33]"
             style={{ color: "var(--accent)" }}
@@ -182,7 +221,7 @@ function ProgramBentoCard({
 
       {/* Actions */}
       <div className="flex items-center justify-between gap-2 px-5 py-4">
-        <a
+        {/* <a
           target="_blank"
           rel="noreferrer"
           href="#contact"
@@ -195,34 +234,50 @@ function ProgramBentoCard({
           <p className="hidden text-[0.95rem] font-medium text-[#3F2214] transition-colors sm:block">
             {contactLabel}
           </p>
-        </a>
+        </a> */}
+        <Button variant="goldMorph" size="lg" asChild>
+          <Link
+            href="#contact"
+            aria-label={contactLabel}
+            className="inline-flex items-center gap-2"
+          >
+            {/* same two inner fills as above */}
+            <div className="pointer-events-none absolute inset-[2px] rounded-[inherit] z-[5] bg-[linear-gradient(135deg,#fff,#f9f9f9,#f0f0f0)] shadow-[inset_0_2px_5px_rgba(255,255,255,0.8),inset_0_-1px_2px_rgba(0,0,0,0.15),0_1px_0_rgba(255,255,255,0.7)] transition-opacity duration-300 group-hover:opacity-0" />
+            <div className="pointer-events-none absolute inset-[2px] rounded-[inherit] z-[6] opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgrgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+            <Phone className="relative z-20 size-5 transition-colors duration-300 text-[#3F2214] group-hover:text-white" />
+            <span className="relative z-20 hidden text-[0.95rem] font-medium sm:block transition-colors duration-300 text-[#3F2214] group-hover:text-white">
+              {contactLabel}
+            </span>
+          </Link>
+        </Button>
 
-        <a
-          href={item.href}
-          className="flex items-center gap-2 rounded-[0.5rem] px-4 py-2 text-white xsm:flex-1 xsm:justify-center"
-          style={{
-            backgroundImage:
-              "linear-gradient(97deg, var(--primary) -3.86%, var(--accent) 117.18%)",
-          }}
-        >
-          <span className="text-[0.95rem] font-medium">{viewDetailsLabel}</span>
-          <ArrowRight className="size-5" />
-        </a>
+        <Button variant="goldBlack" size="lg" asChild>
+          <Link
+            href={item.href}
+            className="xsm:flex-1 inline-flex items-center gap-2"
+          >
+            <div className="pointer-events-none absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)] z-[5]" />
+            <span className="relative z-20 text-[0.95rem] font-medium">
+              {viewDetailsLabel}
+            </span>
+            <ArrowRight className="size-5 relative z-20" />
+          </Link>
+        </Button>
       </div>
     </div>
   );
 }
 
 /* -------------------- Province Stack Card (Single Grid Space) -------------------- */
-function ProvinceStackCard({ 
-  province, 
-  isExpanded, 
+function ProvinceStackCard({
+  province,
+  isExpanded,
   onToggle,
   budgetLabel,
   timelineLabel,
   contactLabel,
-  viewDetailsLabel
-}: { 
+  viewDetailsLabel,
+}: {
   province: ProvinceGroup;
   isExpanded: boolean;
   onToggle: () => void;
@@ -249,17 +304,18 @@ function ProvinceStackCard({
           className="size-full rounded-[1.25rem] object-cover"
         />
         <div className="absolute inset-0 z-10 size-full rounded-[1.25rem] bg-[linear-gradient(180deg,rgba(20,13,5,0.00)_0%,rgba(20,13,5,0.92)_98%)]" />
-        
+
         {/* Province badge */}
         <span
           className="absolute left-4 top-4 z-20 rounded-full px-3 py-1 text-xs font-semibold text-white shadow"
           style={{
-            backgroundImage: "linear-gradient(97deg, var(--primary) -3.86%, var(--accent) 117.18%)",
+            backgroundImage:
+              "linear-gradient(97deg, var(--primary) -3.86%, var(--accent) 117.18%)",
           }}
         >
           {province.programs.length} Programs
         </span>
-        
+
         {/* Province name and info */}
         <div className="absolute bottom-6 left-6 z-[11] text-white">
           <h3 className="text-[1.75rem] font-semibold leading-tight mb-2 xsm:text-[1.5rem]">
@@ -267,7 +323,11 @@ function ProvinceStackCard({
           </h3>
           <div className="flex items-center gap-2 text-sm text-white/80">
             <MapPin className="w-4 h-4" />
-            <span>{isExpanded ? 'Click to collapse' : 'Click to explore all programs'}</span>
+            <span>
+              {isExpanded
+                ? "Click to collapse"
+                : "Click to explore all programs"}
+            </span>
           </div>
         </div>
       </div>
@@ -297,26 +357,46 @@ function ProvinceStackCard({
       {/* Actions */}
       <div className="flex items-center justify-between gap-2 px-5 py-4">
         <div className="group flex cursor-pointer items-center gap-3">
-          <div className="rounded-[1.875rem] bg-[#F4EEEA] p-[0.875rem] transition-all group-hover:[background-image:linear-gradient(97deg,var(--primary)_-3.86%,var(--accent)_117.18%)]">
+          {/* <div className="rounded-[1.875rem] bg-[#F4EEEA] p-[0.875rem] transition-all group-hover:[background-image:linear-gradient(97deg,var(--primary)_-3.86%,var(--accent)_117.18%)]">
             <Users className="size-5 text-[color:var(--accent)] group-hover:text-white transition-colors" />
           </div>
           <p className="hidden text-[0.95rem] font-medium text-[#3F2214] transition-colors sm:block">
             Multiple programs
-          </p>
+          </p> */}
+          <Button variant="goldWhite" size="lg" asChild>
+            <Link
+              href=""
+              rel="noreferrer"
+              aria-label={contactLabel}
+              className="group inline-flex items-center gap-3"
+            >
+              {/* inner fill (above border, below content) */}
+              <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#fff,#f9f9f9,#f0f0f0)] shadow-[inset_0_2px_5px_rgba(255,255,255,0.8),inset_0_-1px_2px_rgba(0,0,0,0.15),0_1px_0_rgba(255,255,255,0.7)]" />
+              <div className="relative z-20 ">
+                <Users className="size-5" />
+              </div>
+              <span className="relative z-20 hidden text-[0.95rem] font-medium sm:block">
+                Multiple programs
+              </span>
+            </Link>
+          </Button>
         </div>
 
-        <button
-          className="flex items-center gap-2 rounded-[0.5rem] px-4 py-2 text-white xsm:flex-1 xsm:justify-center"
-          style={{
-            backgroundImage:
-              "linear-gradient(97deg, var(--primary) -3.86%, var(--accent) 117.18%)",
+        <Button
+          variant="goldBlack"
+          onClick={(e) => {
+            e.stopPropagation();
+            onToggle();
           }}
+          className="xsm:flex-1" // keeps layout parity on mobile
         >
-          <span className="text-[0.95rem] font-medium">
-            {isExpanded ? 'Collapse' : 'Explore all'}
+          {/* inner fill above border, below content */}
+          <div className="pointer-events-none absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)] z-[5]" />
+          <span className="relative z-20 text-[0.95rem] font-medium">
+            {isExpanded ? "Collapse" : "Explore all"}
           </span>
-          <ArrowRight className="size-5" />
-        </button>
+          <ArrowRight className="size-5 relative z-20" />
+        </Button>
       </div>
     </div>
   );
@@ -426,7 +506,9 @@ export function EnhancedProgramsBento({
   const [query, setQuery] = React.useState("");
   const [sort, setSort] = React.useState<SortId>("all");
   const [open, setOpen] = React.useState(false);
-  const [expandedProvince, setExpandedProvince] = React.useState<string | null>(null);
+  const [expandedProvince, setExpandedProvince] = React.useState<string | null>(
+    null
+  );
 
   React.useEffect(() => {
     const onDoc = () => setOpen(false);
@@ -441,11 +523,12 @@ export function EnhancedProgramsBento({
 
   // Filter and sort
   const filtered = React.useMemo(() => {
-    const filteredProvinces = provinces.filter(province =>
-      province.name.toLowerCase().includes(query.toLowerCase().trim()) ||
-      province.programs.some(program =>
-        program.title.toLowerCase().includes(query.toLowerCase().trim())
-      )
+    const filteredProvinces = provinces.filter(
+      (province) =>
+        province.name.toLowerCase().includes(query.toLowerCase().trim()) ||
+        province.programs.some((program) =>
+          program.title.toLowerCase().includes(query.toLowerCase().trim())
+        )
     );
 
     switch (sort) {
@@ -485,147 +568,182 @@ export function EnhancedProgramsBento({
           {/* Single grid with both individual programs and province stacks */}
           <div className="grid w-full grid-cols-2 gap-6 pb-24 xsm:grid-cols-1 xsm:pb-0">
             {/* Individual programs (single programs) */}
-            {filtered.filter(province => !province.isStack).map((province) => (
-              province.programs.map((program) => (
-                <ProgramBentoCard 
-                  key={program.id} 
-                  item={program}
-                  budgetLabel={budgetLabel}
-                  timelineLabel={timelineLabel}
-                  contactLabel={contactLabel}
-                  viewDetailsLabel={viewDetailsLabel}
-                />
-              ))
-            ))}
-            
-            {/* Province stack cards (collapsed and expanded in same grid space) */}
-            {filtered.filter(province => province.isStack).map((province) => {
-              const isExpanded = expandedProvince === province.id;
-              
-              if (isExpanded) {
-                // Show stacked cards in the same grid space
-                return (
-                  <div key={`${province.id}-expanded`} className="relative z-40">
-                    <ContainerScroll className="min-h-[300vh] space-y-4 relative z-30">
-                      {province.programs.map((program, index) => (
-                        <CardSticky
-                          key={program.id}
-                          index={index + 2}
-                          className="rounded-[1.25rem] border border-[rgba(0,0,0,0.08)] bg-white shadow-[0px_4px_11px_0px_rgba(114,114,114,0.08)] overflow-hidden"
-                        >
-                          {/* Program Card Content */}
-                          <div className="relative block h-[18.5625rem] w-full overflow-hidden rounded-t-[1.25rem]">
-                            <a href={program.href} className="block w-full h-full">
-                              <img
-                                alt={program.title}
-                                src={program.image}
-                                className="size-full object-cover"
-                              />
-                              <div className="absolute inset-0 z-10 size-full bg-[linear-gradient(180deg,rgba(20,13,5,0.00)_0%,rgba(20,13,5,0.92)_98%)]" />
-                              <h4 className="absolute bottom-6 left-6 z-[11] line-clamp-2 text-white text-[1.75rem] font-semibold leading-tight">
-                                {program.title}
-                              </h4>
-                            </a>
-
-                            {/* Collapse button inside each card at top right */}
-                            <button
-                              onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                handleProvinceToggle(province.id);
-                              }}
-                              className="absolute top-4 right-4 z-30 flex items-center gap-1 rounded-[0.375rem] px-3 py-1.5 text-white text-xs font-medium transition-all hover:scale-105 shadow-lg backdrop-blur-sm"
-                              style={{
-                                backgroundImage: "linear-gradient(97deg, var(--primary) -3.86%, var(--accent) 117.18%)",
-                              }}
-                            >
-                              <span>Collapse</span>
-                              <ArrowRight className="size-3 rotate-90" />
-                            </button>
-
-                            {program.badge && (
-                              <span
-                                className="absolute left-4 top-4 z-20 rounded-full px-3 py-1 text-xs font-semibold text-white shadow"
-                                style={{
-                                  backgroundImage: "linear-gradient(97deg, var(--primary) -3.86%, var(--accent) 117.18%)",
-                                }}
-                              >
-                                {program.badge}
-                              </span>
-                            )}
-                          </div>
-
-                          {/* Metrics section */}
-                          <div className="flex items-center justify-between px-6 py-5">
-                            <div>
-                              <p className="text-[0.95rem] text-neutral-500">{budgetLabel}</p>
-                              <p
-                                className="text-[1.125rem] font-semibold leading-[1.33]"
-                                style={{ color: "var(--accent)" }}
-                              >
-                                {program.budgetText ?? "—"}
-                              </p>
-                            </div>
-                            <div>
-                              <p className="text-[0.95rem] text-neutral-500">{timelineLabel}</p>
-                              <p
-                                className="text-[1.125rem] font-semibold leading-[1.33]"
-                                style={{ color: "var(--accent)" }}
-                              >
-                                {program.prText ?? "—"}
-                              </p>
-                            </div>
-                          </div>
-
-                          {/* Actions - Both Contact and View Details */}
-                          <div className="flex items-center justify-between gap-2 px-5 py-4">
-                            <a
-                              target="_blank"
-                              rel="noreferrer"
-                              href="#contact"
-                              className="group flex cursor-pointer items-center gap-3"
-                              aria-label={contactLabel}
-                            >
-                              <div className="rounded-[1.875rem] bg-[#F4EEEA] p-[0.875rem] transition-all group-hover:[background-image:linear-gradient(97deg,var(--primary)_-3.86%,var(--accent)_117.18%)]">
-                                <Phone className="size-5 text-[color:var(--accent)] group-hover:text-white transition-colors" />
-                              </div>
-                              <p className="hidden text-[0.95rem] font-medium text-[#3F2214] transition-colors sm:block">
-                                {contactLabel}
-                              </p>
-                            </a>
-
-                            <a
-                              href={program.href}
-                              className="flex items-center gap-2 rounded-[0.5rem] px-4 py-2 text-white xsm:flex-1 xsm:justify-center"
-                              style={{
-                                backgroundImage: "linear-gradient(97deg, var(--primary) -3.86%, var(--accent) 117.18%)",
-                              }}
-                            >
-                              <span className="text-[0.95rem] font-medium">{viewDetailsLabel}</span>
-                              <ArrowRight className="size-5" />
-                            </a>
-                          </div>
-                        </CardSticky>
-                      ))}
-                    </ContainerScroll>
-                  </div>
-                );
-              } else {
-                // Show collapsed province card
-                return (
-                  <ProvinceStackCard
-                    key={province.id}
-                    province={province}
-                    isExpanded={false}
-                    onToggle={() => handleProvinceToggle(province.id)}
+            {filtered
+              .filter((province) => !province.isStack)
+              .map((province) =>
+                province.programs.map((program) => (
+                  <ProgramBentoCard
+                    key={program.id}
+                    item={program}
                     budgetLabel={budgetLabel}
                     timelineLabel={timelineLabel}
                     contactLabel={contactLabel}
                     viewDetailsLabel={viewDetailsLabel}
                   />
-                );
-              }
-            })}
+                ))
+              )}
+
+            {/* Province stack cards (collapsed and expanded in same grid space) */}
+            {filtered
+              .filter((province) => province.isStack)
+              .map((province) => {
+                const isExpanded = expandedProvince === province.id;
+
+                if (isExpanded) {
+                  // Show stacked cards in the same grid space
+                  return (
+                    <div
+                      key={`${province.id}-expanded`}
+                      className="relative z-40"
+                    >
+                      <ContainerScroll className="min-h-[300vh] space-y-4 relative z-30">
+                        {province.programs.map((program, index) => (
+                          <CardSticky
+                            key={program.id}
+                            index={index + 2}
+                            className="rounded-[1.25rem] border border-[rgba(0,0,0,0.08)] bg-white shadow-[0px_4px_11px_0px_rgba(114,114,114,0.08)] overflow-hidden"
+                          >
+                            {/* Program Card Content */}
+                            <div className="relative block h-[18.5625rem] w-full overflow-hidden rounded-t-[1.25rem]">
+                              <a
+                                href={program.href}
+                                className="block w-full h-full"
+                              >
+                                <img
+                                  alt={program.title}
+                                  src={program.image}
+                                  className="size-full object-cover"
+                                />
+                                <div className="absolute inset-0 z-10 size-full bg-[linear-gradient(180deg,rgba(20,13,5,0.00)_0%,rgba(20,13,5,0.92)_98%)]" />
+                                <h4 className="absolute bottom-6 left-6 z-[11] line-clamp-2 text-white text-[1.75rem] font-semibold leading-tight">
+                                  {program.title}
+                                </h4>
+                              </a>
+
+                              {/* Collapse button inside each card at top right */}
+                              <Button
+                                variant="goldBlack"
+                                size="sm"
+                                className="absolute top-4 right-4 z-30"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  handleProvinceToggle(province.id);
+                                }}
+                              >
+                                <div className="pointer-events-none absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)] z-[5]" />
+                                <span className="relative z-20 text-xs font-medium">
+                                  Collapse
+                                </span>
+                                <ArrowRight className="size-3 rotate-90 relative z-20" />
+                              </Button>
+
+                              {program.badge && (
+                                <span
+                                  className="absolute left-4 top-4 z-20 rounded-full px-3 py-1 text-xs font-semibold text-white shadow"
+                                  style={{
+                                    backgroundImage:
+                                      "linear-gradient(97deg, var(--primary) -3.86%, var(--accent) 117.18%)",
+                                  }}
+                                >
+                                  {program.badge}
+                                </span>
+                              )}
+                            </div>
+
+                            {/* Metrics section */}
+                            <div className="flex items-center justify-between px-6 py-5">
+                              <div>
+                                <p className="text-[0.95rem] text-neutral-500">
+                                  {budgetLabel}
+                                </p>
+                                <p
+                                  className="text-[1.125rem] font-semibold leading-[1.33]"
+                                  style={{ color: "var(--accent)" }}
+                                >
+                                  {program.budgetText ?? "—"}
+                                </p>
+                              </div>
+                              <div>
+                                <p className="text-[0.95rem] text-neutral-500">
+                                  {timelineLabel}
+                                </p>
+                                <p
+                                  className="text-[1.125rem] font-semibold leading-[1.33]"
+                                  style={{ color: "var(--accent)" }}
+                                >
+                                  {program.prText ?? "—"}
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Actions - Both Contact and View Details */}
+                            <div className="flex items-center justify-between gap-2 px-5 py-4">
+                              {/* <a
+                                target="_blank"
+                                rel="noreferrer"
+                                href="#contact"
+                                className="group flex cursor-pointer items-center gap-3"
+                                aria-label={contactLabel}
+                              >
+                                <div className="rounded-[1.875rem] bg-[#F4EEEA] p-[0.875rem] transition-all group-hover:[background-image:linear-gradient(97deg,var(--primary)_-3.86%,var(--accent)_117.18%)]">
+                                  <Phone className="size-5 text-[color:var(--accent)] group-hover:text-white transition-colors" />
+                                </div>
+                                <p className="hidden text-[0.95rem] font-medium text-[#3F2214] transition-colors sm:block">
+                                  {contactLabel}
+                                </p>
+                              </a> */}
+
+                              <Button variant="goldMorph" size="lg" asChild>
+                                <Link
+                                  href="#contact"
+                                  aria-label={contactLabel}
+                                  className="inline-flex items-center gap-2"
+                                >
+                                  {/* same two inner fills as above */}
+                                  <div className="pointer-events-none absolute inset-[2px] rounded-[inherit] z-[5] bg-[linear-gradient(135deg,#fff,#f9f9f9,#f0f0f0)] shadow-[inset_0_2px_5px_rgba(255,255,255,0.8),inset_0_-1px_2px_rgba(0,0,0,0.15),0_1px_0_rgba(255,255,255,0.7)] transition-opacity duration-300 group-hover:opacity-0" />
+                                  <div className="pointer-events-none absolute inset-[2px] rounded-[inherit] z-[6] opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgrgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+                                  <Phone className="relative z-20 size-5 transition-colors duration-300 text-[#3F2214] group-hover:text-white" />
+                                  <span className="relative z-20 hidden text-[0.95rem] font-medium sm:block transition-colors duration-300 text-[#3F2214] group-hover:text-white">
+                                    {contactLabel}
+                                  </span>
+                                </Link>
+                              </Button>
+
+                              <Button variant="goldBlack" size="lg" asChild>
+                                <a
+                                  href={program.href}
+                                  className="inline-flex items-center gap-2 xsm:flex-1 xsm:justify-center"
+                                >
+                                  <div className="pointer-events-none absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)] z-[5]" />
+                                  <span className="relative z-20 text-[0.95rem] font-medium">
+                                    {viewDetailsLabel}
+                                  </span>
+                                  <ArrowRight className="size-5 relative z-20" />
+                                </a>
+                              </Button>
+                            </div>
+                          </CardSticky>
+                        ))}
+                      </ContainerScroll>
+                    </div>
+                  );
+                } else {
+                  // Show collapsed province card
+                  return (
+                    <ProvinceStackCard
+                      key={province.id}
+                      province={province}
+                      isExpanded={false}
+                      onToggle={() => handleProvinceToggle(province.id)}
+                      budgetLabel={budgetLabel}
+                      timelineLabel={timelineLabel}
+                      contactLabel={contactLabel}
+                      viewDetailsLabel={viewDetailsLabel}
+                    />
+                  );
+                }
+              })}
           </div>
         </div>
       </div>

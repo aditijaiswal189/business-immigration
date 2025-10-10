@@ -4,6 +4,7 @@ import Tilt from "react-parallax-tilt";
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, ArrowDown } from "lucide-react";
 import { Button } from "./button";
+import { cn } from "@/lib/utils";
 
 const slides = [
   {
@@ -101,7 +102,7 @@ const HeroSlider = () => {
               alt={slide.title}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-800/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/65 via-[var(--primary)]/60 to-[var(--accent)]/50" />
           </div>
         ))}
 
@@ -136,7 +137,7 @@ const HeroSlider = () => {
                 );
               })}
             </div>
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-800/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/65 via-[var(--primary)]/60 to-[var(--accent)]/50" />
           </div>
         )}
       </div>
@@ -182,7 +183,7 @@ const HeroSlider = () => {
             </div>
 
             {/* Right Side - Slide Numbers */}
-            <div className="lg:col-span-4 flex lg:justify-end">
+            {/* <div className="lg:col-span-4 flex lg:justify-end">
               <div className="text-right bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
                 <div className="text-6xl font-bold text-white/30 mb-2">
                   {String(currentSlide + 1).padStart(2, "0")}.
@@ -191,31 +192,48 @@ const HeroSlider = () => {
                   {String(slides.length).padStart(2, "0")}.
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
 
       {/* Navigation Controls */}
-      <div className="absolute left-8 bottom-32 space-y-4 z-30 bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+      <div className="absolute left-8 bottom-28 space-y-4 ">
+        {/* <button
+         
+          className="block text-white/90 hover:text-[var(--accent)] transition-all duration-300 text-sm font-medium tracking-widest disabled:opacity-50 hover:scale-105"
+        >
+         
+        </button>
         <button
+         
+          className="block text-white/90 hover:text-[var(--accent)] transition-all duration-300 text-sm font-medium tracking-widest disabled:opacity-50 hover:scale-105"
+        >
+        
+        </button> */}
+        <Button
+          variant="goldBlack"
           onClick={prevSlide}
           disabled={isTransitioning}
-          className="block text-white/90 hover:text-[var(--accent)] transition-all duration-300 text-sm font-medium tracking-widest disabled:opacity-50 hover:scale-105"
+          className="block "
         >
-          PREVIOUS
-        </button>
-        <button
+          <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+          <span className="relative z-10 text-white font-bold">PREVIOUS</span>
+        </Button>
+
+        <Button
+          variant="goldWhite"
           onClick={nextSlide}
           disabled={isTransitioning}
-          className="block text-white/90 hover:text-[var(--accent)] transition-all duration-300 text-sm font-medium tracking-widest disabled:opacity-50 hover:scale-105"
+          className="block "
         >
-          NEXT
-        </button>
+          <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#fff,#f9f9f9,#f0f0f0)] shadow-[inset_0_2px_5px_rgba(255,255,255,0.8),inset_0_-1px_2px_rgba(0,0,0,0.15),0_1px_0_rgba(255,255,255,0.7)]" />
+          <span className="relative z-10 font-bold ">NEXT</span>
+        </Button>
       </div>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-30 bg-white/5 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10">
+      {/* <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-30 bg-white/5 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10">
         {slides.map((_, index) => (
           <button
             key={index}
@@ -228,6 +246,45 @@ const HeroSlider = () => {
             } disabled:opacity-50`}
           />
         ))}
+      </div> */}
+      <div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-30
+             bg-white/5 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10"
+        role="tablist"
+        aria-label="Slide indicators"
+      >
+        {slides.map((_, i) => {
+          const active = i === currentSlide;
+          return (
+            <Button
+              key={i}
+              onClick={() => goToSlide(i)}
+              disabled={isTransitioning}
+              aria-selected={active}
+              aria-label={`Go to slide ${i + 1}`}
+              role="tab"
+              variant="goldBlack"
+              className={cn(
+                // tiny round dot geometry
+                "relative size-4 rounded-full p-0",
+                // disable shimmer overlay from the gold variant for dots
+                "after:opacity-0 after:!hidden hover:after:opacity-0",
+                active ? "scale-110" : "opacity-80 hover:opacity-100"
+              )}
+            >
+              {/* center fill: light when idle, gradient when active */}
+              <div
+                className={cn(
+                  "absolute inset-[1px] rounded-[inherit] pointer-events-none",
+                  active
+                    ? "bg-[linear-gradient(90deg,var(--primary),var(--accent))] shadow-[inset_0_1px_2px_rgba(255,255,255,0.25)]"
+                    : "bg-white/80 dark:bg-white/25"
+                )}
+              />
+              <span className="sr-only">Slide {i + 1}</span>
+            </Button>
+          );
+        })}
       </div>
 
       {/* Rating Section */}
@@ -239,37 +296,47 @@ const HeroSlider = () => {
       </div>
 
       {/* Navigation Arrows */}
-      <button
+
+      <Button
+        variant="goldBlack"
         onClick={prevSlide}
         disabled={isTransitioning}
-        className="absolute left-8 top-1/2 transform -translate-y-1/2 text-white/90 hover:text-[var(--accent)] transition-all duration-300 z-30 disabled:opacity-50 bg-white/5 backdrop-blur-sm rounded-full p-3 border border-white/10 hover:scale-110"
+        className="absolute left-8 top-1/2 transform -translate-y-1/2"
       >
-        <ChevronLeft className="h-6 w-6" />
-      </button>
-      <button
+        <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+        <span className="relative z-10 text-white font-bold">
+          <ChevronLeft className="w-5 h-5" />
+        </span>
+      </Button>
+
+      <Button
+        variant="goldWhite"
         onClick={nextSlide}
         disabled={isTransitioning}
-        className="absolute right-8 top-1/2 transform -translate-y-1/2 text-white/90 hover:text-[var(--accent)] transition-all duration-300 z-30 disabled:opacity-50 bg-white/5 backdrop-blur-sm rounded-full p-3 border border-white/10 hover:scale-110"
+        className="absolute right-8 top-1/2 transform -translate-y-1/2"
       >
-        <ChevronRight className="h-6 w-6" />
-      </button>
+        <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#fff,#f9f9f9,#f0f0f0)] shadow-[inset_0_2px_5px_rgba(255,255,255,0.8),inset_0_-1px_2px_rgba(0,0,0,0.15),0_1px_0_rgba(255,255,255,0.7)]" />
+        <span className="relative z-10 font-bold ">
+          {" "}
+          <ChevronRight className="w-5 h-5" />
+        </span>
+      </Button>
 
       {/* Scroll Indicator */}
-      <div
-        className="absolute bottom-8 right-8 text-white text-center z-30 cursor-pointer bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:bg-white/10 transition-all duration-300"
+
+      <Button
+        variant="goldBlack"
         onClick={() => {
           const el = document.getElementById("next-section");
           if (el) el.scrollIntoView({ behavior: "smooth" });
         }}
+        className="absolute bottom-8 right-8 text-center z-30 cursor-pointer"
       >
-        <div className="text-xs tracking-widest mb-2 text-white/90">
-          SCROLL TO
-        </div>
-        <div className="text-xs tracking-widest mb-4 text-white/90">
-          EXPLORE
-        </div>
-        <ArrowDown className="h-5 w-5 mx-auto animate-bounce text-[var(--accent)]" />
-      </div>
+        <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+        <span className="relative z-10 text-white font-bold">
+          Scroll to Explore
+        </span>
+      </Button>
     </div>
   );
 };

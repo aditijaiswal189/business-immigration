@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "./button";
 
 const testimonials = [
   {
@@ -87,18 +88,32 @@ export default function TestimonialSection() {
           </div>
 
           <div className="flex justify-center space-x-4">
-            <button
+            <Button variant="goldBlack" onClick={prevTestimonial}>
+              <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+              <span className="relative z-10 text-white font-bold">
+                <ChevronLeft className="w-5 h-5" />
+              </span>
+            </Button>
+
+            <Button variant="goldWhite" onClick={nextTestimonial}>
+              <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#fff,#f9f9f9,#f0f0f0)] shadow-[inset_0_2px_5px_rgba(255,255,255,0.8),inset_0_-1px_2px_rgba(0,0,0,0.15),0_1px_0_rgba(255,255,255,0.7)]" />
+              <span className="relative z-10 font-bold ">
+                {" "}
+                <ChevronRight className="w-5 h-5" />
+              </span>
+            </Button>
+            {/* <button
               onClick={prevTestimonial}
               className="w-12 h-12 rounded-full border-2 border-[#F5C178]/30 flex items-center justify-center hover:bg-gradient-to-r hover:from-[#95502F] hover:to-[#F5C178] hover:border-[#F5C178] hover:text-white transition-all duration-300"
             >
-              <ChevronLeft className="w-5 h-5" />
+              
             </button>
             <button
               onClick={nextTestimonial}
               className="w-12 h-12 rounded-full border-2 border-[#F5C178]/30 flex items-center justify-center hover:bg-gradient-to-r hover:from-[#95502F] hover:to-[#F5C178] hover:border-[#F5C178] hover:text-white transition-all duration-300"
             >
-              <ChevronRight className="w-5 h-5" />
-            </button>
+             
+            </button> */}
           </div>
 
           <div className="flex justify-center mt-8 space-x-2">

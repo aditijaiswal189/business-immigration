@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
 const services = [
   { name: "Visa Consultation", icon: TrendingUp },
@@ -106,36 +107,47 @@ export default function Footer() {
                 className="flex-1 rounded-r-none"
                 placeholder="Your email"
               />
-              <Button className="bg-primary-yellow hover:bg-primary-yellow/90 text-primary rounded-l-none">
-                <ArrowRight className="w-4 h-4" />
+              <Button variant="goldBlack">
+                <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+                <span className="relative z-10 text-white font-bold">
+                  <ArrowRight className="w-4 h-4" />
+                </span>
               </Button>
             </div>
 
             <div className="flex space-x-4 mt-6">
-              <a
-                href="#"
-                className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center hover:bg-primary-yellow hover:text-primary transition-colors"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center hover:bg-primary-yellow hover:text-primary transition-colors"
-              >
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center hover:bg-primary-yellow hover:text-primary transition-colors"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center hover:bg-primary-yellow hover:text-primary transition-colors"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
+              <Link href="#">
+                <Button variant="goldBlack">
+                  <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+                  <span className="relative z-10 text-white font-bold">
+                    <Facebook className="w-5 h-5" />
+                  </span>
+                </Button>
+              </Link>
+              <Link href="#">
+                <Button variant="goldBlack">
+                  <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+                  <span className="relative z-10 text-white font-bold">
+                    <Twitter className="w-5 h-5" />
+                  </span>
+                </Button>
+              </Link>
+              <Link href="#">
+                <Button variant="goldBlack">
+                  <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+                  <span className="relative z-10 text-white font-bold">
+                    <Instagram className="w-5 h-5" />
+                  </span>
+                </Button>
+              </Link>
+              <Link href="#">
+                <Button variant="goldBlack">
+                  <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+                  <span className="relative z-10 text-white font-bold">
+                    <Linkedin className="w-5 h-5" />
+                  </span>
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

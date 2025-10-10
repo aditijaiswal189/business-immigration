@@ -7,6 +7,7 @@ import InteractiveGrid from "./interactive-grid";
 import { Button } from "./button";
 import AnimatedGroup from "./landing/animated-group";
 import AnimatedText from "./landing/animated-text";
+import Link from "next/link";
 
 type RegionHeroProps = {
   eyebrow?: string;
@@ -87,16 +88,30 @@ export function RegionHeroColor({
               preset="slide"
               className="mt-6 flex justify-center gap-3 pointer-events-auto"
             >
-              <Button variant="blackGold" asChild>
-                <a href={primaryCta.href}>{primaryCta.label}</a>
-              </Button>
+              <Link href={primaryCta.href}>
+                <Button variant="goldBlack" size="lg">
+                  <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+                  <span className="relative z-10 text-white font-bold">
+                    {primaryCta.label}
+                  </span>
+                </Button>
+              </Link>
+              <Link href={secondaryCta.href}>
+                <Button variant="goldWhite" size="lg">
+                  <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#fff,#f9f9f9,#f0f0f0)] shadow-[inset_0_2px_5px_rgba(255,255,255,0.8),inset_0_-1px_2px_rgba(0,0,0,0.15),0_1px_0_rgba(255,255,255,0.7)]" />
+                  <span className="relative z-10 flex flex-row  font-bold">
+                    {secondaryCta.label}
+                    <ExternalLink className="ml-2 h-4 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </Button>
+              </Link>
 
-              <Button variant="whiteGold" asChild className="group">
+              {/* <Button variant="whiteGold" asChild className="group">
                 <a href={secondaryCta.href}>
-                  {secondaryCta.label}
-                  <ExternalLink className="ml-2 h-4 transition-transform group-hover:translate-x-0.5" />
+                 
+                 
                 </a>
-              </Button>
+              </Button> */}
             </AnimatedGroup>
           </AnimatedGroup>
         </div>

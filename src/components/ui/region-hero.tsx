@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 type RegionHeroProps = {
   eyebrow?: string; // e.g., "Canada • Provincial Programs"
@@ -90,8 +91,16 @@ export function RegionHero({
               )}
             >
               {primaryCta && (
-                <Button asChild size="lg" className="shadow-xl">
-                  <a href={primaryCta.href}>{primaryCta.label}</a>
+                <Button
+                  variant="goldBlack"
+                  asChild
+                  size="lg"
+                  className="shadow-xl"
+                >
+                  <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+                  <span className="relative z-10 text-white font-bold">
+                    <Link href={primaryCta.href}>{primaryCta.label}</Link>
+                  </span>
                 </Button>
               )}
               {secondaryCta && (

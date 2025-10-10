@@ -13,8 +13,17 @@ export default function AboutSection() {
               alt="Professional team meeting"
               className="rounded-2xl w-full h-160 object-cover shadow-lg"
             />
-            <div className="absolute top-4 right-4 bg-[linear-gradient(90deg,var(--primary),var(--accent))] rounded-full p-4 shadow-lg">
+            {/* <div className="absolute top-4 right-4 bg-[linear-gradient(90deg,var(--primary),var(--accent))] rounded-full p-4 shadow-lg">
               <Briefcase className="w-8 h-8 text-white" />
+            </div> */}
+
+            <div className="absolute top-4 right-4  shadow-lg">
+              <Button variant="goldWhite">
+                <div className="absolute  inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#fff,#f9f9f9,#f0f0f0)] shadow-[inset_0_2px_5px_rgba(255,255,255,0.8),inset_0_-1px_2px_rgba(0,0,0,0.15),0_1px_0_rgba(255,255,255,0.7)]" />
+                <span className="relative z-10 font-bold ">
+                  <Briefcase className="w-8 h-8 " />
+                </span>
+              </Button>
             </div>
           </div>
 
@@ -39,9 +48,13 @@ export default function AboutSection() {
             {/* Feature box */}
             <div className="bg-[var(--card)]/50 backdrop-blur-sm border border-[var(--accent)]/20 rounded-lg p-6 shadow-md mb-8">
               <div className="flex items-start space-x-4">
-                <div className="p-3 bg-[linear-gradient(90deg,var(--primary),var(--accent))] rounded-full">
-                  <Briefcase className="w-6 h-6 text-white" />
-                </div>
+                <Button variant="goldBlack">
+                  <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+                  <span className="relative z-10 text-white font-bold">
+                    <Briefcase className="w-8 h-8" />
+                  </span>
+                </Button>
+
                 <div>
                   <h3 className="text-xl font-bold text-[var(--card-foreground)] mb-2">
                     Business Immigration Services

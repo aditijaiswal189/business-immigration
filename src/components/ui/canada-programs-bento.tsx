@@ -7,6 +7,8 @@ import {
   Phone,
   ArrowRight,
 } from "lucide-react";
+import { Button } from "./button";
+import Link from "next/link";
 
 /** tiny cn helper */
 const cn = (...c: Array<string | false | null | undefined>) =>
@@ -171,8 +173,15 @@ function ProgramBentoCard({ item }: { item: ProgramCard }) {
             Contact advisor
           </p>
         </a>
-
-        <a
+        <Link href={item.href}>
+          <Button variant="goldBlack" size="lg">
+            <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+            <span className="relative z-10 text-white font-bold flex items-center gap-2">
+              View details <ArrowRight className="size-5" />
+            </span>
+          </Button>
+        </Link>
+        {/* <a
           href={item.href}
           className="flex items-center gap-2 rounded-[0.5rem] px-4 py-2 text-white xsm:flex-1 xsm:justify-center"
           style={{
@@ -182,7 +191,7 @@ function ProgramBentoCard({ item }: { item: ProgramCard }) {
         >
           <span className="text-[0.95rem] font-medium">View details</span>
           <ArrowRight className="size-5" />
-        </a>
+        </a> */}
       </div>
     </div>
   );

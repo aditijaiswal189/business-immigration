@@ -134,14 +134,20 @@ export default function ContactSection() {
                 />
               </div>
 
-              <Button
+              <Button variant="goldBlack" type="submit">
+                <div className="absolute inset-[2px] rounded-[inherit] bg-[linear-gradient(135deg,#000,#111,#000)] shadow-[inset_0_3px_6px_rgba(0,0,0,0.9),inset_0_-1px_3px_rgba(255,255,255,0.08),0_1px_0_rgba(255,255,255,0.08)]" />
+                <span className="relative z-10 text-white font-bold">
+                  <ArrowRight className="w-4 h-4" />
+                </span>
+              </Button>
+              {/* <Button
                 type="submit"
                 // disabled={contactMutation.isPending}
                 variant="blackGold" className="px-8 py-4 rounded-lg font-semibold w-full lg:w-auto"
-              >
-                {/* {contactMutation.isPending ? "Sending..." : "Send"}{" "} */}
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
+              > */}
+              {/* {contactMutation.isPending ? "Sending..." : "Send"}{" "} */}
+
+              {/* </Button> */}
             </form>
           </div>
         </div>

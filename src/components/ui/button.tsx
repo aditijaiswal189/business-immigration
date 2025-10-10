@@ -30,7 +30,19 @@ const buttonVariants = cva(
           "bg-[var(--btn-black)] border-2 border-[var(--btn-gold-border)] text-[var(--btn-gold-border)] hover:bg-[var(--btn-gold-border)] hover:text-[var(--btn-black)]",
         whiteGold:
           "bg-[var(--btn-white)] border-2 border-[var(--btn-gold-border)] text-[var(--btn-black)] hover:text-[var(--btn-gold-border)]",
+        goldMorph:
+          "relative isolate overflow-hidden group text-white " +
+          "inline-flex items-center justify-center font-semibold transition-all duration-300 " +
+          "hover:scale-[1.03] " +
+          // gold border via ::before (below content)
+          "before:absolute before:inset-0 before:rounded-[inherit] before:p-[2px] " +
+          "before:bg-[conic-gradient(from_0deg,#8B4513,#CD853F,#FFD700,#FFFACD,#FFD700,#DAA520,#B8860B,#654321,#8B4513)] " +
+          "before:shadow-[0_4px_15px_rgba(0,0,0,0.4),0_0_25px_rgba(255,215,0,0.3)] before:content-[''] before:z-0 " +
+          // subtle moving sheen
+          "after:absolute after:inset-0 after:rounded-[inherit] after:bg-gradient-to-r after:from-transparent after:via-[#FFD700]/20 after:to-transparent " +
+          "after:opacity-0 group-hover:after:opacity-100 after:transition-all after:duration-700 after:-skew-x-12 after:-translate-x-full group-hover:after:translate-x-full after:z-10",
         goldBlack:
+          "relative isolate overflow-hidden text-white " +
           "relative group inline-flex items-center justify-center font-semibold transition-all duration-300 overflow-hidden hover:scale-[1.03]" +
           " before:absolute before:inset-0 before:rounded-[inherit] before:p-[1.5px] before:bg-[conic-gradient(from_0deg,#8B4513,#CD853F,#FFD700,#FFFACD,#FFD700,#DAA520,#B8860B,#654321,#8B4513)] before:shadow-[0_4px_15px_rgba(0,0,0,0.4),0_0_25px_rgba(255,215,0,0.3)] before:content-['']" +
           " after:absolute after:inset-0 after:rounded-[inherit] after:bg-gradient-to-r after:from-transparent after:via-[#FFD700]/20 after:to-transparent after:opacity-0 group-hover:after:opacity-100 after:transition-all after:duration-700 after:-skew-x-12 after:-translate-x-full group-hover:after:translate-x-full",
